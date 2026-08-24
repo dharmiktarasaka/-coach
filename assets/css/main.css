@@ -1,0 +1,86 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --color-primary: #E6AD4A;        /* Warm Gold */
+  --color-primary-hover: #D49B38;  /* Deep Gold */
+  --color-bg-base: #FFFFFF;        /* Crisp White Base */
+  --color-bg-ivory: #FDFBF7;       /* Soft Warm Ivory */
+  --color-bg-card: #FFFFFF;        /* Clean White Cards */
+  --color-bg-raised: #F3F3EC;      /* Subtle Raised Ivory */
+  --color-text-main: #140024;      /* Deep Obsidian Plum */
+  --color-text-muted: #64748B;     /* Readable Slate Muted Text */
+  --color-border: rgba(44, 1, 75, 0.08);
+}
+
+body {
+  background-color: var(--color-bg-base);
+  color: var(--color-text-main);
+  font-family: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #FDFBF7;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #E5E5DC;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #C9C9BE;
+}
+
+/* Glassmorphic & UI Utilities */
+.glass-panel {
+  background: rgba(255, 255, 255, 0.85);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(44, 1, 75, 0.08);
+}
+
+.glass-panel-hover {
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.glass-panel-hover:hover {
+  border-color: rgba(230, 173, 74, 0.5);
+  transform: translateY(-2px);
+  box-shadow: 0 12px 30px -10px rgba(44, 1, 75, 0.1), 0 0 20px -5px rgba(230, 173, 74, 0.2);
+}
+
+.glow-gold-sm {
+  box-shadow: 0 0 20px rgba(230, 173, 74, 0.25);
+}
+
+.text-gradient {
+  background: linear-gradient(135deg, #140024 0%, #2C014B 50%, #460775 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.text-gradient-emerald,
+.text-gradient-gold {
+  background: linear-gradient(135deg, #D49B38 0%, #E6AD4A 50%, #B88126 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+/* Reduced motion preference */
+@media (prefers-reduced-motion: reduce) {
+  *, ::before, ::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
