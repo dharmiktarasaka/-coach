@@ -613,8 +613,8 @@ io.on('connection', (socket: Socket) => {
 
 // ---------------- SERVER STARTUP WITH PORT AUTO-FALLBACK ----------------
 function startServer(port: number) {
-  httpServer.listen(port, () => {
-    console.log(`> Narayan Presence API + Real-Time Zoom WebRTC Server running at http://localhost:${port}`)
+  httpServer.listen(port, '0.0.0.0', () => {
+    console.log(`> Narayan Presence API + Real-Time Zoom WebRTC Server running at port ${port}`)
   })
 
   httpServer.on('error', (err: any) => {
