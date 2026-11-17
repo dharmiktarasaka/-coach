@@ -58,7 +58,7 @@ const io = new SocketIOServer(httpServer, {
 })
 
 // Request logger
-app.use((req, res, next) => {
+app.use((req: Request, res: Response, next: NextFunction) => {
   console.log(`[${new Date().toISOString()}] ${req.method} ${req.path}`)
   next()
 })
