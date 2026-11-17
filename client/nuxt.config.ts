@@ -46,13 +46,13 @@ export default defineNuxtConfig({
       siteUrl: process.env.NUXT_PUBLIC_SITE_URL || 'https://digitalcoach.com',
       apiUrl: process.env.NUXT_PUBLIC_API_URL || 'http://localhost:5001/api',
       firebase: {
-        apiKey: process.env.NUXT_PUBLIC_FIREBASE_API_KEY || '',
-        authDomain: process.env.NUXT_PUBLIC_FIREBASE_AUTH_DOMAIN || '',
-        projectId: process.env.NUXT_PUBLIC_FIREBASE_PROJECT_ID || '',
-        storageBucket: process.env.NUXT_PUBLIC_FIREBASE_STORAGE_BUCKET || '',
-        messagingSenderId: process.env.NUXT_PUBLIC_FIREBASE_MESSAGING_SENDER_ID || '',
-        appId: process.env.NUXT_PUBLIC_FIREBASE_APP_ID || '',
-        measurementId: process.env.NUXT_PUBLIC_FIREBASE_MEASUREMENT_ID || ''
+        apiKey: process.env.NUXT_PUBLIC_FIREBASE_API_KEY || 'AIzaSyCgf1LkSrwobzqsGOM3dFqwekxcXQSNw-M',
+        authDomain: process.env.NUXT_PUBLIC_FIREBASE_AUTH_DOMAIN || 'lyoo-7cc38.firebaseapp.com',
+        projectId: process.env.NUXT_PUBLIC_FIREBASE_PROJECT_ID || 'lyoo-7cc38',
+        storageBucket: process.env.NUXT_PUBLIC_FIREBASE_STORAGE_BUCKET || 'lyoo-7cc38.firebasestorage.app',
+        messagingSenderId: process.env.NUXT_PUBLIC_FIREBASE_MESSAGING_SENDER_ID || '354508992918',
+        appId: process.env.NUXT_PUBLIC_FIREBASE_APP_ID || '1:354508992918:web:f6be8b0a4a68568a78adb7',
+        measurementId: process.env.NUXT_PUBLIC_FIREBASE_MEASUREMENT_ID || 'G-94BXQNT24Y'
       }
     }
   },

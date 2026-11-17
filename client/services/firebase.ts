@@ -11,24 +11,70 @@ import {
 
 let authInstance: Auth | null = null
 
+const DEFAULT_FIREBASE_CONFIG = {
+  apiKey: 'AIzaSyCgf1LkSrwobzqsGOM3dFqwekxcXQSNw-M',
+  authDomain: 'lyoo-7cc38.firebaseapp.com',
+  projectId: 'lyoo-7cc38',
+  storageBucket: 'lyoo-7cc38.firebasestorage.app',
+  messagingSenderId: '354508992918',
+  appId: '1:354508992918:web:f6be8b0a4a68568a78adb7',
+  measurementId: 'G-94BXQNT24Y'
+}
+
 export const getFirebaseConfig = () => {
+  let runtimeCfg: any = {}
   if (typeof window !== 'undefined') {
     try {
       const config = useRuntimeConfig()
-      if (config?.public?.firebase?.apiKey) {
-        return config.public.firebase
+      if (config?.public?.firebase) {
+        runtimeCfg = config.public.firebase
       }
     } catch {}
   }
 
+  const apiKey =
+    runtimeCfg.apiKey ||
+    (typeof process !== 'undefined' && process.env?.NUXT_PUBLIC_FIREBASE_API_KEY) ||
+    DEFAULT_FIREBASE_CONFIG.apiKey
+
+  const authDomain =
+    runtimeCfg.authDomain ||
+    (typeof process !== 'undefined' && process.env?.NUXT_PUBLIC_FIREBASE_AUTH_DOMAIN) ||
+    DEFAULT_FIREBASE_CONFIG.authDomain
+
+  const projectId =
+    runtimeCfg.projectId ||
+    (typeof process !== 'undefined' && process.env?.NUXT_PUBLIC_FIREBASE_PROJECT_ID) ||
+    DEFAULT_FIREBASE_CONFIG.projectId
+
+  const storageBucket =
+    runtimeCfg.storageBucket ||
+    (typeof process !== 'undefined' && process.env?.NUXT_PUBLIC_FIREBASE_STORAGE_BUCKET) ||
+    DEFAULT_FIREBASE_CONFIG.storageBucket
+
+  const messagingSenderId =
+    runtimeCfg.messagingSenderId ||
+    (typeof process !== 'undefined' && process.env?.NUXT_PUBLIC_FIREBASE_MESSAGING_SENDER_ID) ||
+    DEFAULT_FIREBASE_CONFIG.messagingSenderId
+
+  const appId =
+    runtimeCfg.appId ||
+    (typeof process !== 'undefined' && process.env?.NUXT_PUBLIC_FIREBASE_APP_ID) ||
+    DEFAULT_FIREBASE_CONFIG.appId
+
+  const measurementId =
+    runtimeCfg.measurementId ||
+    (typeof process !== 'undefined' && process.env?.NUXT_PUBLIC_FIREBASE_MEASUREMENT_ID) ||
+    DEFAULT_FIREBASE_CONFIG.measurementId
+
   return {
-    apiKey: process.env.NUXT_PUBLIC_FIREBASE_API_KEY || '',
-    authDomain: process.env.NUXT_PUBLIC_FIREBASE_AUTH_DOMAIN || '',
-    projectId: process.env.NUXT_PUBLIC_FIREBASE_PROJECT_ID || '',
-    storageBucket: process.env.NUXT_PUBLIC_FIREBASE_STORAGE_BUCKET || '',
-    messagingSenderId: process.env.NUXT_PUBLIC_FIREBASE_MESSAGING_SENDER_ID || '',
-    appId: process.env.NUXT_PUBLIC_FIREBASE_APP_ID || '',
-    measurementId: process.env.NUXT_PUBLIC_FIREBASE_MEASUREMENT_ID || ''
+    apiKey: String(apiKey).trim(),
+    authDomain: String(authDomain).trim(),
+    projectId: String(projectId).trim(),
+    storageBucket: String(storageBucket).trim(),
+    messagingSenderId: String(messagingSenderId).trim(),
+    appId: String(appId).trim(),
+    measurementId: String(measurementId).trim()
   }
 }
 
