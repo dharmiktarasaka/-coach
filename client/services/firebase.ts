@@ -32,49 +32,68 @@ export const getFirebaseConfig = () => {
     } catch {}
   }
 
-  const apiKey =
+  let rawApiKey = String(
     runtimeCfg.apiKey ||
     (typeof process !== 'undefined' && process.env?.NUXT_PUBLIC_FIREBASE_API_KEY) ||
     DEFAULT_FIREBASE_CONFIG.apiKey
+  ).trim()
 
-  const authDomain =
-    runtimeCfg.authDomain ||
-    (typeof process !== 'undefined' && process.env?.NUXT_PUBLIC_FIREBASE_AUTH_DOMAIN) ||
-    DEFAULT_FIREBASE_CONFIG.authDomain
+  // Auto-correct truncated key if the trailing '-M' was clipped in Vercel
+  if (rawApiKey === 'AIzaSyCgf1LkSrwobzqsGOM3dFqwekxcXQSNw' || rawApiKey.length < 39) {
+    if (rawApiKey.startsWith('AIzaSyCgf1LkSrwobzqsGOM3dFqwekxcXQSNw')) {
+      rawApiKey = DEFAULT_FIREBASE_CONFIG.apiKey
+    }
+  }
 
-  const projectId =
+  let rawProjectId = String(
     runtimeCfg.projectId ||
     (typeof process !== 'undefined' && process.env?.NUXT_PUBLIC_FIREBASE_PROJECT_ID) ||
     DEFAULT_FIREBASE_CONFIG.projectId
+  ).trim()
 
-  const storageBucket =
+  // Auto-correct if numeric project number 354508992918 was pasted instead of project ID lyoo-7cc38
+  if (rawProjectId === '354508992918') {
+    rawProjectId = DEFAULT_FIREBASE_CONFIG.projectId
+  }
+
+  const authDomain = String(
+    runtimeCfg.authDomain ||
+    (typeof process !== 'undefined' && process.env?.NUXT_PUBLIC_FIREBASE_AUTH_DOMAIN) ||
+    DEFAULT_FIREBASE_CONFIG.authDomain
+  ).trim()
+
+  const storageBucket = String(
     runtimeCfg.storageBucket ||
     (typeof process !== 'undefined' && process.env?.NUXT_PUBLIC_FIREBASE_STORAGE_BUCKET) ||
     DEFAULT_FIREBASE_CONFIG.storageBucket
+  ).trim()
 
-  const messagingSenderId =
+  const messagingSenderId = String(
     runtimeCfg.messagingSenderId ||
     (typeof process !== 'undefined' && process.env?.NUXT_PUBLIC_FIREBASE_MESSAGING_SENDER_ID) ||
     DEFAULT_FIREBASE_CONFIG.messagingSenderId
+  ).trim()
 
-  const appId =
+  const appId = String(
     runtimeCfg.appId ||
     (typeof process !== 'undefined' && process.env?.NUXT_PUBLIC_FIREBASE_APP_ID) ||
     DEFAULT_FIREBASE_CONFIG.appId
+  ).trim()
 
-  const measurementId =
+  const measurementId = String(
     runtimeCfg.measurementId ||
     (typeof process !== 'undefined' && process.env?.NUXT_PUBLIC_FIREBASE_MEASUREMENT_ID) ||
     DEFAULT_FIREBASE_CONFIG.measurementId
+  ).trim()
 
   return {
-    apiKey: String(apiKey).trim(),
-    authDomain: String(authDomain).trim(),
-    projectId: String(projectId).trim(),
-    storageBucket: String(storageBucket).trim(),
-    messagingSenderId: String(messagingSenderId).trim(),
-    appId: String(appId).trim(),
-    measurementId: String(measurementId).trim()
+    apiKey: rawApiKey,
+    authDomain,
+    projectId: rawProjectId,
+    storageBucket,
+    messagingSenderId,
+    appId,
+    measurementId
   }
 }
 
