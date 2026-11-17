@@ -1,0 +1,116 @@
+{
+  "users": [
+    {
+      "id": "np-student-808",
+      "name": "Arjun Sharma",
+      "email": "arjun.sharma@example.com",
+      "passwordHash": "10caa25cfd114779e83a88628385748e46ca6c582219c7dff8ce9be9e7b63838dafd38edaf5382361360ce185ff0b70ca853417c2fb581c8ac893439dbee70f7",
+      "avatar": "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=150&auto=format&fit=crop&q=80",
+      "role": "Presence Circle Member",
+      "enrolledCourse": "The Art of Conscious Mastery",
+      "overallProgress": 68,
+      "streakDays": 14,
+      "sessionsAttended": 8,
+      "authProvider": "credentials",
+      "createdAt": "2026-11-16T12:08:52.441Z"
+    },
+    {
+      "id": "np-student-101",
+      "name": "Priya Sundaram",
+      "email": "priya.sundaram@gmail.com",
+      "avatar": "https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=150&auto=format&fit=crop&q=80",
+      "role": "Presence Circle Fellow",
+      "enrolledCourse": "Purposeful Leadership & Influence",
+      "overallProgress": 75,
+      "streakDays": 21,
+      "sessionsAttended": 12,
+      "authProvider": "google",
+      "createdAt": "2026-11-16T12:08:52.442Z"
+    },
+    {
+      "id": "SwlGLXTFtSMnqTacvkXx5pceVd42",
+      "name": "Dharmik",
+      "email": "dharmik.tarasaka@gmail.com",
+      "avatar": "https://lh3.googleusercontent.com/a/ACg8ocJDeDkJKCaTv2g7la6r3yjcKFyFB3gQA25FgrjGfG1_LwJtng=s96-c",
+      "role": "Presence Circle Fellow",
+      "enrolledCourse": "Purposeful Leadership & Influence",
+      "overallProgress": 75,
+      "streakDays": 21,
+      "sessionsAttended": 12,
+      "authProvider": "google",
+      "createdAt": "2026-11-17T05:54:55.518Z"
+    }
+  ],
+  "todos": [
+    {
+      "id": "1",
+      "userId": "np-student-808",
+      "title": "Complete 20-minute morning breathwork protocol",
+      "category": "Meditation",
+      "priority": "High",
+      "completed": true,
+      "createdAt": "Today"
+    },
+    {
+      "id": "2",
+      "userId": "np-student-808",
+      "title": "Review Lesson 3 lecture notes and submit worksheet",
+      "category": "Coursework",
+      "priority": "High",
+      "completed": false,
+      "createdAt": "Today"
+    },
+    {
+      "id": "3",
+      "userId": "np-student-808",
+      "title": "Read Chapter 4 of \"The Grounded Mind\"",
+      "category": "Reading",
+      "priority": "Medium",
+      "completed": false,
+      "createdAt": "Yesterday"
+    }
+  ],
+  "lectures": [
+    {
+      "id": 1,
+      "index": 1,
+      "title": "Lesson 1: The Anatomy of Stillness",
+      "module": "Module 1: Grounding",
+      "duration": "24 min",
+      "description": "Understanding internal vs external stimuli and resetting the central nervous system.",
+      "completedUserIds": [
+        "np-student-808"
+      ]
+    },
+    {
+      "id": 2,
+      "index": 2,
+      "title": "Lesson 2: Guarding Your Attention Diet",
+      "module": "Module 1: Grounding",
+      "duration": "31 min",
+      "description": "Eliminating unconscious digital dopamine loops and rebuilding deep cognitive endurance.",
+      "completedUserIds": [
+        "np-student-808"
+      ]
+    },
+    {
+      "id": 3,
+      "index": 3,
+      "title": "Lesson 3: Emotional Friction as an Asset",
+      "module": "Module 2: Resilience",
+      "duration": "28 min",
+      "description": "Transforming tension, criticism, and uncertainty into unwavering grounded presence.",
+      "completedUserIds": []
+    },
+    {
+      "id": 4,
+      "index": 4,
+      "title": "Lesson 4: Quiet Leadership Presence",
+      "module": "Module 3: Leadership",
+      "duration": "38 min",
+      "description": "How to enter rooms, conduct meetings, and lead organizations with authentic depth.",
+      "completedUserIds": []
+    }
+  ],
+  "leads": []
+}
