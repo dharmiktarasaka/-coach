@@ -190,24 +190,37 @@ app.post('/api/auth/login', async (req: Request, res: Response) => {
 app.post('/api/auth/google', async (req: Request, res: Response) => {
   const { email, name, avatar, firebaseUid } = req.body
 
-  const studentEmail = email || 'student.google@narayanpresence.com'
+  if (!email || typeof email !== 'string') {
+    return res.status(400).json({ success: false, message: 'Valid Google email is required.' })
+  }
+
+  const studentEmail = email.trim().toLowerCase()
   let user = await db.findUserByEmail(studentEmail)
 
   if (!user) {
+    const displayName = name || studentEmail.split('@')[0]
     user = {
-      id: firebaseUid || `np-google-${Math.floor(100 + Math.random() * 900)}`,
-      name: name || 'Conscious Student',
+      id: firebaseUid || `np-google-${Date.now()}`,
+      name: displayName,
       email: studentEmail,
-      avatar: avatar || 'https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=150&auto=format&fit=crop&q=80',
-      role: 'Presence Circle Fellow',
-      enrolledCourse: 'Purposeful Leadership & Influence',
-      overallProgress: 75,
-      streakDays: 21,
-      sessionsAttended: 12,
+      avatar: avatar || `https://ui-avatars.com/api/?name=${encodeURIComponent(displayName)}&background=171844&color=F8D78B`,
+      role: 'Presence Circle Member',
+      enrolledCourse: 'The Art of Conscious Mastery',
+      overallProgress: 0,
+      streakDays: 1,
+      sessionsAttended: 0,
       authProvider: 'google',
       createdAt: new Date().toISOString()
     }
     await db.createUser(user)
+  } else {
+    // Keep avatar or name synced with Google profile
+    if (avatar && user.avatar !== avatar) {
+      user.avatar = avatar
+    }
+    if (name && user.name !== name) {
+      user.name = name
+    }
   }
 
   const token = generateToken({ id: user.id, email: user.email })

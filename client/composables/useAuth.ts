@@ -190,32 +190,39 @@ export const useAuth = () => {
   }
 
   // Google Sign-In with Firebase Authentication
-  const loginWithGoogle = async (): Promise<boolean> => {
+  const loginWithGoogle = async (): Promise<{ success: boolean; error?: string }> => {
     isAuthLoading.value = true
 
-    let googleProfile = {
-      email: 'priya.sundaram@gmail.com',
-      name: 'Priya Sundaram',
-      avatar: 'https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=150&auto=format&fit=crop&q=80',
-      firebaseUid: 'firebase-uid-74291'
-    }
+    let fbUser: { uid: string; email: string; displayName: string; photoURL: string } | null = null
 
     try {
       const fbResult = await signInWithFirebaseGoogle()
-      if (fbResult.success && fbResult.user) {
-        googleProfile = {
-          email: fbResult.user.email || googleProfile.email,
-          name: fbResult.user.displayName || googleProfile.name,
-          avatar: fbResult.user.photoURL || googleProfile.avatar,
-          firebaseUid: fbResult.user.uid || googleProfile.firebaseUid
+      if (!fbResult.success || !fbResult.user) {
+        isAuthLoading.value = false
+        return {
+          success: false,
+          error: fbResult.error || 'Google sign-in was not completed.'
         }
-        console.log('[Firebase Auth] Google Sign-In Successful:', googleProfile.email)
       }
-    } catch (err) {
-      console.warn('[Firebase Auth] Using direct student sync:', err)
+      fbUser = fbResult.user
+      console.log('[Firebase Auth] Real Google Sign-In Successful:', fbUser.email)
+    } catch (err: any) {
+      console.error('[Firebase Auth] Exception during Google Sign-In:', err)
+      isAuthLoading.value = false
+      return {
+        success: false,
+        error: err?.message || 'Failed to authenticate with Google.'
+      }
     }
 
-    // Sync user with MongoDB Backend
+    const googleProfile = {
+      email: fbUser.email,
+      name: fbUser.displayName,
+      avatar: fbUser.photoURL,
+      firebaseUid: fbUser.uid
+    }
+
+    // Sync real Google user with MongoDB Backend
     try {
       const response = await fetch(`${getApiUrl()}/auth/google`, {
         method: 'POST',
@@ -233,32 +240,33 @@ export const useAuth = () => {
             localStorage.setItem(TOKEN_KEY, data.token)
           }
           isAuthLoading.value = false
-          return true
+          return { success: true }
         }
       }
-    } catch {
-      // Backend offline fallback
+    } catch (err) {
+      console.warn('[Backend Sync Error] Fallback to direct Firebase authenticated user:', err)
     }
 
-    const fallbackUser: StudentUser = {
-      id: googleProfile.firebaseUid,
-      name: googleProfile.name,
-      email: googleProfile.email,
-      avatar: googleProfile.avatar,
-      role: 'Presence Circle Fellow',
+    // Direct Firebase authenticated user with REAL Google account data
+    const authenticatedUser: StudentUser = {
+      id: fbUser.uid,
+      name: fbUser.displayName,
+      email: fbUser.email,
+      avatar: fbUser.photoURL,
+      role: 'Presence Circle Member',
       enrolledCourse: 'Purposeful Leadership & Influence',
-      overallProgress: 75,
-      streakDays: 21,
-      sessionsAttended: 12
+      overallProgress: 0,
+      streakDays: 1,
+      sessionsAttended: 0
     }
 
-    currentUser.value = fallbackUser
+    currentUser.value = authenticatedUser
     if (typeof window !== 'undefined') {
-      localStorage.setItem(STORAGE_KEY, JSON.stringify(fallbackUser))
-      localStorage.setItem(TOKEN_KEY, 'google-firebase-token-74291')
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(authenticatedUser))
+      localStorage.setItem(TOKEN_KEY, `firebase-token-${fbUser.uid}`)
     }
     isAuthLoading.value = false
-    return true
+    return { success: true }
   }
 
   const logout = () => {

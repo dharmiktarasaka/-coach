@@ -305,11 +305,11 @@ const handleRegister = async () => {
 
 const handleGoogleLogin = async () => {
   errorMessage.value = ''
-  const success = await loginWithGoogle()
-  if (success) {
+  const result = await loginWithGoogle()
+  if (result.success) {
     navigateTo('/portal')
   } else {
-    errorMessage.value = 'Google sign-in could not be completed.'
+    errorMessage.value = result.error || 'Google sign-in could not be completed.'
   }
 }
 
