@@ -41,8 +41,38 @@
         </div>
       </div>
 
-      <!-- Main Login Card -->
+      <!-- Main Login & Register Card -->
       <div v-else class="bg-white border border-[#EAE2D4] rounded-3xl p-6 sm:p-8 shadow-sm space-y-6">
+        <!-- Auth Mode Switcher: Sign In vs Create Account -->
+        <div class="grid grid-cols-2 gap-1 p-1 bg-[#FAFAFA] border border-[#EAE2D4] rounded-2xl text-xs font-bold">
+          <button
+            type="button"
+            :class="[
+              'py-2.5 rounded-xl transition-all cursor-pointer text-center',
+              authMode === 'login' ? 'bg-[#171844] text-[#F8D78B] shadow-sm' : 'text-[#8C6D57] hover:text-[#171844]'
+            ]"
+            @click="authMode = 'login'; errorMessage = ''"
+          >
+            Sign In
+          </button>
+          <button
+            type="button"
+            :class="[
+              'py-2.5 rounded-xl transition-all cursor-pointer text-center',
+              authMode === 'register' ? 'bg-[#171844] text-[#F8D78B] shadow-sm' : 'text-[#8C6D57] hover:text-[#171844]'
+            ]"
+            @click="authMode = 'register'; errorMessage = ''"
+          >
+            Create Account
+          </button>
+        </div>
+
+        <!-- Error Alert -->
+        <div v-if="errorMessage" class="p-3.5 rounded-xl bg-red-50 border border-red-200 text-red-700 text-xs font-semibold flex items-center gap-2">
+          <span>⚠️</span>
+          <span>{{ errorMessage }}</span>
+        </div>
+
         <!-- Google Authentication Button (Firebase Auth) -->
         <div>
           <button
@@ -71,12 +101,12 @@
         <div class="relative flex items-center justify-center">
           <div class="border-t border-[#EAE2D4] w-full"></div>
           <span class="bg-white px-3 text-[11px] uppercase font-bold text-[#8C6D57] tracking-wider absolute">
-            or manual login
+            {{ authMode === 'login' ? 'or sign in with credentials' : 'or create separate account' }}
           </span>
         </div>
 
-        <!-- Manual Credentials Form -->
-        <form class="space-y-4" @submit.prevent="handleManualLogin">
+        <!-- FORM A: SIGN IN -->
+        <form v-if="authMode === 'login'" class="space-y-4" @submit.prevent="handleManualLogin">
           <div>
             <label class="block text-xs font-mono text-[#8C6D57] uppercase mb-1.5 font-bold">
               User ID or Student Email *
@@ -86,7 +116,7 @@
               type="text"
               required
               class="w-full px-4 py-3 rounded-xl bg-[#FAFAFA] border border-[#EAE2D4] text-[#171844] text-sm focus:outline-none focus:border-[#171844] transition-colors"
-              placeholder="e.g. np-student-808 or your@email.com"
+              placeholder="e.g. your@email.com or student ID"
             />
           </div>
 
@@ -107,7 +137,7 @@
               />
               <button
                 type="button"
-                class="absolute right-3 top-1/2 -translate-y-1/2 text-xs text-[#8C6D57] hover:text-[#171844]"
+                class="absolute right-3 top-1/2 -translate-y-1/2 text-xs text-[#8C6D57] hover:text-[#171844] cursor-pointer"
                 @click="showPassword = !showPassword"
               >
                 {{ showPassword ? 'Hide' : 'Show' }}
@@ -135,11 +165,76 @@
           </button>
         </form>
 
+        <!-- FORM B: CREATE NEW STUDENT ACCOUNT -->
+        <form v-else class="space-y-4" @submit.prevent="handleRegister">
+          <div>
+            <label class="block text-xs font-mono text-[#8C6D57] uppercase mb-1.5 font-bold">
+              Full Name *
+            </label>
+            <input
+              v-model="regName"
+              type="text"
+              required
+              class="w-full px-4 py-3 rounded-xl bg-[#FAFAFA] border border-[#EAE2D4] text-[#171844] text-sm focus:outline-none focus:border-[#171844] transition-colors"
+              placeholder="e.g. Priya Sharma"
+            />
+          </div>
+
+          <div>
+            <label class="block text-xs font-mono text-[#8C6D57] uppercase mb-1.5 font-bold">
+              Student Email *
+            </label>
+            <input
+              v-model="regEmail"
+              type="email"
+              required
+              class="w-full px-4 py-3 rounded-xl bg-[#FAFAFA] border border-[#EAE2D4] text-[#171844] text-sm focus:outline-none focus:border-[#171844] transition-colors"
+              placeholder="e.g. priya.sharma@example.com"
+            />
+          </div>
+
+          <div>
+            <label class="block text-xs font-mono text-[#8C6D57] uppercase mb-1.5 font-bold">
+              Create Password *
+            </label>
+            <div class="relative">
+              <input
+                v-model="regPassword"
+                :type="showPassword ? 'text' : 'password'"
+                required
+                minlength="6"
+                class="w-full px-4 py-3 rounded-xl bg-[#FAFAFA] border border-[#EAE2D4] text-[#171844] text-sm focus:outline-none focus:border-[#171844] transition-colors pr-10"
+                placeholder="Minimum 6 characters"
+              />
+              <button
+                type="button"
+                class="absolute right-3 top-1/2 -translate-y-1/2 text-xs text-[#8C6D57] hover:text-[#171844] cursor-pointer"
+                @click="showPassword = !showPassword"
+              >
+                {{ showPassword ? 'Hide' : 'Show' }}
+              </button>
+            </div>
+            <span class="text-[10px] text-[#8C6D57] mt-1 block">Your profile, courses, and tasks will be uniquely saved to your personal account.</span>
+          </div>
+
+          <button
+            type="submit"
+            :disabled="isAuthLoading"
+            class="w-full py-3.5 rounded-xl bg-gradient-to-r from-[#171844] to-[#242658] hover:from-[#242658] hover:to-[#171844] text-[#F8D78B] font-bold text-xs uppercase tracking-wider transition-all shadow-md flex items-center justify-center gap-2 disabled:opacity-50 cursor-pointer"
+          >
+            <svg v-if="isAuthLoading" class="animate-spin w-4 h-4 text-[#F8D78B]" viewBox="0 0 24 24" fill="none">
+              <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+              <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v8H4z"></path>
+            </svg>
+            <span>{{ isAuthLoading ? 'Creating Personal Account...' : 'Create Account & Enter Portal &rarr;' }}</span>
+          </button>
+        </form>
+
         <!-- Quick 1-Click Demo Credentials -->
-        <div class="pt-2 border-t border-[#EAE2D4]/70">
+        <div v-if="authMode === 'login'" class="pt-2 border-t border-[#EAE2D4]/70">
           <button
             type="button"
-            class="w-full py-2.5 rounded-xl bg-[#FAFAFA] border border-dashed border-[#8C6D57]/40 text-[#8C6D57] hover:text-[#171844] hover:border-[#171844] text-xs font-semibold transition-colors flex items-center justify-center gap-2"
+            class="w-full py-2.5 rounded-xl bg-[#FAFAFA] border border-dashed border-[#8C6D57]/40 text-[#8C6D57] hover:text-[#171844] hover:border-[#171844] text-xs font-semibold transition-colors flex items-center justify-center gap-2 cursor-pointer"
             @click="fillDemoCredentials"
           >
             <span>⚡ Use Demo Student Credentials</span>
@@ -153,30 +248,68 @@
 <script setup lang="ts">
 import { ref } from 'vue'
 
-const { currentUser, isAuthLoading, loginWithCredentials, loginWithGoogle, logout } = useAuth()
+const {
+  currentUser,
+  isAuthLoading,
+  loginWithCredentials,
+  registerWithCredentials,
+  loginWithGoogle,
+  logout
+} = useAuth()
 
+const authMode = ref<'login' | 'register'>('login')
+const errorMessage = ref('')
+
+// Login Form State
 const userId = ref('')
 const password = ref('')
 const showPassword = ref(false)
 const rememberMe = ref(true)
 
+// Registration Form State
+const regName = ref('')
+const regEmail = ref('')
+const regPassword = ref('')
+
 const fillDemoCredentials = () => {
   userId.value = 'arjun.sharma@example.com'
   password.value = 'presence2026'
+  errorMessage.value = ''
 }
 
 const handleManualLogin = async () => {
-  if (!userId.value) return
+  if (!userId.value || !password.value) return
+  errorMessage.value = ''
   const success = await loginWithCredentials(userId.value, password.value)
   if (success) {
     navigateTo('/portal')
+  } else {
+    errorMessage.value = 'Invalid student credentials. Please verify your email/ID and password.'
+  }
+}
+
+const handleRegister = async () => {
+  if (!regName.value || !regEmail.value || !regPassword.value) return
+  if (regPassword.value.length < 6) {
+    errorMessage.value = 'Password must be at least 6 characters long.'
+    return
+  }
+  errorMessage.value = ''
+  const result = await registerWithCredentials(regName.value, regEmail.value, regPassword.value)
+  if (result.success) {
+    navigateTo('/portal')
+  } else {
+    errorMessage.value = result.message || 'Registration failed. Please try again.'
   }
 }
 
 const handleGoogleLogin = async () => {
+  errorMessage.value = ''
   const success = await loginWithGoogle()
   if (success) {
     navigateTo('/portal')
+  } else {
+    errorMessage.value = 'Google sign-in could not be completed.'
   }
 }
 

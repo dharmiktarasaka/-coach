@@ -1360,23 +1360,41 @@
 <script setup lang="ts">
 import { ref, computed, watch, onMounted } from 'vue'
 
-const { currentUser, logout } = useAuth()
+const { currentUser, authToken, refreshUser, logout } = useAuth()
 
-// Fallback student if not logged in
+const getApiBaseUrl = () => {
+  if (typeof window !== 'undefined') {
+    try {
+      const config = useRuntimeConfig?.()
+      if (config?.public?.apiUrl) return config.public.apiUrl
+    } catch {}
+    const host = window.location.hostname || 'localhost'
+    return `http://${host}:5001/api`
+  }
+  return 'http://localhost:5001/api'
+}
+
+// Fallback student placeholder during initial hydration before redirect
 const defaultStudent = {
-  id: 'np-student-808',
-  name: 'Arjun Sharma',
-  email: 'arjun.sharma@example.com',
+  id: 'np-student-guest',
+  name: 'Student Member',
+  email: 'student@narayanpresence.com',
   avatar: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=150&auto=format&fit=crop&q=80',
   role: 'Presence Circle Member',
   enrolledCourse: 'The Art of Conscious Mastery',
-  overallProgress: 68,
-  streakDays: 14,
-  sessionsAttended: 8
+  overallProgress: 0,
+  streakDays: 1,
+  sessionsAttended: 0
 }
 
 const student = computed(() => currentUser.value || defaultStudent)
-const studentProgress = ref(68)
+const studentProgress = ref(currentUser.value?.overallProgress ?? 0)
+
+watch(currentUser, (newUser) => {
+  if (newUser) {
+    studentProgress.value = newUser.overallProgress ?? 0
+  }
+})
 
 const activeTab = ref<'dashboard' | 'live' | 'lectures' | 'todo'>('dashboard')
 
@@ -1677,21 +1695,68 @@ const lecturesList = ref([
   }
 ])
 
-const currentLecture = ref(lecturesList.value[2])
+const currentLecture = ref(lecturesList.value[0])
 
-const markLectureCompleted = (id: number) => {
-  const lec = lecturesList.value.find(l => l.id === id)
-  if (lec) {
-    lec.completed = !lec.completed
-    // Recalculate progress percentage
-    const completedCount = lecturesList.value.filter(l => l.completed).length
-    studentProgress.value = Math.round((completedCount / lecturesList.value.length) * 100)
+const loadUserLectures = async () => {
+  if (authToken.value) {
+    try {
+      const res = await fetch(`${getApiBaseUrl()}/lectures`, {
+        headers: { Authorization: `Bearer ${authToken.value}` }
+      })
+      if (res.ok) {
+        const data = await res.json()
+        if (data.success && Array.isArray(data.lectures)) {
+          lecturesList.value = data.lectures
+          if (!currentLecture.value && lecturesList.value.length > 0) {
+            currentLecture.value = lecturesList.value[0]
+          }
+          const completedCount = lecturesList.value.filter((l: any) => l.completed).length
+          studentProgress.value = Math.round((completedCount / lecturesList.value.length) * 100)
+        }
+      }
+    } catch (err) {
+      console.warn('[Lectures API Notice]:', err)
+    }
   }
 }
 
-// ---------------- REAL TODO APP STATE ----------------
+const markLectureCompleted = async (id: number) => {
+  const lec = lecturesList.value.find(l => l.id === id)
+  if (!lec) return
+
+  // Optimistic UI update
+  lec.completed = !lec.completed
+  const completedCount = lecturesList.value.filter(l => l.completed).length
+  studentProgress.value = Math.round((completedCount / lecturesList.value.length) * 100)
+
+  if (authToken.value) {
+    try {
+      const res = await fetch(`${getApiBaseUrl()}/lectures/${id}/complete`, {
+        method: 'POST',
+        headers: {
+          Authorization: `Bearer ${authToken.value}`,
+          'Content-Type': 'application/json'
+        }
+      })
+      if (res.ok) {
+        const data = await res.json()
+        if (data.overallProgress !== undefined) {
+          studentProgress.value = data.overallProgress
+          if (currentUser.value) {
+            currentUser.value.overallProgress = data.overallProgress
+          }
+        }
+      }
+    } catch (err) {
+      console.warn('[Lecture Complete Sync Notice]:', err)
+    }
+  }
+}
+
+// ---------------- REAL TODO APP STATE (USER-ISOLATED & SECURED) ----------------
 interface TodoItem {
   id: string
+  userId?: string
   title: string
   category: string
   priority: string
@@ -1699,33 +1764,80 @@ interface TodoItem {
   createdAt: string
 }
 
-const TODO_STORAGE_KEY = 'narayan_presence_student_todos'
+const getUserTodoStorageKey = () => `np_todos_${currentUser.value?.id || 'guest'}`
 
 const newTaskTitle = ref('')
 const newTaskCategory = ref('Reflection')
 const newTaskPriority = ref('High')
 const todoFilter = ref<'all' | 'active' | 'completed'>('all')
 
-const todos = ref<TodoItem[]>([
-  { id: '1', title: 'Complete 20-minute morning breathwork protocol', category: 'Meditation', priority: 'High', completed: true, createdAt: 'Today' },
-  { id: '2', title: 'Review Lesson 3 lecture notes and submit worksheet', category: 'Coursework', priority: 'High', completed: false, createdAt: 'Today' },
-  { id: '3', title: 'Read Chapter 4 of "The Grounded Mind"', category: 'Reading', priority: 'Medium', completed: false, createdAt: 'Yesterday' },
-  { id: '4', title: 'Evening reflection journal: 3 moments of conscious choice', category: 'Reflection', priority: 'Normal', completed: false, createdAt: 'Today' }
-])
+const todos = ref<TodoItem[]>([])
 
-onMounted(() => {
+const saveTodosLocally = () => {
   if (typeof window !== 'undefined') {
-    // 1. Restore Todo items
-    const saved = localStorage.getItem(TODO_STORAGE_KEY)
+    localStorage.setItem(getUserTodoStorageKey(), JSON.stringify(todos.value))
+  }
+}
+
+const loadUserTodos = async () => {
+  // 1. Try user-isolated local cache first
+  if (typeof window !== 'undefined') {
+    const saved = localStorage.getItem(getUserTodoStorageKey())
     if (saved) {
       try {
         todos.value = JSON.parse(saved)
-      } catch {
-        // use default
+      } catch {}
+    }
+  }
+
+  // 2. Fetch authenticated user's tasks from MongoDB backend
+  if (authToken.value) {
+    try {
+      const res = await fetch(`${getApiBaseUrl()}/todos`, {
+        headers: { Authorization: `Bearer ${authToken.value}` }
+      })
+      if (res.ok) {
+        const data = await res.json()
+        if (data.success && Array.isArray(data.todos)) {
+          todos.value = data.todos
+          saveTodosLocally()
+        }
       }
+    } catch (err) {
+      console.warn('[Todos API Notice]: Running in local offline mode', err)
+    }
+  }
+
+  // 3. Fallback initial demo tasks if user is fresh and has 0 tasks
+  if (todos.value.length === 0) {
+    todos.value = [
+      { id: '1', title: 'Complete 20-minute morning breathwork protocol', category: 'Meditation', priority: 'High', completed: true, createdAt: 'Today' },
+      { id: '2', title: 'Review Lesson 1 lecture notes and submit reflection', category: 'Coursework', priority: 'High', completed: false, createdAt: 'Today' }
+    ]
+    saveTodosLocally()
+  }
+}
+
+onMounted(async () => {
+  if (typeof window !== 'undefined') {
+    // 1. Security Check: Redirect to login if user has no session
+    const savedToken = localStorage.getItem('narayan_presence_student_token')
+    const savedUser = localStorage.getItem('narayan_presence_student_user')
+    if (!savedToken && !currentUser.value && !savedUser) {
+      navigateTo('/login')
+      return
     }
 
-    // 2. Handle direct invitation query params (e.g. ?room=xyz&passcode=1234)
+    // 2. Refresh authenticated user profile to get fresh stats from MongoDB
+    await refreshUser()
+
+    // 3. Load user-isolated Todos from backend
+    await loadUserTodos()
+
+    // 4. Load user-isolated Lectures from backend
+    await loadUserLectures()
+
+    // 5. Handle direct invitation query params (e.g. ?room=xyz&passcode=1234)
     if (route.query.room) {
       activeTab.value = 'live'
       joinRoomId.value = String(route.query.room)
@@ -1736,42 +1848,112 @@ onMounted(() => {
   }
 })
 
-const saveTodos = () => {
-  if (typeof window !== 'undefined') {
-    localStorage.setItem(TODO_STORAGE_KEY, JSON.stringify(todos.value))
-  }
-}
-
-const addTodo = () => {
+const addTodo = async () => {
   if (!newTaskTitle.value.trim()) return
-  todos.value.unshift({
-    id: Date.now().toString(),
-    title: newTaskTitle.value.trim(),
-    category: newTaskCategory.value,
-    priority: newTaskPriority.value,
+
+  const itemTitle = newTaskTitle.value.trim()
+  const itemCategory = newTaskCategory.value
+  const itemPriority = newTaskPriority.value
+  newTaskTitle.value = ''
+
+  // Optimistic local add
+  const tempId = Date.now().toString()
+  const localItem: TodoItem = {
+    id: tempId,
+    userId: currentUser.value?.id,
+    title: itemTitle,
+    category: itemCategory,
+    priority: itemPriority,
     completed: false,
     createdAt: 'Today'
-  })
-  newTaskTitle.value = ''
-  saveTodos()
-}
+  }
+  todos.value.unshift(localItem)
+  saveTodosLocally()
 
-const toggleTodo = (id: string) => {
-  const item = todos.value.find(t => t.id === id)
-  if (item) {
-    item.completed = !item.completed
-    saveTodos()
+  // Authenticated sync with MongoDB backend
+  if (authToken.value) {
+    try {
+      const res = await fetch(`${getApiBaseUrl()}/todos`, {
+        method: 'POST',
+        headers: {
+          Authorization: `Bearer ${authToken.value}`,
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          title: itemTitle,
+          category: itemCategory,
+          priority: itemPriority
+        })
+      })
+      if (res.ok) {
+        const data = await res.json()
+        if (data.success && data.todo) {
+          // Replace temporary id with backend generated id
+          const idx = todos.value.findIndex(t => t.id === tempId)
+          if (idx !== -1) {
+            todos.value[idx] = data.todo
+            saveTodosLocally()
+          }
+        }
+      }
+    } catch (err) {
+      console.warn('[Add Todo Sync Notice]:', err)
+    }
   }
 }
 
-const deleteTodo = (id: string) => {
+const toggleTodo = async (id: string) => {
+  const item = todos.value.find(t => t.id === id)
+  if (!item) return
+
+  item.completed = !item.completed
+  saveTodosLocally()
+
+  if (authToken.value) {
+    try {
+      await fetch(`${getApiBaseUrl()}/todos/${id}`, {
+        method: 'PATCH',
+        headers: {
+          Authorization: `Bearer ${authToken.value}`,
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ completed: item.completed })
+      })
+    } catch (err) {
+      console.warn('[Toggle Todo Sync Notice]:', err)
+    }
+  }
+}
+
+const deleteTodo = async (id: string) => {
   todos.value = todos.value.filter(t => t.id !== id)
-  saveTodos()
+  saveTodosLocally()
+
+  if (authToken.value) {
+    try {
+      await fetch(`${getApiBaseUrl()}/todos/${id}`, {
+        method: 'DELETE',
+        headers: { Authorization: `Bearer ${authToken.value}` }
+      })
+    } catch (err) {
+      console.warn('[Delete Todo Sync Notice]:', err)
+    }
+  }
 }
 
 const clearCompletedTodos = () => {
+  const completedIds = todos.value.filter(t => t.completed).map(t => t.id)
   todos.value = todos.value.filter(t => !t.completed)
-  saveTodos()
+  saveTodosLocally()
+
+  if (authToken.value) {
+    completedIds.forEach(id => {
+      fetch(`${getApiBaseUrl()}/todos/${id}`, {
+        method: 'DELETE',
+        headers: { Authorization: `Bearer ${authToken.value}` }
+      }).catch(() => {})
+    })
+  }
 }
 
 const pendingTasksCount = computed(() => todos.value.filter(t => !t.completed).length)

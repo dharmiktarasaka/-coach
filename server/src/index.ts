@@ -232,25 +232,26 @@ app.get('/api/auth/me', requireAuth, async (req: Request, res: Response) => {
   return res.json({ success: true, user: safeUser })
 })
 
-// ---------------- TODO (TASK MANAGER) ENDPOINTS ----------------
+// ---------------- TODO (TASK MANAGER) ENDPOINTS (USER-ISOLATED & SECURED) ----------------
 
-// GET /api/todos
-app.get('/api/todos', async (req: Request, res: Response) => {
-  const userId = req.query.userId as string | undefined
+// GET /api/todos - returns ONLY authenticated user's tasks
+app.get('/api/todos', requireAuth, async (req: Request, res: Response) => {
+  const userId = (req as any).user.id
   const todos = await db.getTodos(userId)
   return res.json({ success: true, todos })
 })
 
-// POST /api/todos
-app.post('/api/todos', async (req: Request, res: Response) => {
-  const { title, category, priority, userId } = req.body
-  if (!title) {
+// POST /api/todos - creates task tied exclusively to authenticated user
+app.post('/api/todos', requireAuth, async (req: Request, res: Response) => {
+  const userId = (req as any).user.id
+  const { title, category, priority } = req.body
+  if (!title || typeof title !== 'string' || !title.trim()) {
     return res.status(400).json({ success: false, message: 'Task title is required.' })
   }
 
   const newTodo: Todo = {
-    id: Date.now().toString(),
-    userId: userId || 'np-student-808',
+    id: `todo-${Date.now()}-${Math.floor(100 + Math.random() * 900)}`,
+    userId,
     title: title.trim(),
     category: category || 'Reflection',
     priority: priority || 'High',
@@ -262,10 +263,20 @@ app.post('/api/todos', async (req: Request, res: Response) => {
   return res.status(201).json({ success: true, todo: newTodo })
 })
 
-// PATCH /api/todos/:id
-app.patch('/api/todos/:id', async (req: Request, res: Response) => {
+// PATCH /api/todos/:id - verifies ownership before updating
+app.patch('/api/todos/:id', requireAuth, async (req: Request, res: Response) => {
+  const userId = (req as any).user.id
   const id = String(req.params.id)
+
+  // Verify ownership: task must belong to authenticated user
+  const userTodos = await db.getTodos(userId)
+  const userOwnsTodo = userTodos.some(t => t.id === id)
+  if (!userOwnsTodo) {
+    return res.status(403).json({ success: false, message: 'Access denied. You do not own this task.' })
+  }
+
   const updates = req.body
+  delete updates.userId // prevent reassignment of ownership
   const updated = await db.updateTodo(id, updates)
   if (!updated) {
     return res.status(404).json({ success: false, message: 'Task not found.' })
@@ -273,9 +284,18 @@ app.patch('/api/todos/:id', async (req: Request, res: Response) => {
   return res.json({ success: true, todo: updated })
 })
 
-// DELETE /api/todos/:id
-app.delete('/api/todos/:id', async (req: Request, res: Response) => {
+// DELETE /api/todos/:id - verifies ownership before deleting
+app.delete('/api/todos/:id', requireAuth, async (req: Request, res: Response) => {
+  const userId = (req as any).user.id
   const id = String(req.params.id)
+
+  // Verify ownership: task must belong to authenticated user
+  const userTodos = await db.getTodos(userId)
+  const userOwnsTodo = userTodos.some(t => t.id === id)
+  if (!userOwnsTodo) {
+    return res.status(403).json({ success: false, message: 'Access denied. You do not own this task.' })
+  }
+
   const deleted = await db.deleteTodo(id)
   if (!deleted) {
     return res.status(404).json({ success: false, message: 'Task not found.' })
@@ -283,11 +303,11 @@ app.delete('/api/todos/:id', async (req: Request, res: Response) => {
   return res.json({ success: true, message: 'Task removed.' })
 })
 
-// ---------------- LECTURES ENDPOINTS ----------------
+// ---------------- LECTURES ENDPOINTS (USER-ISOLATED & SECURED) ----------------
 
-// GET /api/lectures
-app.get('/api/lectures', async (req: Request, res: Response) => {
-  const userId = (req.query.userId as string) || 'np-student-808'
+// GET /api/lectures - returns curriculum with completion status scoped strictly to authenticated user
+app.get('/api/lectures', requireAuth, async (req: Request, res: Response) => {
+  const userId = (req as any).user.id
   const allLectures = await db.getLectures()
   const lectures = allLectures.map(lec => ({
     ...lec,
@@ -296,10 +316,10 @@ app.get('/api/lectures', async (req: Request, res: Response) => {
   return res.json({ success: true, lectures })
 })
 
-// POST /api/lectures/:id/complete
-app.post('/api/lectures/:id/complete', async (req: Request, res: Response) => {
+// POST /api/lectures/:id/complete - toggles completion and updates overall progress for authenticated user
+app.post('/api/lectures/:id/complete', requireAuth, async (req: Request, res: Response) => {
+  const userId = (req as any).user.id
   const lectureId = Number(req.params.id)
-  const userId = req.body.userId || 'np-student-808'
   const result = await db.toggleLectureCompletion(lectureId, userId)
   return res.json({ success: true, ...result })
 })

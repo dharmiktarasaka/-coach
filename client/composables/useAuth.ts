@@ -23,10 +23,23 @@ const isAuthLoading = ref(false)
 
 const STORAGE_KEY = 'narayan_presence_student_user'
 const TOKEN_KEY = 'narayan_presence_student_token'
-const API_URL = 'http://localhost:5001/api'
+
+const getApiUrl = () => {
+  if (typeof window !== 'undefined') {
+    try {
+      const config = useRuntimeConfig?.()
+      if (config?.public?.apiUrl) {
+        return config.public.apiUrl
+      }
+    } catch {}
+    const host = window.location.hostname || 'localhost'
+    return `http://${host}:5001/api`
+  }
+  return 'http://localhost:5001/api'
+}
 
 export const useAuth = () => {
-  onMounted(() => {
+  onMounted(async () => {
     if (typeof window !== 'undefined') {
       const savedUser = localStorage.getItem(STORAGE_KEY)
       const savedToken = localStorage.getItem(TOKEN_KEY)
@@ -39,8 +52,79 @@ export const useAuth = () => {
           localStorage.removeItem(TOKEN_KEY)
         }
       }
+      if (authToken.value) {
+        await refreshUser()
+      }
     }
   })
+
+  // Refresh user data from authenticated backend
+  const refreshUser = async (): Promise<StudentUser | null> => {
+    if (!authToken.value) return null
+    try {
+      const response = await fetch(`${getApiUrl()}/auth/me`, {
+        headers: {
+          Authorization: `Bearer ${authToken.value}`
+        }
+      })
+      if (response.ok) {
+        const data = await response.json()
+        if (data.success && data.user) {
+          currentUser.value = data.user
+          if (typeof window !== 'undefined') {
+            localStorage.setItem(STORAGE_KEY, JSON.stringify(data.user))
+          }
+          return data.user
+        }
+      } else if (response.status === 401) {
+        logout()
+      }
+    } catch {
+      // offline fallback
+    }
+    return currentUser.value
+  }
+
+  // Register New Student Account (Email + Password + Name)
+  const registerWithCredentials = async (
+    name: string,
+    email: string,
+    password: string
+  ): Promise<{ success: boolean; message?: string }> => {
+    isAuthLoading.value = true
+
+    // Also attempt Firebase registration for multi-factor/Google sync
+    try {
+      await registerWithFirebaseEmail(email, password, name)
+    } catch (fbErr) {
+      console.warn('[Firebase Registration Notice]:', fbErr)
+    }
+
+    try {
+      const response = await fetch(`${getApiUrl()}/auth/register`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ name, email, password })
+      })
+
+      const data = await response.json()
+      if (response.ok && data.success && data.user) {
+        currentUser.value = data.user
+        authToken.value = data.token
+        if (typeof window !== 'undefined') {
+          localStorage.setItem(STORAGE_KEY, JSON.stringify(data.user))
+          localStorage.setItem(TOKEN_KEY, data.token)
+        }
+        isAuthLoading.value = false
+        return { success: true }
+      }
+      isAuthLoading.value = false
+      return { success: false, message: data.message || 'Account creation failed.' }
+    } catch (err: any) {
+      isAuthLoading.value = false
+      return { success: false, message: 'Could not reach authentication server.' }
+    }
+  }
 
   // Manual Credentials Login (Firebase Email + Backend Sync)
   const loginWithCredentials = async (userIdOrEmail: string, password: string): Promise<boolean> => {
@@ -60,7 +144,7 @@ export const useAuth = () => {
 
     // Authenticate with MongoDB Backend
     try {
-      const response = await fetch(`${API_URL}/auth/login`, {
+      const response = await fetch(`${getApiUrl()}/auth/login`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ userIdOrEmail, password })
@@ -133,7 +217,7 @@ export const useAuth = () => {
 
     // Sync user with MongoDB Backend
     try {
-      const response = await fetch(`${API_URL}/auth/google`, {
+      const response = await fetch(`${getApiUrl()}/auth/google`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(googleProfile)
@@ -191,7 +275,9 @@ export const useAuth = () => {
     authToken,
     isAuthLoading,
     loginWithCredentials,
+    registerWithCredentials,
     loginWithGoogle,
+    refreshUser,
     logout
   }
 }

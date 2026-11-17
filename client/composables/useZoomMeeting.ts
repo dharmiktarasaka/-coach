@@ -24,6 +24,14 @@ export interface ChatMessage {
 
 const getSocketServerUrl = () => {
   if (typeof window !== 'undefined') {
+    try {
+      const config = useRuntimeConfig()
+      if (config?.public?.apiUrl) {
+        return config.public.apiUrl.replace(/\/api\/?$/, '')
+      }
+    } catch {
+      // outside Nuxt setup context
+    }
     const host = window.location.hostname || 'localhost'
     return `http://${host}:5001`
   }
@@ -104,12 +112,13 @@ export const useZoomMeeting = () => {
     if (socket.value) return socket.value
 
     try {
-      // Dynamic import from CDN with vite-ignore for zero-dependency browser compatibility
-      const { io } = await import(
-        /* @vite-ignore */ 'https://cdn.socket.io/4.7.5/socket.io.esm.min.js'
-      )
+      // Bundled locally via socket.io-client (no external CDN dependency, zero connection timeouts)
+      const { io } = await import('socket.io-client')
 
-      const s = io(getSocketServerUrl(), {
+      const serverUrl = getSocketServerUrl()
+      console.log('[Zoom WebRTC] Connecting to signaling server:', serverUrl)
+
+      const s = io(serverUrl, {
         transports: ['websocket', 'polling'],
         reconnectionAttempts: 5,
         timeout: 10000
@@ -119,7 +128,13 @@ export const useZoomMeeting = () => {
 
       s.on('connect', () => {
         isConnected.value = true
+        errorMessage.value = null
         console.log('[Zoom WebRTC] Connected to signaling server:', s.id)
+      })
+
+      s.on('connect_error', (err: any) => {
+        console.warn('[Zoom WebRTC] Socket connection warning:', err?.message || err)
+        errorMessage.value = `Unable to reach signaling server at ${serverUrl}. Please ensure the backend server is running.`
       })
 
       s.on('disconnect', () => {
