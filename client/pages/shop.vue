@@ -1,911 +1,454 @@
 <template>
-  <div class="py-28 md:py-36 bg-[#FBF6F6] min-h-screen text-[#1A1A1A]">
-    <UiContainer size="xl">
-      <!-- Section Header -->
-      <div class="text-center max-w-3xl mx-auto mb-12 space-y-4">
-        <UiBadge variant="amber" :dot="true">Digital Coach Store</UiBadge>
-        <h1 class="font-display font-black text-3xl sm:text-4xl lg:text-5xl text-[#1A1A1A] tracking-tight">
-          DIGITAL PRODUCTS & OPERATING ASSETS
-        </h1>
-        <p class="text-[#524F4E] text-base sm:text-lg leading-relaxed">
-          Battle-tested Notion operating systems, high-ticket sales script vaults, automated funnel templates, and AI prompt suites ready for instant download and implementation.
-        </p>
-      </div>
+  <div class="py-24 sm:py-32 bg-[#F1F3F6] min-h-screen text-[#212121]">
+    <!-- Top Flipkart Banner & Breadcrumb Header -->
+    <div class="bg-[#171844] text-white py-10 px-4 mb-8 shadow-md border-b-4 border-[#2874F0]">
+      <UiContainer size="xl">
+        <div class="flex flex-col md:flex-row md:items-center justify-between gap-6">
+          <div class="space-y-2 max-w-2xl">
+            <div class="flex items-center gap-2 text-xs text-[#F8D78B] font-bold uppercase tracking-wider">
+              <span>🏠 Home</span>
+              <span>&gt;</span>
+              <span>Narayan Presence Store</span>
+              <span>&gt;</span>
+              <span class="text-white">All Offerings</span>
+            </div>
+            <h1 class="font-display font-black text-2xl sm:text-4xl text-white tracking-tight">
+              NARAYAN PRESENCE STORE &amp; CURRICULUM
+            </h1>
+            <p class="text-xs sm:text-sm text-[#EAE2D4]/90 leading-relaxed">
+              Explore conscious awareness resources, workbooks, live workshops, specialized courses, and 1-on-1 private mentoring.
+            </p>
+          </div>
 
-      <!-- Controls Bar: Search, Category Filter, Currency Toggle & Cart Trigger -->
-      <div class="bg-white border border-[#EAE4E4] rounded-3xl p-4 sm:p-6 mb-12 shadow-sm space-y-4">
+          <!-- Flipkart Style Quick Trust Badges -->
+          <div class="grid grid-cols-2 sm:grid-cols-4 md:grid-cols-2 gap-3 text-left">
+            <div class="p-2.5 rounded-xl bg-white/5 border border-white/10 flex items-center gap-2.5">
+              <span class="text-xl">⚡</span>
+              <div>
+                <div class="text-[11px] font-bold text-white">Instant Delivery</div>
+                <div class="text-[9px] text-[#EAE2D4]/70">Digital access in 30s</div>
+              </div>
+            </div>
+            <div class="p-2.5 rounded-xl bg-white/5 border border-white/10 flex items-center gap-2.5">
+              <span class="text-xl">✨</span>
+              <div>
+                <div class="text-[11px] font-bold text-[#FFE11B]">Narayan Assured</div>
+                <div class="text-[9px] text-[#EAE2D4]/70">100% Verified Quality</div>
+              </div>
+            </div>
+            <div class="p-2.5 rounded-xl bg-white/5 border border-white/10 flex items-center gap-2.5">
+              <span class="text-xl">🔒</span>
+              <div>
+                <div class="text-[11px] font-bold text-white">Safe &amp; Secure</div>
+                <div class="text-[9px] text-[#EAE2D4]/70">UPI / NetBanking / Cards</div>
+              </div>
+            </div>
+            <div class="p-2.5 rounded-xl bg-white/5 border border-white/10 flex items-center gap-2.5">
+              <span class="text-xl">⭐</span>
+              <div>
+                <div class="text-[11px] font-bold text-white">4.9+ Rating</div>
+                <div class="text-[9px] text-[#EAE2D4]/70">15,000+ Seekers</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </UiContainer>
+    </div>
+
+    <UiContainer size="xl">
+      <!-- Search, Category Filter & Sorting Controls Bar -->
+      <div class="bg-white border border-[#EAE2D4] rounded-2xl p-4 sm:p-5 mb-8 shadow-sm space-y-4">
+        <!-- Search and Sort Row -->
         <div class="flex flex-col md:flex-row items-center justify-between gap-4">
-          <!-- Search input -->
-          <div class="relative w-full md:w-80">
+          <!-- Live Search Bar -->
+          <div class="relative w-full md:w-96">
             <input
               v-model="searchQuery"
               type="text"
-              placeholder="Search products, templates..."
-              class="w-full pl-10 pr-4 py-2.5 rounded-full border border-[#EAE4E4] bg-[#FBF6F6] text-sm text-[#1A1A1A] placeholder-[#8C8685] focus:outline-none focus:ring-2 focus:ring-[#FF7F11] focus:border-transparent transition-all"
+              placeholder="Search products, courses, workbooks, coaching..."
+              class="w-full pl-10 pr-8 py-2.5 rounded-xl border border-[#EAE2D4] bg-[#FAFAFA] text-xs sm:text-sm text-[#212121] placeholder-[#878787] focus:outline-none focus:ring-2 focus:ring-[#2874F0] focus:border-transparent transition-all"
             />
-            <svg class="w-4 h-4 text-[#8C8685] absolute left-3.5 top-1/2 -translate-y-1/2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <svg class="w-4 h-4 text-[#878787] absolute left-3.5 top-1/2 -translate-y-1/2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
             </svg>
             <button
               v-if="searchQuery"
               @click="searchQuery = ''"
-              class="absolute right-3.5 top-1/2 -translate-y-1/2 text-xs text-[#8C8685] hover:text-[#1A1A1A]"
+              class="absolute right-3 top-1/2 -translate-y-1/2 text-sm text-[#878787] hover:text-[#212121]"
             >
               &times;
             </button>
           </div>
 
-          <!-- Currency Selector & Guarantee Badges -->
-          <div class="flex items-center gap-4 w-full md:w-auto justify-between md:justify-end">
-            <!-- Currency Toggle -->
-            <div class="flex items-center bg-[#FBF6F6] border border-[#EAE4E4] rounded-full p-1 text-xs font-bold">
-              <button
-                type="button"
-                :class="[
-                  'px-3 py-1.5 rounded-full transition-all duration-200',
-                  currency === 'USD' ? 'bg-[#FF7F11] text-white shadow-sm' : 'text-[#524F4E] hover:text-[#1A1A1A]'
-                ]"
-                @click="currency = 'USD'"
+          <!-- Sort and Cart Trigger Row -->
+          <div class="flex items-center gap-3 w-full md:w-auto justify-between md:justify-end">
+            <!-- Sort dropdown -->
+            <div class="flex items-center gap-1.5 text-xs text-[#878787]">
+              <span class="font-bold">Sort By:</span>
+              <select
+                v-model="sortBy"
+                class="bg-[#FAFAFA] border border-[#EAE2D4] rounded-lg px-2.5 py-2 text-xs font-semibold text-[#212121] focus:outline-none focus:ring-1 focus:ring-[#2874F0]"
               >
-                USD ($)
-              </button>
-              <button
-                type="button"
-                :class="[
-                  'px-3 py-1.5 rounded-full transition-all duration-200',
-                  currency === 'INR' ? 'bg-[#FF7F11] text-white shadow-sm' : 'text-[#524F4E] hover:text-[#1A1A1A]'
-                ]"
-                @click="currency = 'INR'"
-              >
-                INR (₹)
-              </button>
+                <option value="popular">Popularity</option>
+                <option value="price-low">Price: Low to High</option>
+                <option value="price-high">Price: High to Low</option>
+                <option value="rating">Customer Rating</option>
+              </select>
             </div>
 
-            <!-- Cart button if items exist -->
+            <!-- Wishlist Trigger Pill -->
             <button
-              v-if="cart.length > 0"
-              @click="isCheckoutOpen = true"
-              class="flex items-center gap-2 px-4 py-2 rounded-full bg-[#1A1A1A] text-white text-xs font-bold shadow-md hover:bg-[#FF7F11] transition-colors"
+              type="button"
+              class="flex items-center gap-1.5 px-3 py-2 rounded-xl bg-white border border-[#EAE2D4] hover:bg-pink-50 text-[#171844] text-xs font-bold transition-colors cursor-pointer shadow-sm"
+              @click="isWishlistOpen = true"
             >
-              <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z" />
+              <svg class="w-4 h-4 text-[#FF3E6C] fill-[#FF3E6C]" viewBox="0 0 24 24">
+                <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
               </svg>
-              <span>Checkout ({{ cart.length }})</span>
+              <span>Wishlist ({{ wishlist.length }})</span>
+            </button>
+
+            <!-- Cart Trigger Pill -->
+            <button
+              type="button"
+              class="flex items-center gap-2 px-4 py-2 rounded-xl bg-[#2874F0] hover:bg-[#1C5BC4] text-white text-xs font-bold shadow-md transition-all cursor-pointer hover:scale-[1.02]"
+              @click="isCartOpen = true"
+            >
+              <svg class="w-4 h-4 text-[#FFE11B]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.2" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z" />
+              </svg>
+              <span>Cart ({{ cartTotalCount }})</span>
             </button>
           </div>
         </div>
 
-        <!-- Filter Category Tabs -->
-        <div class="flex items-center gap-2 overflow-x-auto pb-1 pt-1 no-scrollbar border-t border-[#EAE4E4]/60">
+        <!-- Flipkart Style Category Tabs -->
+        <div class="flex items-center gap-2 overflow-x-auto pb-1 pt-1 no-scrollbar border-t border-[#EAE2D4]/80">
           <button
-            v-for="category in categories"
-            :key="category.id"
+            v-for="cat in categoryFilters"
+            :key="cat.id"
             type="button"
             :class="[
-              'px-4 py-2 rounded-full text-xs font-bold whitespace-nowrap transition-all duration-200 shrink-0',
-              selectedCategory === category.id
-                ? 'bg-[#FF7F11] text-white shadow-md shadow-[#FF7F11]/25'
-                : 'bg-[#FBF6F6] text-[#524F4E] hover:bg-[#EFE9E9] hover:text-[#1A1A1A]'
+              'px-3.5 py-1.5 rounded-lg text-xs font-bold whitespace-nowrap transition-all shrink-0 cursor-pointer',
+              selectedCategory === cat.id
+                ? 'bg-[#2874F0] text-white shadow-sm'
+                : 'bg-[#FAFAFA] text-[#524F4E] hover:bg-[#EAE2D4] hover:text-[#212121] border border-[#EAE2D4]'
             ]"
-            @click="selectedCategory = category.id"
+            @click="selectedCategory = cat.id"
           >
-            {{ category.label }}
-            <span class="ml-1 opacity-75 font-normal">({{ getCategoryCount(category.id) }})</span>
+            {{ cat.label }}
+            <span class="ml-1 opacity-80 text-[10px]">({{ getCategoryCount(cat.id) }})</span>
           </button>
         </div>
       </div>
 
-      <!-- Products Grid -->
-      <div v-if="filteredProducts.length > 0" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-20">
+      <!-- Results Count Banner -->
+      <div class="flex items-center justify-between mb-4 text-xs text-[#878787] px-1 font-medium">
+        <div>
+          Showing <strong class="text-[#212121]">{{ filteredProducts.length }}</strong> products &amp; courses
+        </div>
+        <div class="flex items-center gap-1.5 text-[#388E3C] font-bold">
+          <span>⚡</span>
+          <span>Instant Download &amp; Portal Enrollment Available</span>
+        </div>
+      </div>
+
+      <!-- Product Cards Grid (Flipkart-Style) -->
+      <div v-if="filteredProducts.length > 0" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5 mb-16">
         <div
           v-for="product in filteredProducts"
           :key="product.id"
-          class="bg-white border border-[#EAE4E4] hover:border-[#FF7F11]/60 rounded-3xl p-7 transition-all duration-300 flex flex-col justify-between group shadow-md hover:shadow-xl hover:-translate-y-1 relative overflow-hidden"
+          class="bg-white border border-[#EAE2D4] hover:border-[#2874F0]/60 rounded-2xl overflow-hidden transition-all duration-300 flex flex-col justify-between group shadow-sm hover:shadow-xl hover:-translate-y-1 relative"
         >
-          <!-- Popular / Best Seller Flag -->
-          <div
-            v-if="product.isBestseller"
-            class="absolute top-0 right-0 bg-gradient-to-l from-[#FF7F11] to-[#E66800] text-white text-[10px] font-extrabold uppercase px-3 py-1 rounded-bl-xl tracking-wider shadow-sm"
-          >
-            🔥 Best Seller
-          </div>
+          <!-- Top Badges & Wishlist -->
+          <div class="relative aspect-[4/3] overflow-hidden bg-[#FAFAFA] border-b border-[#EAE2D4]">
+            <img
+              :src="product.images[0]"
+              :alt="product.title"
+              class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+            />
 
-          <div class="space-y-5">
-            <!-- Header Badges & Category -->
-            <div class="flex items-center justify-between pb-3 border-b border-[#EAE4E4]">
-              <UiBadge :variant="product.badgeVariant || 'amber'">
-                {{ product.categoryLabel }}
-              </UiBadge>
-              <div class="flex items-center gap-1 text-xs text-[#FF7F11] font-bold">
-                <span>★ {{ product.rating }}</span>
-                <span class="text-[#8C8685] font-normal">({{ product.reviewCount }})</span>
-              </div>
+            <!-- Bestseller Ribbon -->
+            <div
+              v-if="product.isBestseller"
+              class="absolute top-2.5 left-2.5 bg-gradient-to-r from-[#FB641B] to-[#FF9F00] text-white text-[10px] font-black uppercase px-2.5 py-0.5 rounded shadow-sm tracking-wider"
+            >
+              🔥 Bestseller
             </div>
 
-            <!-- Title & Pitch -->
-            <div>
-              <h2 class="font-display font-black text-xl text-[#1A1A1A] group-hover:text-[#FF7F11] transition-colors leading-snug">
+            <!-- Wishlist Heart Toggle Button -->
+            <button
+              type="button"
+              class="absolute top-2.5 right-2.5 w-8 h-8 rounded-full bg-white/90 backdrop-blur-md shadow-md flex items-center justify-center transition-transform hover:scale-110 cursor-pointer"
+              :title="isInWishlist(product.id) ? 'Remove from Wishlist' : 'Add to Wishlist'"
+              @click.stop="toggleWishlist(product.id)"
+            >
+              <svg
+                class="w-4 h-4 transition-colors"
+                :class="isInWishlist(product.id) ? 'text-[#FF3E6C] fill-[#FF3E6C]' : 'text-gray-400 fill-none'"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+                stroke-width="2"
+              >
+                <path stroke-linecap="round" stroke-linejoin="round" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
+              </svg>
+            </button>
+
+            <!-- Level Label at Bottom of Image -->
+            <div class="absolute bottom-2 left-2.5 bg-[#171844]/80 backdrop-blur-md text-[#F8D78B] text-[10px] font-bold px-2 py-0.5 rounded border border-[#F8D78B]/20">
+              Level: {{ product.level }}
+            </div>
+          </div>
+
+          <!-- Card Body -->
+          <div class="p-4 flex-1 flex flex-col justify-between space-y-3">
+            <div class="space-y-1.5">
+              <!-- Assured Badge & Format -->
+              <div class="flex items-center justify-between text-[11px] text-[#878787]">
+                <span class="font-semibold text-[#8C6D57] truncate">{{ product.categoryLabel }}</span>
+                <span v-if="product.isAssured" class="text-[#2874F0] font-black flex items-center gap-0.5 text-[10px]">
+                  <span>✨</span>
+                  <span>Assured</span>
+                </span>
+              </div>
+
+              <!-- Product Title -->
+              <h3
+                class="font-display font-extrabold text-base text-[#171844] group-hover:text-[#2874F0] transition-colors leading-snug line-clamp-1 cursor-pointer"
+                @click="openQuickView(product)"
+              >
                 {{ product.title }}
-              </h2>
-              <p class="text-xs text-[#524F4E] leading-relaxed mt-2 line-clamp-3">
-                {{ product.description }}
+              </h3>
+
+              <p class="text-xs text-[#524F4E] line-clamp-2 leading-relaxed">
+                {{ product.shortDescription }}
               </p>
             </div>
 
-            <!-- Price Display -->
-            <div class="flex items-baseline gap-2 pt-1">
-              <span class="font-display font-black text-2xl text-[#1A1A1A]">
-                {{ formatPrice(product.priceUsd, product.priceInr) }}
+            <!-- Rating Row -->
+            <div class="flex items-center gap-2">
+              <div class="inline-flex items-center gap-1 bg-[#388E3C] text-white text-[10px] font-bold px-1.5 py-0.5 rounded">
+                <span>{{ product.rating }}</span>
+                <span>★</span>
+              </div>
+              <span class="text-[11px] text-[#878787]">({{ product.ratingCount.toLocaleString() }})</span>
+            </div>
+
+            <!-- Price Display (Flipkart Format) -->
+            <div class="flex items-baseline gap-2 pt-1 border-t border-[#EAE2D4]/50">
+              <span class="font-display font-black text-xl text-[#171844]">
+                {{ product.price === 0 ? 'FREE' : `₹${product.price.toLocaleString('en-IN')}` }}
               </span>
-              <span class="text-xs text-[#8C8685] line-through" v-if="product.originalPriceUsd">
-                {{ formatPrice(product.originalPriceUsd, product.originalPriceInr) }}
+              <span v-if="product.originalPrice > product.price" class="text-xs text-[#878787] line-through">
+                ₹{{ product.originalPrice.toLocaleString('en-IN') }}
               </span>
-              <span class="text-[10px] font-bold text-emerald-600 bg-emerald-50 px-2 py-0.5 rounded-full border border-emerald-200">
-                Save {{ calculateDiscount(product.priceUsd, product.originalPriceUsd) }}%
+              <span v-if="product.discountPercent > 0" class="text-xs font-bold text-[#388E3C]">
+                {{ product.discountPercent }}% off
               </span>
             </div>
 
-            <!-- Features / Includes List -->
-            <div class="space-y-2 pt-2 bg-[#FBF6F6] p-4 rounded-2xl border border-[#EAE4E4]/60">
-              <div class="text-[10px] font-mono uppercase text-[#8C8685] font-bold tracking-wider">What You Get:</div>
-              <ul class="space-y-1.5">
-                <li
-                  v-for="(item, i) in product.includes"
-                  :key="i"
-                  class="flex items-start gap-2 text-xs text-[#524F4E]"
+            <!-- Key Feature bullet -->
+            <div class="text-[11px] text-[#524F4E] flex items-center gap-1.5 truncate">
+              <span class="text-[#388E3C] font-bold">✓</span>
+              <span class="truncate">{{ product.highlights[0] }}</span>
+            </div>
+
+            <!-- Flipkart Style Action Buttons: View Details, Add to Cart, Buy Now -->
+            <div class="pt-2 space-y-2 border-t border-[#EAE2D4]/60">
+              <div class="grid grid-cols-2 gap-2">
+                <button
+                  type="button"
+                  class="py-2.5 px-2 rounded-xl bg-[#FF9F00] hover:bg-[#F39700] text-white text-xs font-bold transition-all shadow-sm text-center flex items-center justify-center gap-1 cursor-pointer"
+                  @click="handleCardAddToCart(product)"
                 >
-                  <span class="text-[#FF7F11] font-bold shrink-0 mt-0.5">&check;</span>
-                  <span class="line-clamp-1">{{ item }}</span>
-                </li>
-              </ul>
-            </div>
-          </div>
-
-          <!-- Actions: Quick View & Buy Now -->
-          <div class="pt-6 mt-6 border-t border-[#EAE4E4] space-y-2.5">
-            <div class="grid grid-cols-2 gap-2">
+                  <svg class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z" />
+                  </svg>
+                  <span>Add to Cart</span>
+                </button>
+                <button
+                  type="button"
+                  class="py-2.5 px-2 rounded-xl bg-[#FB641B] hover:bg-[#E85611] text-white text-xs font-bold transition-all shadow-sm text-center flex items-center justify-center gap-1 cursor-pointer"
+                  @click="startBuyNow(product)"
+                >
+                  <span>Buy Now &rarr;</span>
+                </button>
+              </div>
               <button
                 type="button"
-                @click="openPreview(product)"
-                class="px-3 py-2.5 rounded-xl border border-[#EAE4E4] hover:bg-[#FBF6F6] text-[#1A1A1A] text-xs font-bold transition-colors text-center"
+                class="w-full py-1.5 text-[11px] font-bold text-[#2874F0] hover:text-[#171844] hover:bg-[#FAFAFA] rounded-lg transition-colors text-center cursor-pointer"
+                @click="openQuickView(product)"
               >
-                View Details
+                View Details &amp; Reviews &rarr;
               </button>
-              <button
-                type="button"
-                @click="startBuyNow(product)"
-                class="px-3 py-2.5 rounded-xl bg-[#FF7F11] hover:bg-[#FF9334] text-white text-xs font-bold transition-all shadow-md shadow-[#FF7F11]/25 text-center"
-              >
-                Buy Now &rarr;
-              </button>
-            </div>
-            <div class="flex items-center justify-center gap-2 text-[11px] text-[#8C8685]">
-              <span>⚡ Instant Access</span>
-              <span>&middot;</span>
-              <span>🔒 30-Day Money Back</span>
             </div>
           </div>
         </div>
       </div>
 
-      <!-- Empty State when no results found -->
-      <div v-else class="text-center py-20 bg-white rounded-3xl border border-[#EAE4E4] p-8 max-w-xl mx-auto shadow-sm">
-        <div class="text-4xl mb-4">🔍</div>
-        <h3 class="font-display font-bold text-xl text-[#1A1A1A] mb-2">No products found</h3>
-        <p class="text-xs text-[#524F4E] mb-6">No digital products matched your current search or category filter.</p>
+      <!-- Empty Filter State -->
+      <div v-else class="text-center py-20 bg-white rounded-2xl border border-[#EAE2D4] p-8 max-w-lg mx-auto shadow-sm space-y-4">
+        <div class="text-4xl">🔍</div>
+        <h3 class="font-display font-bold text-xl text-[#171844]">No Products Found</h3>
+        <p class="text-xs text-[#878787]">
+          No products matched "{{ searchQuery }}" in this category.
+        </p>
         <button
           type="button"
+          class="px-5 py-2 rounded-xl bg-[#2874F0] text-white text-xs font-bold transition-colors shadow-sm"
           @click="resetFilters"
-          class="px-5 py-2.5 rounded-full bg-[#FF7F11] text-white text-xs font-bold shadow-md shadow-[#FF7F11]/25"
         >
           Reset Filters
         </button>
       </div>
 
-      <!-- Trust, Security & Instant Delivery Guarantees -->
-      <div class="bg-white border border-[#EAE4E4] rounded-3xl p-8 sm:p-12 shadow-xl mb-16">
-        <div class="grid grid-cols-1 md:grid-cols-4 gap-6 text-center md:text-left">
-          <div class="space-y-2">
-            <div class="w-10 h-10 rounded-xl bg-[#FFF8F2] border border-[#FF7F11]/20 flex items-center justify-center text-[#FF7F11] font-bold mx-auto md:mx-0">
-              ⚡
-            </div>
-            <h3 class="font-display font-bold text-sm text-[#1A1A1A]">Instant Digital Delivery</h3>
-            <p class="text-xs text-[#524F4E] leading-relaxed">Direct download access to Notion databases, PDF templates, and video walkthroughs immediately after checkout.</p>
-          </div>
-
-          <div class="space-y-2">
-            <div class="w-10 h-10 rounded-xl bg-[#FFF8F2] border border-[#FF7F11]/20 flex items-center justify-center text-[#FF7F11] font-bold mx-auto md:mx-0">
-              🛡️
-            </div>
-            <h3 class="font-display font-bold text-sm text-[#1A1A1A]">100% Satisfaction Guarantee</h3>
-            <p class="text-xs text-[#524F4E] leading-relaxed">If any toolkit doesn't save you at least 20 hours or bring actionable clarity, get a full refund within 30 days.</p>
-          </div>
-
-          <div class="space-y-2">
-            <div class="w-10 h-10 rounded-xl bg-[#FFF8F2] border border-[#FF7F11]/20 flex items-center justify-center text-[#FF7F11] font-bold mx-auto md:mx-0">
-              🔄
-            </div>
-            <h3 class="font-display font-bold text-sm text-[#1A1A1A]">Lifetime Free Updates</h3>
-            <p class="text-xs text-[#524F4E] leading-relaxed">As algorithms, AI prompts, and coaching sales frameworks evolve, you automatically receive free template updates.</p>
-          </div>
-
-          <div class="space-y-2">
-            <div class="w-10 h-10 rounded-xl bg-[#FFF8F2] border border-[#FF7F11]/20 flex items-center justify-center text-[#FF7F11] font-bold mx-auto md:mx-0">
-              💳
-            </div>
-            <h3 class="font-display font-bold text-sm text-[#1A1A1A]">Multi-Currency & UPI</h3>
-            <p class="text-xs text-[#524F4E] leading-relaxed">Seamlessly checkout with Stripe, Credit/Debit Cards, or Indian UPI (Google Pay, PhonePe, Paytm, QR).</p>
-          </div>
+      <!-- Flipkart Style Bottom FAQs & Guarantee Cards -->
+      <div class="bg-white border border-[#EAE2D4] rounded-2xl p-6 sm:p-8 shadow-sm mb-16 space-y-6">
+        <div class="text-center max-w-xl mx-auto space-y-1">
+          <h2 class="font-display font-extrabold text-2xl text-[#171844]">Frequently Asked Questions</h2>
+          <p class="text-xs text-[#878787]">Everything you need to know about our digital store, ordering, and delivery.</p>
         </div>
-      </div>
 
-      <!-- FAQ Accordion Section -->
-      <div class="max-w-3xl mx-auto space-y-6">
-        <h3 class="font-display font-black text-2xl text-center text-[#1A1A1A]">Frequently Asked Questions</h3>
-        <div class="space-y-3">
-          <div
-            v-for="(faq, idx) in shopFaqs"
-            :key="idx"
-            class="bg-white border border-[#EAE4E4] rounded-2xl overflow-hidden shadow-sm"
-          >
-            <button
-              type="button"
-              @click="toggleFaq(idx)"
-              class="w-full px-6 py-4 text-left flex items-center justify-between text-sm font-bold text-[#1A1A1A] hover:text-[#FF7F11] transition-colors"
-            >
-              <span>{{ faq.question }}</span>
-              <span class="text-base text-[#8C8685]">{{ openFaqIndex === idx ? '−' : '+' }}</span>
-            </button>
-            <div
-              v-show="openFaqIndex === idx"
-              class="px-6 pb-4 pt-1 text-xs text-[#524F4E] leading-relaxed border-t border-[#EAE4E4]/60 bg-[#FBF6F6]/50"
-            >
-              {{ faq.answer }}
-            </div>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4 max-w-4xl mx-auto pt-2">
+          <div class="p-4 rounded-xl bg-[#FAFAFA] border border-[#EAE2D4] space-y-1.5">
+            <h4 class="font-bold text-xs text-[#171844]">⚡ How do I receive my products after ordering?</h4>
+            <p class="text-xs text-[#524F4E] leading-relaxed">
+              Delivery is instantaneous. As soon as payment completes, access links are generated on-screen and emailed directly to your inbox.
+            </p>
+          </div>
+          <div class="p-4 rounded-xl bg-[#FAFAFA] border border-[#EAE2D4] space-y-1.5">
+            <h4 class="font-bold text-xs text-[#171844]">🔒 Which payment methods are accepted?</h4>
+            <p class="text-xs text-[#524F4E] leading-relaxed">
+              We accept Indian UPI (Google Pay, PhonePe, Paytm, BHIM), all Debit &amp; Credit Cards, NetBanking, and international cards.
+            </p>
+          </div>
+          <div class="p-4 rounded-xl bg-[#FAFAFA] border border-[#EAE2D4] space-y-1.5">
+            <h4 class="font-bold text-xs text-[#171844]">📅 How do 1-on-1 private clarity sessions work?</h4>
+            <p class="text-xs text-[#524F4E] leading-relaxed">
+              After booking, you immediately receive a private calendar booking link to choose a date and time that fits your schedule.
+            </p>
+          </div>
+          <div class="p-4 rounded-xl bg-[#FAFAFA] border border-[#EAE2D4] space-y-1.5">
+            <h4 class="font-bold text-xs text-[#171844]">💬 Can I cancel the monthly Circle membership anytime?</h4>
+            <p class="text-xs text-[#524F4E] leading-relaxed">
+              Yes, absolutely. The Narayan Presence Circle membership can be cancelled anytime with a single click from your Student Portal.
+            </p>
           </div>
         </div>
       </div>
     </UiContainer>
 
-    <!-- Product Preview Modal -->
-    <div
-      v-if="isPreviewOpen && selectedProduct"
-      class="fixed inset-0 bg-black/60 backdrop-blur-sm z-50 flex items-center justify-center p-4 overflow-y-auto animate-fadeIn"
-      @click.self="isPreviewOpen = false"
-    >
-      <div class="bg-white rounded-3xl max-w-2xl w-full p-6 sm:p-8 shadow-2xl border border-[#EAE4E4] relative my-8">
-        <!-- Close Button -->
-        <button
-          type="button"
-          @click="isPreviewOpen = false"
-          class="absolute top-5 right-5 w-8 h-8 rounded-full bg-[#FBF6F6] border border-[#EAE4E4] flex items-center justify-center text-sm font-bold hover:bg-[#EAE4E4]"
-        >
-          &times;
-        </button>
+    <!-- Floating Flipkart-Style Action Bar (Fixed Bottom-Right) -->
+    <div class="fixed bottom-6 right-6 z-40 flex items-center gap-3">
+      <!-- Floating Wishlist -->
+      <button
+        v-if="wishlist.length > 0"
+        type="button"
+        class="flex items-center gap-2 px-4 py-3 rounded-full bg-white text-[#171844] border-2 border-[#FF3E6C] shadow-xl hover:scale-105 transition-all cursor-pointer font-bold text-xs"
+        @click="isWishlistOpen = true"
+      >
+        <span class="text-[#FF3E6C]">❤️</span>
+        <span>Wishlist ({{ wishlist.length }})</span>
+      </button>
 
-        <div class="space-y-6">
-          <div class="flex items-center gap-2">
-            <UiBadge :variant="selectedProduct.badgeVariant || 'amber'">{{ selectedProduct.categoryLabel }}</UiBadge>
-            <span class="text-xs text-[#8C8685]">Format: {{ selectedProduct.format }}</span>
-          </div>
-
-          <div>
-            <h2 class="font-display font-black text-2xl sm:text-3xl text-[#1A1A1A] mb-2">
-              {{ selectedProduct.title }}
-            </h2>
-            <p class="text-sm text-[#524F4E] leading-relaxed">
-              {{ selectedProduct.longDescription || selectedProduct.description }}
-            </p>
-          </div>
-
-          <!-- Price & Discount -->
-          <div class="p-4 rounded-2xl bg-[#FFF8F2] border border-[#FF7F11]/30 flex items-center justify-between">
-            <div>
-              <div class="text-[11px] font-mono text-[#FF7F11] font-bold uppercase">One-Time Investment</div>
-              <div class="flex items-baseline gap-2">
-                <span class="font-display font-black text-2xl text-[#1A1A1A]">
-                  {{ formatPrice(selectedProduct.priceUsd, selectedProduct.priceInr) }}
-                </span>
-                <span class="text-xs text-[#8C8685] line-through" v-if="selectedProduct.originalPriceUsd">
-                  {{ formatPrice(selectedProduct.originalPriceUsd, selectedProduct.originalPriceInr) }}
-                </span>
-              </div>
-            </div>
-            <div class="text-right text-xs text-[#524F4E]">
-              <div class="font-bold text-emerald-600">✓ Instant Download</div>
-              <div>Lifetime Updates Included</div>
-            </div>
-          </div>
-
-          <!-- Breakdown list -->
-          <div class="space-y-3">
-            <div class="text-xs font-mono uppercase text-[#1A1A1A] font-bold">Complete Package Contents:</div>
-            <div class="grid grid-cols-1 sm:grid-cols-2 gap-2">
-              <div
-                v-for="(item, i) in selectedProduct.includes"
-                :key="i"
-                class="p-3 rounded-xl bg-[#FBF6F6] border border-[#EAE4E4] text-xs text-[#524F4E] flex items-start gap-2"
-              >
-                <span class="text-[#FF7F11] font-bold shrink-0">&check;</span>
-                <span>{{ item }}</span>
-              </div>
-            </div>
-          </div>
-
-          <!-- Modal Action -->
-          <div class="pt-4 border-t border-[#EAE4E4] flex flex-col sm:flex-row items-center gap-3">
-            <button
-              type="button"
-              @click="startBuyNow(selectedProduct)"
-              class="w-full sm:flex-1 py-3.5 rounded-xl bg-[#FF7F11] hover:bg-[#FF9334] text-white font-bold text-sm shadow-md shadow-[#FF7F11]/25 text-center transition-transform hover:scale-[1.01]"
-            >
-              Buy Now for {{ formatPrice(selectedProduct.priceUsd, selectedProduct.priceInr) }} &rarr;
-            </button>
-            <button
-              type="button"
-              @click="isPreviewOpen = false"
-              class="w-full sm:w-auto px-6 py-3.5 rounded-xl border border-[#EAE4E4] text-xs font-bold text-[#524F4E] hover:bg-[#FBF6F6]"
-            >
-              Continue Browsing
-            </button>
-          </div>
-        </div>
-      </div>
+      <!-- Floating Cart -->
+      <button
+        v-if="cartTotalCount > 0"
+        type="button"
+        class="flex items-center gap-2.5 px-5 py-3 rounded-full bg-[#FB641B] hover:bg-[#E85611] text-white shadow-2xl hover:scale-105 transition-all cursor-pointer font-bold text-xs uppercase tracking-wider animate-bounce"
+        @click="isCartOpen = true"
+      >
+        <span>🛒</span>
+        <span>View Cart ({{ cartTotalCount }}) &middot; ₹{{ cartTotalPrice.toLocaleString('en-IN') }}</span>
+      </button>
     </div>
 
-    <!-- Instant Checkout Drawer / Modal -->
-    <div
-      v-if="isCheckoutOpen && checkoutItem"
-      class="fixed inset-0 bg-black/60 backdrop-blur-sm z-50 flex items-center justify-center p-4 overflow-y-auto animate-fadeIn"
-      @click.self="isCheckoutOpen = false"
-    >
-      <div class="bg-white rounded-3xl max-w-xl w-full p-6 sm:p-8 shadow-2xl border border-[#EAE4E4] relative my-8">
-        <!-- Close button -->
-        <button
-          type="button"
-          @click="isCheckoutOpen = false"
-          class="absolute top-5 right-5 w-8 h-8 rounded-full bg-[#FBF6F6] border border-[#EAE4E4] flex items-center justify-center text-sm font-bold hover:bg-[#EAE4E4]"
-        >
-          &times;
-        </button>
-
-        <!-- Order Success State -->
-        <div v-if="orderSuccess" class="text-center py-6 space-y-4">
-          <div class="w-16 h-16 rounded-full bg-emerald-100 border border-emerald-300 text-emerald-600 flex items-center justify-center text-2xl mx-auto">
-            ✓
-          </div>
-          <h3 class="font-display font-black text-2xl text-[#1A1A1A]">Payment Successful!</h3>
-          <p class="text-xs text-[#524F4E] max-w-md mx-auto leading-relaxed">
-            Thank you <strong class="text-[#1A1A1A]">{{ customerName || 'Coach' }}</strong>! Your purchase of <strong class="text-[#FF7F11]">{{ checkoutItem.title }}</strong> is confirmed.
-          </p>
-
-          <div class="p-4 rounded-2xl bg-[#FBF6F6] border border-[#EAE4E4] text-left space-y-2 text-xs">
-            <div class="flex justify-between font-mono text-[#8C8685]">
-              <span>Order Ref:</span>
-              <span class="font-bold text-[#1A1A1A]">#DC-{{ Math.floor(100000 + Math.random() * 900000) }}</span>
-            </div>
-            <div class="flex justify-between font-mono text-[#8C8685]">
-              <span>Delivered To:</span>
-              <span class="font-bold text-[#1A1A1A]">{{ customerEmail }}</span>
-            </div>
-            <div class="flex justify-between font-mono text-[#8C8685]">
-              <span>Total Paid:</span>
-              <span class="font-bold text-[#FF7F11]">{{ formatFinalPrice() }}</span>
-            </div>
-          </div>
-
-          <div class="pt-4 space-y-3">
-            <button
-              type="button"
-              @click="simulateDownload"
-              class="w-full py-3.5 rounded-xl bg-[#FF7F11] hover:bg-[#FF9334] text-white font-bold text-xs uppercase tracking-wider shadow-md shadow-[#FF7F11]/25 flex items-center justify-center gap-2"
-            >
-              <span>Download Digital Assets Now (.ZIP / Notion Links)</span>
-              <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
-              </svg>
-            </button>
-            <p v-if="downloadTriggered" class="text-[11px] text-emerald-600 font-bold animate-pulse">
-              ✓ Download initiated! Check your downloads folder.
-            </p>
-            <button
-              type="button"
-              @click="closeCheckout"
-              class="text-xs text-[#8C8685] hover:text-[#1A1A1A] font-semibold"
-            >
-              Return to Store
-            </button>
-          </div>
-        </div>
-
-        <!-- Checkout Form State -->
-        <div v-else class="space-y-6">
-          <div class="border-b border-[#EAE4E4] pb-4">
-            <div class="text-[10px] font-mono text-[#FF7F11] font-bold uppercase">Express Digital Checkout</div>
-            <h3 class="font-display font-black text-xl text-[#1A1A1A]">
-              {{ checkoutItem.title }}
-            </h3>
-          </div>
-
-          <!-- Customer Details Form -->
-          <form @submit.prevent="processOrder" class="space-y-4">
-            <div class="space-y-3">
-              <div>
-                <label class="block text-xs font-bold text-[#1A1A1A] mb-1">Full Name</label>
-                <input
-                  v-model="customerName"
-                  type="text"
-                  required
-                  placeholder="e.g. Sarah Jenkins"
-                  class="w-full px-3.5 py-2.5 rounded-xl border border-[#EAE4E4] bg-[#FBF6F6] text-xs text-[#1A1A1A] focus:ring-2 focus:ring-[#FF7F11] focus:outline-none"
-                />
-              </div>
-
-              <div>
-                <label class="block text-xs font-bold text-[#1A1A1A] mb-1">Email Address (Where products are sent)</label>
-                <input
-                  v-model="customerEmail"
-                  type="email"
-                  required
-                  placeholder="name@company.com"
-                  class="w-full px-3.5 py-2.5 rounded-xl border border-[#EAE4E4] bg-[#FBF6F6] text-xs text-[#1A1A1A] focus:ring-2 focus:ring-[#FF7F11] focus:outline-none"
-                />
-              </div>
-
-              <div>
-                <label class="block text-xs font-bold text-[#1A1A1A] mb-1">WhatsApp / Phone Number</label>
-                <input
-                  v-model="customerPhone"
-                  type="tel"
-                  placeholder="+1 555-0199 or +91 98765 43210"
-                  class="w-full px-3.5 py-2.5 rounded-xl border border-[#EAE4E4] bg-[#FBF6F6] text-xs text-[#1A1A1A] focus:ring-2 focus:ring-[#FF7F11] focus:outline-none"
-                />
-              </div>
-            </div>
-
-            <!-- Order Bump Offer -->
-            <div class="p-3.5 rounded-2xl bg-[#FFF8F2] border border-[#FF7F11]/40 flex items-start gap-3">
-              <input
-                id="orderBump"
-                v-model="includeOrderBump"
-                type="checkbox"
-                class="mt-1 w-4 h-4 rounded text-[#FF7F11] focus:ring-[#FF7F11]"
-              />
-              <label for="orderBump" class="text-xs cursor-pointer select-none">
-                <span class="font-bold text-[#1A1A1A]">One-Time Addon:</span>
-                <span class="text-[#524F4E]"> Add the 100+ High-Converting Coaching Email Sequence Pack for only </span>
-                <strong class="text-[#FF7F11]">{{ currency === 'USD' ? '+$19' : '+₹1,499' }}</strong>
-                <span class="text-[#8C8685] line-through ml-1">{{ currency === 'USD' ? '$49' : '₹3,999' }}</span>
-              </label>
-            </div>
-
-            <!-- Coupon Code input -->
-            <div class="flex gap-2">
-              <input
-                v-model="couponCode"
-                type="text"
-                placeholder="Discount code (try: EARLYBIRD)"
-                class="flex-1 px-3 py-2 rounded-xl border border-[#EAE4E4] bg-[#FBF6F6] text-xs text-[#1A1A1A] uppercase focus:outline-none focus:ring-2 focus:ring-[#FF7F11]"
-              />
-              <button
-                type="button"
-                @click="applyCoupon"
-                class="px-4 py-2 rounded-xl bg-[#1A1A1A] hover:bg-[#FF7F11] text-white text-xs font-bold transition-colors"
-              >
-                Apply
-              </button>
-            </div>
-            <p v-if="couponSuccess" class="text-[11px] text-emerald-600 font-bold">✓ Promo code applied: 20% OFF</p>
-            <p v-if="couponError" class="text-[11px] text-rose-500 font-bold">✕ Invalid promo code</p>
-
-            <!-- Payment Method Selection -->
-            <div class="space-y-2 pt-2 border-t border-[#EAE4E4]">
-              <label class="block text-xs font-bold text-[#1A1A1A]">Select Payment Gateway</label>
-              <div class="grid grid-cols-2 gap-2">
-                <label
-                  :class="[
-                    'p-3 rounded-xl border flex items-center gap-2 cursor-pointer text-xs font-semibold transition-all',
-                    paymentMethod === 'card' ? 'border-[#FF7F11] bg-[#FFF8F2] text-[#FF7F11]' : 'border-[#EAE4E4] bg-white text-[#524F4E]'
-                  ]"
-                >
-                  <input type="radio" v-model="paymentMethod" value="card" class="hidden" />
-                  <span>💳 Card / Stripe</span>
-                </label>
-
-                <label
-                  :class="[
-                    'p-3 rounded-xl border flex items-center gap-2 cursor-pointer text-xs font-semibold transition-all',
-                    paymentMethod === 'upi' ? 'border-[#FF7F11] bg-[#FFF8F2] text-[#FF7F11]' : 'border-[#EAE4E4] bg-white text-[#524F4E]'
-                  ]"
-                >
-                  <input type="radio" v-model="paymentMethod" value="upi" class="hidden" />
-                  <span>📱 UPI / Razorpay</span>
-                </label>
-              </div>
-            </div>
-
-            <!-- Price Breakdown Summary -->
-            <div class="p-3.5 rounded-2xl bg-[#FBF6F6] border border-[#EAE4E4] space-y-1.5 text-xs text-[#524F4E]">
-              <div class="flex justify-between">
-                <span>Item Subtotal:</span>
-                <span>{{ formatPrice(checkoutItem.priceUsd, checkoutItem.priceInr) }}</span>
-              </div>
-              <div v-if="includeOrderBump" class="flex justify-between text-[#FF7F11]">
-                <span>Addon (Email Pack):</span>
-                <span>{{ currency === 'USD' ? '+$19' : '+₹1,499' }}</span>
-              </div>
-              <div v-if="discountApplied > 0" class="flex justify-between text-emerald-600">
-                <span>Discount (20% Off):</span>
-                <span>-{{ formatPrice(discountAmountUsd, discountAmountInr) }}</span>
-              </div>
-              <div class="flex justify-between font-bold text-sm text-[#1A1A1A] pt-2 border-t border-[#EAE4E4]">
-                <span>Total Amount:</span>
-                <span class="text-[#FF7F11] font-display font-black text-base">{{ formatFinalPrice() }}</span>
-              </div>
-            </div>
-
-            <!-- Submit Button -->
-            <button
-              type="submit"
-              :disabled="isProcessing"
-              class="w-full py-4 rounded-xl bg-[#FF7F11] hover:bg-[#FF9334] text-white font-bold text-sm uppercase tracking-wider shadow-lg shadow-[#FF7F11]/25 transition-all flex items-center justify-center gap-2 disabled:opacity-50"
-            >
-              <span v-if="isProcessing">Processing Secure Payment...</span>
-              <span v-else>Pay {{ formatFinalPrice() }} & Complete Order &rarr;</span>
-            </button>
-
-            <div class="flex items-center justify-center gap-2 text-[10px] text-[#8C8685]">
-              <span>🔒 256-Bit SSL Encrypted</span>
-              <span>&middot;</span>
-              <span>Instant Download Access</span>
-            </div>
-          </form>
-        </div>
-      </div>
-    </div>
+    <!-- Modals & Drawers -->
+    <ShopProductQuickView />
+    <ShopDrawerCart />
+    <ShopDrawerWishlist />
+    <ShopCheckoutModal />
   </div>
 </template>
 
 <script setup lang="ts">
+import { ref, computed } from 'vue'
+import { useShopCart, type ShopProduct } from '~/composables/useShopCart'
+import ShopProductQuickView from '~/components/shop/ShopProductQuickView.vue'
+import ShopDrawerCart from '~/components/shop/ShopDrawerCart.vue'
+import ShopDrawerWishlist from '~/components/shop/ShopDrawerWishlist.vue'
+import ShopCheckoutModal from '~/components/shop/ShopCheckoutModal.vue'
+
+const {
+  SHOP_PRODUCTS,
+  cart,
+  wishlist,
+  isCartOpen,
+  isWishlistOpen,
+  cartTotalCount,
+  cartTotalPrice,
+  addToCart,
+  toggleWishlist,
+  isInWishlist,
+  openQuickView,
+  startBuyNow
+} = useShopCart()
+
 useSeoMeta({
-  title: 'Digital Coach Shop - Premium Toolkits, Notion OS & Frameworks',
-  description: 'Download plug-and-play Notion operating systems, diagnostic sales scripts, automated funnels, and AI prompt suites to scale your expert business.',
-  ogTitle: 'Digital Coach Store & Toolkits',
-  ogDescription: 'Instant-access business operating systems, scripts, and frameworks for high-ticket coaches and consultants.'
+  title: 'Narayan Presence Shop — Conscious Living Resources & Curriculum',
+  description: 'Order awareness resources, digital workbooks, live workshops, specialized courses, and 1-on-1 private coaching sessions.'
 })
 
-// State
-const currency = ref<'USD' | 'INR'>('USD')
+// Search & Filter state
 const searchQuery = ref('')
 const selectedCategory = ref('all')
-const cart = ref<any[]>([])
+const sortBy = ref<'popular' | 'price-low' | 'price-high' | 'rating'>('popular')
 
-// Modal controls
-const isPreviewOpen = ref(false)
-const selectedProduct = ref<any>(null)
-
-const isCheckoutOpen = ref(false)
-const checkoutItem = ref<any>(null)
-const customerName = ref('')
-const customerEmail = ref('')
-const customerPhone = ref('')
-const includeOrderBump = ref(false)
-const couponCode = ref('')
-const couponSuccess = ref(false)
-const couponError = ref(false)
-const discountApplied = ref(0)
-const paymentMethod = ref<'card' | 'upi'>('card')
-const isProcessing = ref(false)
-const orderSuccess = ref(false)
-const downloadTriggered = ref(false)
-
-const openFaqIndex = ref<number | null>(null)
-
-// Categories
-const categories = [
+const categoryFilters = [
   { id: 'all', label: 'All Products' },
-  { id: 'templates', label: 'Notion Systems' },
-  { id: 'sales', label: 'Sales & Conversion' },
-  { id: 'funnels', label: 'Funnels & Marketing' },
-  { id: 'ai', label: 'AI Prompts & Automation' },
-  { id: 'courses', label: 'Masterclasses' }
+  { id: 'free', label: 'Free Awareness' },
+  { id: 'entry', label: 'Workbooks & Entry' },
+  { id: 'workshop', label: 'Live Workshops' },
+  { id: 'course', label: 'Specialized Courses' },
+  { id: 'private', label: '1-on-1 Private Coaching' },
+  { id: 'premium', label: 'Executive Immersion' },
+  { id: 'membership', label: 'Circle Membership' }
 ]
 
-// Digital Products Catalog
-const products = [
-  {
-    id: 1,
-    category: 'templates',
-    categoryLabel: 'Notion System',
-    badgeVariant: 'amber',
-    isBestseller: true,
-    rating: '4.9',
-    reviewCount: 142,
-    format: 'Notion Workspace + Video Guide',
-    title: 'CoachOS™ Master Notion Operating System',
-    priceUsd: 97,
-    originalPriceUsd: 197,
-    priceInr: 7999,
-    originalPriceInr: 15999,
-    description: 'The all-in-one centralized digital workspace for high-ticket client onboarding, pipeline CRM, curriculum delivery, and revenue dashboard.',
-    longDescription: 'CoachOS is an enterprise-grade Notion architecture specifically tailored for coaches and consultants. It eliminates tool fatigue by consolidating CRM tracking, client portals, action item databases, and content generation into one sleek dashboard.',
-    includes: [
-      'Client Portal & Progress Milestone Tracker',
-      'High-Ticket Pipeline & Lead Stage CRM',
-      'Content Multiplication Kanban & Vault',
-      'SOP & Digital Resource Library Database',
-      '60-Minute Loom Setup & Walkthrough Video'
-    ]
-  },
-  {
-    id: 2,
-    category: 'sales',
-    categoryLabel: 'Sales & Closing',
-    badgeVariant: 'amber',
-    isBestseller: true,
-    rating: '5.0',
-    reviewCount: 98,
-    format: 'PDF + Editable Google Docs + Audio Breakdown',
-    title: 'Diagnostic Enrollment & Sales Script Vault',
-    priceUsd: 67,
-    originalPriceUsd: 147,
-    priceInr: 5499,
-    originalPriceInr: 11999,
-    description: 'Word-for-word conversation frameworks and diagnostic triage scripts that convert qualified discovery calls into high-ticket clients without friction.',
-    longDescription: 'Say goodbye to high-pressure closing. This script vault focuses on diagnostic clarity and gap analysis, leading high-income prospects to naturally request working with you.',
-    includes: [
-      '30-Minute Diagnostic Discovery Script',
-      'WhatsApp Triage & Voice Note Conversation Frameworks',
-      'Price & Timing Objection Handling Matrix',
-      'Post-Call Proposal & Follow-up Sequences'
-    ]
-  },
-  {
-    id: 3,
-    category: 'funnels',
-    categoryLabel: 'Funnels & Ads',
-    badgeVariant: 'amber',
-    isBestseller: false,
-    rating: '4.8',
-    reviewCount: 76,
-    format: 'Keynote, Canva, Figma & Figma Templates',
-    title: 'Live Masterclass & Webinar Funnel Blueprint',
-    priceUsd: 127,
-    originalPriceUsd: 247,
-    priceInr: 9999,
-    originalPriceInr: 19999,
-    description: 'The exact high-conversion slide decks, registration wireframes, and show-up SMS/Email campaigns for 90-minute live masterclasses.',
-    longDescription: 'Turn cold traffic into eager buyers. This kit includes the entire customer acquisition journey for high-ticket masterclasses, from Meta ad copy to the final closing slide deck.',
-    includes: [
-      '45-Slide High-Converting Pitch Presentation Deck',
-      'Pre-built Registration & Thank You Page Templates',
-      'WhatsApp & SMS Show-Up Automation Sequences',
-      'Post-Webinar 5-Day Flash Replay Campaign'
-    ]
-  },
-  {
-    id: 4,
-    category: 'ai',
-    categoryLabel: 'AI & Automation',
-    badgeVariant: 'amber',
-    isBestseller: true,
-    rating: '4.9',
-    reviewCount: 115,
-    format: 'Notion Database + JSON Prompts + Video Guide',
-    title: 'AI Coaching Assistant 150+ Prompt Suite',
-    priceUsd: 47,
-    originalPriceUsd: 97,
-    priceInr: 3999,
-    originalPriceInr: 7999,
-    description: 'Engineered prompts to generate customized coaching curriculum, client diagnostic reports, social authority content, and email sequences in seconds.',
-    longDescription: 'Supercharge your coaching leverage with tailored AI prompts for ChatGPT, Claude, and Gemini. Stop staring at a blank screen and start generating high-ticket assets in minutes.',
-    includes: [
-      'Curriculum Synthesizer & Homework Generator Prompts',
-      'Client Diagnostic Report & Gap Assessment Maker',
-      'Thought Leadership & Hook Architect Engine',
-      'Custom GPT Agent Instructions & System Prompts'
-    ]
-  },
-  {
-    id: 5,
-    category: 'funnels',
-    categoryLabel: 'Lead Generation',
-    badgeVariant: 'amber',
-    isBestseller: false,
-    rating: '4.7',
-    reviewCount: 64,
-    format: 'Typeform / ScoreApp Templates + Copy Blueprint',
-    title: 'Interactive Scorecard & Quiz Funnel Kit',
-    priceUsd: 77,
-    originalPriceUsd: 149,
-    priceInr: 5999,
-    originalPriceInr: 11999,
-    description: 'Build your own viral diagnostic assessment that pre-qualifies prospects, calculates readiness scores, and feeds high-intent leads to your calendar.',
-    longDescription: 'Diagnostic lead magnets outperform generic PDFs by 300%. This blueprint gives you the exact questions, scoring algorithms, and personalized result page copy to deploy your own scorecard.',
-    includes: [
-      'Assessment Question Architecture Matrix',
-      'Multi-Tier Scoring & Recommendation Logic',
-      'Personalized Dynamic Result Page Copy',
-      'Scorecard Lead Nurture Email Sequence'
-    ]
-  },
-  {
-    id: 6,
-    category: 'courses',
-    categoryLabel: 'Masterclass',
-    badgeVariant: 'amber',
-    isBestseller: true,
-    rating: '5.0',
-    reviewCount: 88,
-    format: 'Video Masterclass + Workbook + Figma Architecture',
-    title: 'Flagship Offer Architecture Masterclass',
-    priceUsd: 89,
-    originalPriceUsd: 179,
-    priceInr: 6999,
-    originalPriceInr: 13999,
-    description: '3-hour masterclass teaching you how to package domain expertise into a premium $3,000–$10,000 flagship transformation program.',
-    longDescription: 'Learn how to transition away from selling hours or low-ticket sessions into commanding premium retainer and high-ticket cohort fees with irresistible positioning.',
-    includes: [
-      '3-Hour High-Definition Video Training',
-      'Step-by-Step Transformation Roadmap Workbook',
-      'Tiered Pricing & Profit Margin Calculator',
-      'Client Onboarding Contract Agreement Template'
-    ]
-  }
-]
-
-// Computed product count
-const getCategoryCount = (catId: string) => {
-  if (catId === 'all') return products.length
-  return products.filter(p => p.category === catId).length
+const getCategoryCount = (catId: string): number => {
+  if (catId === 'all') return SHOP_PRODUCTS.length
+  return SHOP_PRODUCTS.filter(p => p.category === catId).length
 }
 
-// Filtered products
 const filteredProducts = computed(() => {
-  return products.filter(product => {
-    const matchesCategory = selectedCategory.value === 'all' || product.category === selectedCategory.value
-    const matchesSearch = searchQuery.value.trim() === '' ||
-      product.title.toLowerCase().includes(searchQuery.value.toLowerCase()) ||
-      product.description.toLowerCase().includes(searchQuery.value.toLowerCase()) ||
-      product.categoryLabel.toLowerCase().includes(searchQuery.value.toLowerCase())
-    return matchesCategory && matchesSearch
+  return SHOP_PRODUCTS.filter(p => {
+    const matchesSearch =
+      !searchQuery.value ||
+      p.title.toLowerCase().includes(searchQuery.value.toLowerCase()) ||
+      p.subtitle.toLowerCase().includes(searchQuery.value.toLowerCase()) ||
+      p.level.toLowerCase().includes(searchQuery.value.toLowerCase()) ||
+      p.shortDescription.toLowerCase().includes(searchQuery.value.toLowerCase())
+
+    const matchesCategory =
+      selectedCategory.value === 'all' || p.category === selectedCategory.value
+
+    return matchesSearch && matchesCategory
+  }).sort((a, b) => {
+    if (sortBy.value === 'price-low') return a.price - b.price
+    if (sortBy.value === 'price-high') return b.price - a.price
+    if (sortBy.value === 'rating') return b.rating - a.rating
+    return (b.isBestseller ? 1 : 0) - (a.isBestseller ? 1 : 0)
   })
 })
 
-// Helpers for pricing
-const formatPrice = (usd: number, inr: number) => {
-  if (currency.value === 'INR') {
-    return `₹${inr.toLocaleString('en-IN')}`
-  }
-  return `$${usd}`
-}
-
-const calculateDiscount = (price: number, original: number) => {
-  if (!original || original <= price) return 0
-  return Math.round(((original - price) / original) * 100)
+const handleCardAddToCart = (product: ShopProduct) => {
+  addToCart(product, 1)
+  isCartOpen.value = true
 }
 
 const resetFilters = () => {
-  selectedCategory.value = 'all'
   searchQuery.value = ''
+  selectedCategory.value = 'all'
+  sortBy.value = 'popular'
 }
-
-// Modal handling
-const openPreview = (product: any) => {
-  selectedProduct.value = product
-  isPreviewOpen.value = true
-}
-
-const startBuyNow = (product: any) => {
-  checkoutItem.value = product
-  isPreviewOpen.value = false
-  isCheckoutOpen.value = true
-  orderSuccess.value = false
-  downloadTriggered.value = false
-  couponSuccess.value = false
-  couponError.value = false
-  discountApplied.value = 0
-}
-
-const closeCheckout = () => {
-  isCheckoutOpen.value = false
-  orderSuccess.value = false
-}
-
-// Coupon Logic
-const applyCoupon = () => {
-  if (couponCode.value.trim().toUpperCase() === 'EARLYBIRD' || couponCode.value.trim().toUpperCase() === 'COACH20') {
-    discountApplied.value = 0.2 // 20% off
-    couponSuccess.value = true
-    couponError.value = false
-  } else {
-    couponSuccess.value = false
-    couponError.value = true
-    discountApplied.value = 0
-  }
-}
-
-const discountAmountUsd = computed(() => {
-  if (!checkoutItem.value) return 0
-  let base = checkoutItem.value.priceUsd
-  if (includeOrderBump.value) base += 19
-  return Math.round(base * discountApplied.value)
-})
-
-const discountAmountInr = computed(() => {
-  if (!checkoutItem.value) return 0
-  let base = checkoutItem.value.priceInr
-  if (includeOrderBump.value) base += 1499
-  return Math.round(base * discountApplied.value)
-})
-
-const formatFinalPrice = () => {
-  if (!checkoutItem.value) return ''
-  if (currency.value === 'INR') {
-    let total = checkoutItem.value.priceInr
-    if (includeOrderBump.value) total += 1499
-    if (discountApplied.value > 0) total -= discountAmountInr.value
-    return `₹${total.toLocaleString('en-IN')}`
-  } else {
-    let total = checkoutItem.value.priceUsd
-    if (includeOrderBump.value) total += 19
-    if (discountApplied.value > 0) total -= discountAmountUsd.value
-    return `$${total}`
-  }
-}
-
-// Order Submission Simulation
-const processOrder = () => {
-  isProcessing.value = true
-  setTimeout(() => {
-    isProcessing.value = false
-    orderSuccess.value = true
-  }, 1200)
-}
-
-const simulateDownload = () => {
-  downloadTriggered.value = true
-}
-
-// FAQ Accordion
-const toggleFaq = (index: number) => {
-  openFaqIndex.value = openFaqIndex.value === index ? null : index
-}
-
-const shopFaqs = [
-  {
-    question: 'How do I receive access after purchasing?',
-    answer: 'Immediately upon checkout completion, you will be redirected to an instant download page with direct Notion duplicate links, editable Google Docs, and asset ZIP files. An automated confirmation email with permanent download links is also sent.'
-  },
-  {
-    question: 'Do I need paid Notion or Figma accounts to use these?',
-    answer: 'No. All our Notion templates and Figma assets work 100% smoothly on free personal accounts. No paid software subscriptions are required.'
-  },
-  {
-    question: 'What is your refund policy?',
-    answer: 'We provide an unconditional 30-day money-back guarantee. If any product does not immediately streamline your business operations or save you hours of work, simply email us for a full refund.'
-  },
-  {
-    question: 'Can I customize the templates for my own clients?',
-    answer: 'Yes! You have full commercial license to customize, rebrand, and use all frameworks, diagnostic assessments, and workflows in your 1-on-1 coaching, cohort programs, or consulting client engagements.'
-  }
-]
 </script>
-
-<style scoped>
-@keyframes fadeIn {
-  from { opacity: 0; transform: scale(0.98) translateY(6px); }
-  to { opacity: 1; transform: scale(1) translateY(0); }
-}
-.animate-fadeIn {
-  animation: fadeIn 0.2s ease-out forwards;
-}
-
-.no-scrollbar::-webkit-scrollbar {
-  display: none;
-}
-.no-scrollbar {
-  -ms-overflow-style: none;
-  scrollbar-width: none;
-}
-</style>

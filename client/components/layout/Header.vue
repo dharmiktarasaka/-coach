@@ -256,6 +256,28 @@
             </svg>
           </NuxtLink>
 
+          <!-- Shop Icon Button (Right of Contact) -->
+          <NuxtLink
+            to="/shop"
+            class="relative inline-flex items-center gap-1.5 px-3 sm:px-3.5 py-2.5 rounded-xl bg-gradient-to-r from-[#FF9F00]/15 to-[#FB641B]/15 hover:from-[#FF9F00]/25 hover:to-[#FB641B]/25 border border-[#FF9F00]/50 text-[#171844] font-bold text-xs uppercase tracking-wider transition-all duration-200 shadow-sm hover:scale-[1.04] group"
+            title="Narayan Presence Store & Products"
+            aria-label="Open Shop"
+          >
+            <div class="relative flex items-center">
+              <svg class="w-4 h-4 text-[#FB641B] group-hover:scale-110 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.2" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z" />
+              </svg>
+              <!-- Cart Count Badge -->
+              <span
+                v-if="cartTotalCount > 0"
+                class="absolute -top-2.5 -right-2.5 min-w-[17px] h-[17px] px-1 bg-[#2874F0] text-white text-[9px] font-black rounded-full flex items-center justify-center border-2 border-white shadow-sm animate-pulse"
+              >
+                {{ cartTotalCount }}
+              </span>
+            </div>
+            <span class="hidden md:inline font-extrabold text-[#171844]">Shop</span>
+          </NuxtLink>
+
           <!-- Mobile Hamburger -->
           <button
             type="button"
@@ -280,8 +302,8 @@
       class="lg:hidden fixed inset-0 top-[68px] bg-[#FAFAFA]/98 backdrop-blur-xl z-40 overflow-y-auto border-t border-[#EAE2D4] p-6 pb-24 shadow-2xl"
     >
       <div class="space-y-6 max-w-lg mx-auto">
-        <!-- Direct Home, Student Login & Contact -->
-        <div class="grid grid-cols-2 gap-2.5 pb-3 border-b border-[#EAE2D4]">
+        <!-- Direct Home, Shop, Student Login & Contact -->
+        <div class="grid grid-cols-3 gap-2 pb-3 border-b border-[#EAE2D4]">
           <NuxtLink
             to="/"
             class="p-2.5 rounded-xl bg-white text-[#171844] font-bold text-xs uppercase tracking-wider text-center border border-[#EAE2D4]"
@@ -290,16 +312,27 @@
             Home
           </NuxtLink>
           <NuxtLink
+            to="/shop"
+            class="p-2.5 rounded-xl bg-gradient-to-r from-[#FF9F00]/15 to-[#FB641B]/15 text-[#171844] font-bold text-xs uppercase tracking-wider text-center border border-[#FF9F00]/40 flex items-center justify-center gap-1"
+            @click="isMobileMenuOpen = false"
+          >
+            <span>🛍️</span>
+            <span>Shop</span>
+            <span v-if="cartTotalCount > 0" class="min-w-[16px] h-4 px-1 rounded-full bg-[#2874F0] text-white text-[9px] font-black flex items-center justify-center">
+              {{ cartTotalCount }}
+            </span>
+          </NuxtLink>
+          <NuxtLink
             to="/contact"
             class="p-2.5 rounded-xl bg-[#171844] text-[#F8D78B] font-bold text-xs uppercase tracking-wider text-center border border-[#F8D78B]/30"
             @click="isMobileMenuOpen = false"
           >
-            Contact Us
+            Contact
           </NuxtLink>
           <NuxtLink
             v-if="!currentUser"
             to="/login"
-            class="col-span-2 p-3 rounded-xl bg-gradient-to-r from-[#242658] to-[#171844] text-[#F8D78B] font-bold text-xs uppercase tracking-wider text-center flex items-center justify-center gap-2 border border-[#F8D78B]/30 shadow-sm"
+            class="col-span-3 p-3 rounded-xl bg-gradient-to-r from-[#242658] to-[#171844] text-[#F8D78B] font-bold text-xs uppercase tracking-wider text-center flex items-center justify-center gap-2 border border-[#F8D78B]/30 shadow-sm"
             @click="isMobileMenuOpen = false"
           >
             <svg class="w-4 h-4 text-[#F8D78B]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -310,7 +343,7 @@
           <NuxtLink
             v-else
             to="/portal"
-            class="col-span-2 p-3 rounded-xl bg-gradient-to-r from-[#242658] to-[#171844] text-[#F8D78B] font-bold text-xs uppercase tracking-wider text-center flex items-center justify-center gap-2 border border-[#F8D78B]/40 shadow-sm"
+            class="col-span-3 p-3 rounded-xl bg-gradient-to-r from-[#242658] to-[#171844] text-[#F8D78B] font-bold text-xs uppercase tracking-wider text-center flex items-center justify-center gap-2 border border-[#F8D78B]/40 shadow-sm"
             @click="isMobileMenuOpen = false"
           >
             <span class="w-2 h-2 rounded-full bg-[#35D9B0] animate-pulse"></span>
@@ -394,8 +427,10 @@
 
 <script setup lang="ts">
 import { ref, onMounted, onUnmounted } from 'vue'
+import { useShopCart } from '~/composables/useShopCart'
 
 const { currentUser } = useAuth()
+const { cartTotalCount } = useShopCart()
 
 const activeDropdown = ref<string | null>(null)
 const isMobileMenuOpen = ref(false)
