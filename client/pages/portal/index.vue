@@ -721,7 +721,7 @@
                 <div
                   v-for="peer in participants"
                   :key="peer.socketId"
-                  class="h-24 sm:h-28 rounded-2xl bg-[#1D1E4F] border border-white/20 relative overflow-hidden flex items-center justify-center shadow-md"
+                  class="h-24 sm:h-28 rounded-2xl bg-[#1D1E4F] border border-white/20 relative overflow-hidden flex items-center justify-center shadow-md group"
                 >
                   <video
                     v-show="peer.isVideoOn && peer.stream"
@@ -736,6 +736,27 @@
                       {{ getInitial(peer?.name, 'P') }}
                     </div>
                     <span class="text-[9px] text-white/50 block mt-1">Camera Off</span>
+                  </div>
+
+                  <!-- Host Quick Moderation Controls on Tile Hover -->
+                  <div v-if="isHost" class="absolute top-1.5 left-1.5 flex items-center gap-1 z-10 opacity-90 sm:opacity-0 sm:group-hover:opacity-100 transition-opacity">
+                    <button
+                      v-if="!peer.isMuted"
+                      type="button"
+                      class="px-1.5 py-0.5 rounded bg-black/70 hover:bg-amber-500 text-amber-300 hover:text-black text-[9px] font-bold cursor-pointer transition-colors shadow"
+                      title="Mute participant"
+                      @click.stop="muteParticipant(peer.socketId)"
+                    >
+                      🔇 Mute
+                    </button>
+                    <button
+                      type="button"
+                      class="px-1.5 py-0.5 rounded bg-black/70 hover:bg-red-600 text-red-300 hover:text-white text-[9px] font-bold cursor-pointer transition-colors shadow"
+                      title="Kick participant"
+                      @click.stop="kickParticipant(peer.socketId, peer?.name)"
+                    >
+                      ✕ Kick
+                    </button>
                   </div>
 
                   <!-- Tag: Remote Peer -->
@@ -844,21 +865,42 @@
                 <div
                   v-for="peer in participants"
                   :key="peer.socketId"
-                  class="p-2.5 rounded-xl bg-white/5 border border-white/10 flex items-center justify-between"
+                  class="p-2.5 rounded-xl bg-white/5 border border-white/10 flex items-center justify-between group hover:border-[#F8D78B]/40 transition-colors"
                 >
-                  <div class="flex items-center gap-2.5">
-                    <div class="w-7 h-7 rounded-full bg-[#242658] text-[#F8D78B] flex items-center justify-center font-bold text-xs">
+                  <div class="flex items-center gap-2.5 min-w-0">
+                    <div class="w-7 h-7 rounded-full bg-[#242658] text-[#F8D78B] flex items-center justify-center font-bold text-xs shrink-0">
                       {{ getInitial(peer?.name, 'P') }}
                     </div>
-                    <div>
-                      <div class="font-bold text-white">{{ peer?.name || 'Participant' }}</div>
+                    <div class="truncate">
+                      <div class="font-bold text-white text-xs truncate">{{ peer?.name || 'Participant' }}</div>
                       <span class="text-[10px] text-white/50">{{ peer?.role || 'Student' }}</span>
                     </div>
                   </div>
-                  <div class="flex items-center gap-2 text-sm">
+                  <div class="flex items-center gap-2 text-sm shrink-0">
                     <span v-if="peer.handRaised">✋</span>
                     <span>{{ peer.isMuted ? '🔇' : '🎤' }}</span>
                     <span>{{ peer.isVideoOn ? '📹' : '🚫' }}</span>
+
+                    <!-- Host Controls for Remote Participant -->
+                    <div v-if="isHost" class="flex items-center gap-1 ml-1.5 pl-1.5 border-l border-white/15">
+                      <button
+                        v-if="!peer.isMuted"
+                        type="button"
+                        class="px-2 py-0.5 rounded bg-amber-500/20 text-amber-300 hover:bg-amber-500 hover:text-black text-[10px] font-semibold cursor-pointer transition-colors"
+                        title="Mute this participant"
+                        @click="muteParticipant(peer.socketId)"
+                      >
+                        Mute
+                      </button>
+                      <button
+                        type="button"
+                        class="px-2 py-0.5 rounded bg-red-500/20 text-red-300 hover:bg-red-500 hover:text-white text-[10px] font-semibold cursor-pointer transition-colors"
+                        title="Remove / kick participant from session"
+                        @click="kickParticipant(peer.socketId, peer?.name)"
+                      >
+                        Kick
+                      </button>
+                    </div>
                   </div>
                 </div>
               </div>
@@ -1436,6 +1478,8 @@ const {
   toggleHandRaise,
   lockMeeting,
   muteAllParticipants,
+  muteParticipant,
+  kickParticipant,
   endMeetingForAll,
   createMeeting,
   joinMeeting,

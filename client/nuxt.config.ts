@@ -3,7 +3,8 @@ export default defineNuxtConfig({
   devtools: { enabled: false },
 
   experimental: {
-    appManifest: false
+    appManifest: false,
+    configSchema: false
   },
 
   modules: [

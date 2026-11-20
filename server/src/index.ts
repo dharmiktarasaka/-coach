@@ -585,6 +585,43 @@ io.on('connection', (socket: Socket) => {
     }
   })
 
+  socket.on('host-mute-participant', ({ roomId, targetSocketId }: { roomId: string; targetSocketId: string }) => {
+    const room = activeRooms.get(roomId)
+    if (room && room.hostSocketId === socket.id && targetSocketId && targetSocketId !== socket.id) {
+      const targetUser = room.participants.get(targetSocketId)
+      if (targetUser) {
+        targetUser.isMuted = true
+        io.to(targetSocketId).emit('force-mute-by-host')
+        io.to(roomId).emit('participant-media-changed', {
+          socketId: targetSocketId,
+          isMuted: true,
+          isVideoOn: targetUser.isVideoOn,
+          isSharing: targetUser.isSharing,
+          handRaised: targetUser.handRaised
+        })
+      }
+    }
+  })
+
+  socket.on('host-kick-participant', ({ roomId, targetSocketId, reason }: { roomId: string; targetSocketId: string; reason?: string }) => {
+    const room = activeRooms.get(roomId)
+    if (room && room.hostSocketId === socket.id && targetSocketId && targetSocketId !== socket.id) {
+      const targetUser = room.participants.get(targetSocketId)
+      if (targetUser) {
+        room.participants.delete(targetSocketId)
+        io.to(targetSocketId).emit('kicked-by-host', { reason: reason || 'You were removed from the meeting by the host.' })
+        const targetSocket = io.sockets.sockets.get(targetSocketId)
+        if (targetSocket) {
+          targetSocket.leave(roomId)
+        }
+        io.to(roomId).emit('user-left', {
+          socketId: targetSocketId,
+          name: targetUser.name
+        })
+      }
+    }
+  })
+
   socket.on('host-end-meeting', ({ roomId }: { roomId: string }) => {
     const room = activeRooms.get(roomId)
     if (room && room.hostSocketId === socket.id) {

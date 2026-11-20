@@ -215,6 +215,18 @@ export const useZoomMeeting = () => {
         }
       })
 
+      // Individual force mute from host
+      s.on('force-mute-by-host', () => {
+        muteAudio()
+        alert('You have been muted by the host.')
+      })
+
+      // Kicked from meeting by host
+      s.on('kicked-by-host', ({ reason }: any) => {
+        leaveMeeting()
+        alert(reason || 'You have been removed from the session by the host.')
+      })
+
       // Host ended meeting
       s.on('meeting-ended-by-host', () => {
         leaveMeeting()
@@ -633,6 +645,28 @@ export const useZoomMeeting = () => {
     }
   }
 
+  const muteParticipant = (targetSocketId: string) => {
+    if (socket.value && isHost.value && targetSocketId) {
+      socket.value.emit('host-mute-participant', {
+        roomId: currentRoomId.value,
+        targetSocketId
+      })
+    }
+  }
+
+  const kickParticipant = (targetSocketId: string, participantName?: string) => {
+    if (socket.value && isHost.value && targetSocketId) {
+      const confirmKick = confirm(`Are you sure you want to remove ${participantName || 'this participant'} from the meeting?`)
+      if (confirmKick) {
+        socket.value.emit('host-kick-participant', {
+          roomId: currentRoomId.value,
+          targetSocketId,
+          reason: 'You were removed from the session by the host.'
+        })
+      }
+    }
+  }
+
   const endMeetingForAll = () => {
     if (socket.value && isHost.value) {
       socket.value.emit('host-end-meeting', {
@@ -690,6 +724,8 @@ export const useZoomMeeting = () => {
     sendChatMessage,
     lockMeeting,
     muteAllParticipants,
+    muteParticipant,
+    kickParticipant,
     endMeetingForAll,
     bindVideoElement
   }

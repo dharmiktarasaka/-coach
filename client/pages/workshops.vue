@@ -63,7 +63,6 @@
               <div><dt style="color:#c4c4e2">Format</dt><dd style="color:#fff;font-weight:700">3 Live Sessions</dd></div>
               <div><dt style="color:#c4c4e2">Includes</dt><dd style="color:#fff;font-weight:700">Lessons, Worksheets, Toolkits</dd></div>
               <div><dt style="color:#c4c4e2">Make-up Policy</dt><dd style="color:#fff;font-weight:700">1 Free Make-up Session</dd></div>
-              <div><dt style="color:#c4c4e2">Investment Fee</dt><dd style="color:#F8D78B;font-size:28px;font-weight:800">₹2,999</dd></div>
               <div class="pt-4">
                 <a class="btn btn-gold w-full text-center" href="https://r6e8zx.flexi-funnels.com/1-am-reset-blueprint" target="_blank" rel="noopener">
                   Register for 1 AM Reset &rarr;
@@ -106,8 +105,6 @@ useHead({
         },
         'offers': {
           '@type': 'Offer',
-          'price': '2999',
-          'priceCurrency': 'INR',
           'availability': 'https://schema.org/InStock',
           'url': 'https://r6e8zx.flexi-funnels.com/1-am-reset-blueprint'
         }

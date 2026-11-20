@@ -30,6 +30,10 @@ useHead({
     {
       rel: 'canonical',
       href: canonicalUrl
+    },
+    {
+      rel: 'stylesheet',
+      href: '/style.css'
     }
   ],
   script: [

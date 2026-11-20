@@ -214,11 +214,16 @@ a.card:hover{transform:translateY(-6px);border-color:var(--gold);box-shadow:0 30
 
 /* modules */
 .mods{margin-top:44px;border-top:1.5px solid var(--fg)}
-.mod{display:grid;grid-template-columns:90px minmax(0,1fr);gap:20px;padding:26px 6px;border-bottom:1px solid var(--line)}
-.mod .no{font-family:var(--serif);color:var(--accent);font-size:26px}
+.mod{display:grid;grid-template-columns:120px minmax(0,1fr);gap:24px;padding:26px 6px;border-bottom:1px solid var(--line)}
+.mod .no{font-family:var(--serif);color:var(--accent);font-size:26px;line-height:1}
 .mod h3{font-size:26px;line-height:1.2}
-.mod p{margin-top:8px;font-size:16px}
-@media(max-width:600px){.mod{grid-template-columns:54px 1fr}}
+.mod p{margin-top:8px;font-size:16px;line-height:1.6}
+@media(max-width:640px){
+  .mod{display:flex;flex-direction:column;gap:6px;padding:20px 2px}
+  .mod .no{font-family:var(--sans);font-weight:700;font-size:13px;letter-spacing:0.14em;text-transform:uppercase;color:var(--gold);display:inline-block}
+  .mod h3{font-size:22px;line-height:1.25}
+  .mod p{margin-top:4px;font-size:15px;line-height:1.6}
+}
 
 /* faq */
 details{border-top:1px solid var(--line);padding:24px 0}
@@ -807,4 +812,190 @@ body.light .resource-card .card-author,
 .resource-card[style*="background: #fff"] .card-desc,
 .resource-card[style*="background:white"] .card-desc {
   color: #4A4B68 !important;
+}
+
+/* ==========================================================================
+   Comprehensive Mobile & Small-Screen Visual Polish (320px - 768px)
+   ========================================================================== */
+.pgrid {
+  display: grid;
+  grid-template-columns: minmax(0, 1.5fr) minmax(0, 1fr);
+  gap: clamp(28px, 5vw, 80px);
+  align-items: end;
+}
+
+.hero h1, .phero h1, .h2, .cta h2 {
+  overflow-wrap: break-word;
+  word-break: break-word;
+}
+
+@media (max-width: 900px) {
+  .pgrid {
+    display: grid !important;
+    grid-template-columns: 1fr !important;
+    gap: 32px !important;
+  }
+  .phero aside {
+    width: 100% !important;
+    max-width: 100% !important;
+  }
+}
+
+@media (max-width: 768px) {
+  .doors {
+    flex-direction: column !important;
+    gap: 18px !important;
+  }
+  .door {
+    min-height: 280px !important;
+    padding: 26px 20px !important;
+  }
+  .door h3 {
+    font-size: 26px !important;
+  }
+  .pz {
+    grid-template-columns: 1fr !important;
+    gap: 24px !important;
+  }
+  .pcard {
+    min-height: auto !important;
+    padding: 24px 18px !important;
+  }
+  .ring5 {
+    width: 120px !important;
+    height: 120px !important;
+    margin: 0 auto 18px auto !important;
+    display: block !important;
+  }
+}
+
+@media (max-width: 640px) {
+  .wrap {
+    padding: 0 18px !important;
+  }
+  .sec {
+    padding: clamp(52px, 8vw, 76px) 0 !important;
+  }
+  .sec.tight {
+    padding: clamp(36px, 6vw, 54px) 0 !important;
+  }
+  .hero h1 {
+    font-size: clamp(30px, 7.8vw, 48px) !important;
+    line-height: 1.1 !important;
+    letter-spacing: -0.025em !important;
+  }
+  .phero h1 {
+    font-size: clamp(28px, 7vw, 44px) !important;
+    line-height: 1.12 !important;
+  }
+  .h2 {
+    font-size: clamp(26px, 6.5vw, 38px) !important;
+    line-height: 1.12 !important;
+    margin-top: 14px !important;
+  }
+  .lead {
+    font-size: 15.5px !important;
+    line-height: 1.65 !important;
+    margin-top: 14px !important;
+  }
+
+  /* Stat counters 2x2 grid */
+  .counts {
+    grid-template-columns: 1fr 1fr !important;
+    gap: 10px !important;
+    margin-top: 18px !important;
+  }
+  .count {
+    border-left: 0 !important;
+    border: 1px solid var(--line) !important;
+    border-radius: 18px !important;
+    padding: 16px 12px !important;
+    text-align: center !important;
+    background: var(--card) !important;
+  }
+  .count:first-child {
+    padding-left: 12px !important;
+  }
+  .count b {
+    font-size: 38px !important;
+  }
+  .count span {
+    font-size: 11px !important;
+    letter-spacing: 0.1em !important;
+    margin-top: 6px !important;
+  }
+
+  /* Full-width tap-friendly hero CTA buttons */
+  .btns {
+    flex-direction: column !important;
+    gap: 10px !important;
+    margin-top: 26px !important;
+  }
+  .btns .btn {
+    width: 100% !important;
+    justify-content: center !important;
+    text-align: center !important;
+    padding: 14px 20px !important;
+    font-size: 15px !important;
+  }
+  .live {
+    padding: 12px 14px !important;
+    gap: 10px !important;
+    font-size: 13.5px !important;
+    border-radius: 14px !important;
+  }
+
+  /* Cosmic mandala orbit */
+  .orb {
+    max-width: min(270px, 80vw) !important;
+  }
+
+  /* Review touch dots */
+  .qdots {
+    display: flex !important;
+    gap: 8px !important;
+    margin-top: 28px !important;
+    justify-content: center !important;
+  }
+  .qdots button {
+    position: relative !important;
+    width: 28px !important;
+    height: 5px !important;
+    border-radius: 3px !important;
+  }
+  .qdots button::before {
+    content: "" !important;
+    position: absolute !important;
+    inset: -14px -6px !important;
+  }
+  .qdots button[aria-current=true] {
+    width: 48px !important;
+    background: var(--gold) !important;
+  }
+
+  /* Testimonial cards */
+  .cards {
+    grid-template-columns: 1fr !important;
+    gap: 14px !important;
+    margin-top: 24px !important;
+  }
+  .card {
+    padding: 20px 16px !important;
+    border-radius: 18px !important;
+  }
+  .rv p {
+    font-size: 16px !important;
+    line-height: 1.5 !important;
+  }
+}
+
+@media (max-width: 440px) {
+  .facts div {
+    flex-direction: column !important;
+    gap: 4px !important;
+    align-items: flex-start !important;
+  }
+  .facts dd {
+    text-align: left !important;
+  }
 }

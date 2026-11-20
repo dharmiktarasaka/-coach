@@ -14,15 +14,15 @@
     <UiContainer size="xl">
       <div class="flex items-center justify-between">
         <!-- Brand Logo -->
-        <NuxtLink to="/" class="flex items-center gap-3 group focus:outline-none">
+        <NuxtLink to="/" class="flex items-center gap-2 sm:gap-3 group focus:outline-none min-w-0">
           <img
             src="/logo.png"
             alt="Narayan Presence"
-            class="h-10 sm:h-11 w-auto object-contain group-hover:scale-105 transition-transform"
+            class="h-8 sm:h-11 w-auto object-contain group-hover:scale-105 transition-transform shrink-0"
           />
-          <div class="flex flex-col">
+          <div class="flex flex-col min-w-0">
             <span
-              class="font-display font-extrabold text-lg sm:text-xl tracking-tight transition-colors"
+              class="font-display font-extrabold text-sm xs:text-base sm:text-xl tracking-tight transition-colors truncate"
               :class="isDark ? 'text-[#F8F5EF] group-hover:text-[#F8D78B]' : 'text-[#171844] group-hover:text-[#242658]'"
             >
               NARAYAN PRESENCE
@@ -369,7 +369,7 @@
           <!-- Shop Icon Button -->
           <NuxtLink
             to="/shop"
-            class="relative inline-flex items-center gap-1.5 px-3 sm:px-3.5 py-2.5 rounded-xl border font-bold text-xs uppercase tracking-wider transition-all duration-200 shadow-sm hover:scale-[1.04] group"
+            class="relative inline-flex items-center justify-center w-8 h-8 sm:w-10 sm:h-10 sm:px-3.5 sm:py-2.5 rounded-lg sm:rounded-xl border font-bold text-xs uppercase tracking-wider transition-all duration-200 shadow-sm hover:scale-[1.04] group shrink-0"
             :class="isDark
               ? 'bg-gradient-to-r from-[#FF9F00]/20 to-[#FB641B]/20 hover:from-[#FF9F00]/30 hover:to-[#FB641B]/30 border-[#FF9F00]/50 text-[#F8F5EF]'
               : 'bg-gradient-to-r from-[#FF9F00]/15 to-[#FB641B]/15 hover:from-[#FF9F00]/25 hover:to-[#FB641B]/25 border-[#FF9F00]/50 text-[#171844]'"
@@ -383,7 +383,7 @@
               <!-- Cart Count Badge -->
               <span
                 v-if="cartTotalCount > 0"
-                class="absolute -top-2.5 -right-2.5 min-w-[17px] h-[17px] px-1 bg-[#2874F0] text-white text-[9px] font-black rounded-full flex items-center justify-center border-2 border-white shadow-sm animate-pulse"
+                class="absolute -top-2 -right-2 min-w-[15px] h-[15px] px-1 bg-[#2874F0] text-white text-[8px] font-black rounded-full flex items-center justify-center border border-white shadow-sm"
               >
                 {{ cartTotalCount }}
               </span>
@@ -396,7 +396,7 @@
             type="button"
             id="theme"
             @click="toggleTheme"
-            class="relative inline-flex items-center justify-center w-10 h-10 rounded-xl transition-all duration-300 border focus:outline-none focus-visible:ring-2 focus-visible:ring-[#D9AA55] group cursor-pointer shadow-sm hover:scale-105"
+            class="relative inline-flex items-center justify-center w-8 h-8 sm:w-10 sm:h-10 rounded-lg sm:rounded-xl transition-all duration-300 border focus:outline-none focus-visible:ring-2 focus-visible:ring-[#D9AA55] group cursor-pointer shadow-sm hover:scale-105 shrink-0"
             :class="[
               isDark
                 ? 'bg-[#141845] hover:bg-[#1c2260] border-[#D9AA55]/40 text-[#F8D78B] shadow-black/30'
@@ -407,13 +407,13 @@
           >
             <!-- In dark mode, show Sun icon with warm cosmic glow -->
             <span v-if="isDark" key="sun" class="flex items-center justify-center transition-transform duration-300 group-hover:rotate-45">
-              <svg class="w-5 h-5 text-[#F8D78B]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <svg class="w-4 h-4 sm:w-5 sm:h-5 text-[#F8D78B]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" />
               </svg>
             </span>
             <!-- In light mode, show Moon icon -->
             <span v-else key="moon" class="flex items-center justify-center transition-transform duration-300 group-hover:-rotate-12">
-              <svg class="w-5 h-5 text-[#171844]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <svg class="w-4 h-4 sm:w-5 sm:h-5 text-[#171844]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" />
               </svg>
             </span>
@@ -422,15 +422,15 @@
           <!-- Mobile Hamburger -->
           <button
             type="button"
-            class="lg:hidden p-2 rounded-xl focus:outline-none transition-colors cursor-pointer"
+            class="lg:hidden p-1.5 sm:p-2 rounded-lg sm:rounded-xl focus:outline-none transition-colors cursor-pointer shrink-0"
             :class="isDark ? 'text-[#F8F5EF] hover:bg-white/10' : 'text-[#171844] hover:bg-[#EAE2D4]/50'"
             aria-label="Toggle mobile menu"
             @click="isMobileMenuOpen = !isMobileMenuOpen"
           >
-            <svg v-if="!isMobileMenuOpen" class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <svg v-if="!isMobileMenuOpen" class="w-5 h-5 sm:w-6 sm:h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
             </svg>
-            <svg v-else class="w-6 h-6" :class="isDark ? 'text-[#F8D78B]' : 'text-[#171844]'" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <svg v-else class="w-5 h-5 sm:w-6 sm:h-6" :class="isDark ? 'text-[#F8D78B]' : 'text-[#171844]'" fill="none" viewBox="0 0 24 24" stroke="currentColor">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
             </svg>
           </button>
@@ -438,191 +438,238 @@
       </div>
     </UiContainer>
 
-    <!-- Mobile Drawer -->
-    <div
-      v-if="isMobileMenuOpen"
-      class="lg:hidden fixed inset-0 top-[68px] backdrop-blur-xl z-40 overflow-y-auto p-6 pb-28 shadow-2xl transition-colors"
-      :class="isDark ? 'bg-[#0f1233]/98 border-t border-[#D9AA55]/20 text-[#F8F5EF]' : 'bg-[#FAFAFA]/98 border-t border-[#EAE2D4] text-[#171844]'"
-    >
-      <div class="space-y-6 max-w-lg mx-auto">
-        <!-- Prominent Mobile Theme Switcher Bar -->
+    <!-- Mobile Drawer via Teleport to Body (Guarantees 100% viewport coverage with zero backdrop overlap) -->
+    <ClientOnly>
+      <Teleport to="body">
         <div
-          class="flex items-center justify-between p-3.5 rounded-2xl border transition-all shadow-sm"
-          :class="isDark ? 'bg-[#141845] border-[#D9AA55]/30 text-[#F8F5EF]' : 'bg-white border-[#EAE2D4] text-[#171844]'"
+          v-if="isMobileMenuOpen"
+          class="lg:hidden fixed inset-0 z-[100] flex flex-col h-[100dvh] w-screen transition-colors duration-300 overflow-hidden shadow-2xl"
+          :class="isDark ? 'bg-[#0f1233] text-[#F8F5EF]' : 'bg-[#FAFAFA] text-[#171844]'"
         >
-          <div class="flex items-center gap-3">
-            <div
-              class="w-9 h-9 rounded-xl flex items-center justify-center text-lg"
-              :class="isDark ? 'bg-[#0f1233] text-[#F8D78B]' : 'bg-[#FAFAFA] text-[#171844] border border-[#EAE2D4]'"
-            >
-              {{ isDark ? '🌙' : '☀️' }}
-            </div>
-            <div class="flex flex-col">
-              <span class="text-xs font-bold uppercase tracking-wider">{{ isDark ? 'Dark Theme' : 'Light Theme' }}</span>
-              <span class="text-[11px]" :class="isDark ? 'text-[#b4b4d4]' : 'text-[#8C6D57]'">
-                {{ isDark ? 'Cosmic Navy & Gold' : 'Warm Editorial Cream' }}
+          <!-- Dedicated Mobile Header Inside Fullscreen Drawer -->
+          <div
+            class="flex items-center justify-between px-4 py-3 border-b shrink-0 backdrop-blur-md"
+            :class="isDark ? 'border-[#D9AA55]/20 bg-[#0f1233]/95' : 'border-[#EAE2D4] bg-[#FAFAFA]/95'"
+          >
+            <NuxtLink to="/" class="flex items-center gap-2.5 min-w-0" @click="isMobileMenuOpen = false">
+              <img src="/logo.png" alt="Narayan Presence" class="h-8 w-auto object-contain shrink-0" />
+              <span class="font-display font-extrabold text-sm tracking-tight truncate" :class="isDark ? 'text-[#F8F5EF]' : 'text-[#171844]'">
+                NARAYAN PRESENCE
               </span>
+            </NuxtLink>
+
+            <div class="flex items-center gap-2 shrink-0">
+              <!-- Quick Theme Switcher in Drawer Header -->
+              <button
+                type="button"
+                @click="toggleTheme"
+                class="w-9 h-9 rounded-xl border flex items-center justify-center cursor-pointer transition-colors"
+                :class="isDark ? 'bg-[#141845] border-[#D9AA55]/30 text-[#F8D78B]' : 'bg-white border-[#EAE2D4] text-[#171844]'"
+                :title="isDark ? 'Switch to Light' : 'Switch to Dark'"
+                :aria-label="isDark ? 'Switch to Light' : 'Switch to Dark'"
+              >
+                <span>{{ isDark ? '☀️' : '🌙' }}</span>
+              </button>
+
+              <!-- Close Button -->
+              <button
+                type="button"
+                class="w-9 h-9 rounded-xl border flex items-center justify-center cursor-pointer transition-colors"
+                :class="isDark ? 'bg-white/10 hover:bg-white/20 text-[#F8D78B] border-white/15' : 'bg-black/5 hover:bg-black/10 text-[#171844] border-black/10'"
+                aria-label="Close menu"
+                @click="isMobileMenuOpen = false"
+              >
+                <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.2" d="M6 18L18 6M6 6l12 12" />
+                </svg>
+              </button>
             </div>
           </div>
-          <button
-            type="button"
-            @click="toggleTheme"
-            class="px-3.5 py-1.5 rounded-xl font-bold text-xs uppercase tracking-wider transition-all duration-200 border cursor-pointer hover:scale-105 shadow-sm"
-            :class="isDark
-              ? 'bg-[#0f1233] text-[#F8D78B] border-[#D9AA55]/40 hover:bg-[#1b1f55]'
-              : 'bg-[#171844] text-[#F8D78B] border-[#171844] hover:bg-[#242658]'"
-          >
-            Switch to {{ isDark ? 'Light ☀️' : 'Dark 🌙' }}
-          </button>
-        </div>
 
-        <!-- Direct Home, Shop, Student Login & Contact -->
-        <div class="grid grid-cols-3 gap-2 pb-3 border-b" :class="isDark ? 'border-[#D9AA55]/20' : 'border-[#EAE2D4]'">
-          <NuxtLink
-            to="/"
-            class="p-2.5 rounded-xl font-bold text-xs uppercase tracking-wider text-center border transition-colors"
-            :class="isDark
-              ? 'bg-[#141845] text-[#F8F5EF] border-[#D9AA55]/30 hover:bg-[#1b1f55]'
-              : 'bg-white text-[#171844] border-[#EAE2D4] hover:bg-[#EAE2D4]/40'"
-            @click="isMobileMenuOpen = false"
-          >
-            Home
-          </NuxtLink>
-          <NuxtLink
-            to="/shop"
-            class="p-2.5 rounded-xl font-bold text-xs uppercase tracking-wider text-center border flex items-center justify-center gap-1 transition-colors"
-            :class="isDark
-              ? 'bg-gradient-to-r from-[#FF9F00]/20 to-[#FB641B]/20 text-[#F8F5EF] border-[#FF9F00]/50'
-              : 'bg-gradient-to-r from-[#FF9F00]/15 to-[#FB641B]/15 text-[#171844] border-[#FF9F00]/40'"
-            @click="isMobileMenuOpen = false"
-          >
-            <span>🛍️</span>
-            <span>Shop</span>
-            <span v-if="cartTotalCount > 0" class="min-w-[16px] h-4 px-1 rounded-full bg-[#2874F0] text-white text-[9px] font-black flex items-center justify-center">
-              {{ cartTotalCount }}
-            </span>
-          </NuxtLink>
-          <NuxtLink
-            to="/contact"
-            class="p-2.5 rounded-xl font-bold text-xs uppercase tracking-wider text-center border transition-colors"
-            :class="isDark
-              ? 'bg-[#D9AA55] text-[#0f1233] border-[#F8D78B] font-black'
-              : 'bg-[#171844] text-[#F8D78B] border-[#F8D78B]/30'"
-            @click="isMobileMenuOpen = false"
-          >
-            Contact
-          </NuxtLink>
-          <NuxtLink
-            v-if="!currentUser"
-            to="/login"
-            class="col-span-3 p-3 rounded-xl font-bold text-xs uppercase tracking-wider text-center flex items-center justify-center gap-2 border shadow-sm transition-colors"
-            :class="isDark
-              ? 'bg-gradient-to-r from-[#141845] to-[#1b1f55] text-[#F8D78B] border-[#D9AA55]/40'
-              : 'bg-gradient-to-r from-[#242658] to-[#171844] text-[#F8D78B] border-[#F8D78B]/30'"
-            @click="isMobileMenuOpen = false"
-          >
-            <svg class="w-4 h-4 text-[#F8D78B]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
-            </svg>
-            Student Login
-          </NuxtLink>
-          <NuxtLink
-            v-else
-            to="/portal"
-            class="col-span-3 p-3 rounded-xl bg-gradient-to-r from-[#242658] to-[#171844] text-[#F8D78B] font-bold text-xs uppercase tracking-wider text-center flex items-center justify-center gap-2 border border-[#F8D78B]/40 shadow-sm"
-            @click="isMobileMenuOpen = false"
-          >
-            <span class="w-2 h-2 rounded-full bg-[#35D9B0] animate-pulse"></span>
-            Enter Student Portal
-          </NuxtLink>
-        </div>
-
-        <!-- Section: About -->
-        <div class="space-y-1">
-          <div class="text-[11px] font-bold uppercase tracking-wider px-2 py-1" :class="isDark ? 'text-[#D9AA55]' : 'text-[#8C6D57]'">About</div>
-          <NuxtLink
-            v-for="item in aboutLinks"
-            :key="item.to"
-            :to="item.to"
-            class="block px-3 py-2 rounded-xl text-sm font-semibold transition-colors"
-            :class="isDark ? 'text-[#F8F5EF] hover:bg-white/10' : 'text-[#171844] hover:bg-[#EAE2D4]/50'"
-            @click="isMobileMenuOpen = false"
-          >
-            {{ item.label }}
-          </NuxtLink>
-        </div>
-
-        <!-- Section: Offerings -->
-        <div class="space-y-1">
-          <div class="text-[11px] font-bold uppercase tracking-wider px-2 py-1" :class="isDark ? 'text-[#D9AA55]' : 'text-[#8C6D57]'">Offerings</div>
-          <NuxtLink
-            v-for="item in offeringsLinks"
-            :key="item.to"
-            :to="item.to"
-            class="block px-3 py-2 rounded-xl text-sm font-semibold transition-colors"
-            :class="isDark ? 'text-[#F8F5EF] hover:bg-white/10' : 'text-[#171844] hover:bg-[#EAE2D4]/50'"
-            @click="isMobileMenuOpen = false"
-          >
-            {{ item.label }}
-          </NuxtLink>
-        </div>
-
-        <!-- Section: Community -->
-        <div class="space-y-1">
-          <div class="text-[11px] font-bold uppercase tracking-wider px-2 py-1" :class="isDark ? 'text-[#D9AA55]' : 'text-[#8C6D57]'">Community</div>
-          <NuxtLink
-            to="/community"
-            class="block px-3 py-2 rounded-xl text-sm font-semibold transition-colors"
-            :class="isDark ? 'text-[#F8F5EF] hover:bg-white/10' : 'text-[#171844] hover:bg-[#EAE2D4]/50'"
-            @click="isMobileMenuOpen = false"
-          >
-            Community Overview
-          </NuxtLink>
-        </div>
-
-        <!-- Section: Insights -->
-        <div class="space-y-1">
-          <div class="text-[11px] font-bold uppercase tracking-wider px-2 py-1" :class="isDark ? 'text-[#D9AA55]' : 'text-[#8C6D57]'">Insights & Resources</div>
-          <NuxtLink
-            v-for="item in insightLinks"
-            :key="item.to"
-            :to="item.to"
-            class="block px-3 py-2 rounded-xl text-sm font-semibold transition-colors"
-            :class="isDark ? 'text-[#F8F5EF] hover:bg-white/10' : 'text-[#171844] hover:bg-[#EAE2D4]/50'"
-            @click="isMobileMenuOpen = false"
-          >
-            {{ item.label }}
-          </NuxtLink>
-        </div>
-
-        <!-- Section: Policies -->
-        <div class="space-y-1 pt-2 border-t" :class="isDark ? 'border-[#D9AA55]/20' : 'border-[#EAE2D4]'">
-          <div class="text-[11px] font-bold uppercase tracking-wider px-2 py-1" :class="isDark ? 'text-[#D9AA55]' : 'text-[#8C6D57]'">Legal & Safety</div>
-          <div class="grid grid-cols-2 gap-1">
-            <NuxtLink
-              v-for="item in legalLinks"
-              :key="item.to"
-              :to="item.to"
-              class="block px-3 py-1.5 rounded-xl text-xs transition-colors"
-              :class="isDark
-                ? 'text-[#F8F5EF]/80 hover:text-[#F8D78B] hover:bg-white/10'
-                : 'text-[#171844]/80 hover:text-[#171844] hover:bg-[#EAE2D4]/40'"
-              @click="isMobileMenuOpen = false"
+          <!-- Scrollable Menu Content -->
+          <div class="flex-1 overflow-y-auto p-4 sm:p-6 pb-28 space-y-5">
+            <!-- Theme Switcher Card -->
+            <div
+              class="flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-3 p-3.5 rounded-2xl border transition-all shadow-sm"
+              :class="isDark ? 'bg-[#141845] border-[#D9AA55]/30 text-[#F8F5EF]' : 'bg-white border-[#EAE2D4] text-[#171844]'"
             >
-              {{ item.label }}
-            </NuxtLink>
+              <div class="flex items-center gap-3">
+                <div
+                  class="w-9 h-9 rounded-xl flex items-center justify-center text-lg shrink-0"
+                  :class="isDark ? 'bg-[#0f1233] text-[#F8D78B]' : 'bg-[#FAFAFA] text-[#171844] border border-[#EAE2D4]'"
+                >
+                  {{ isDark ? '🌙' : '☀️' }}
+                </div>
+                <div class="flex flex-col">
+                  <span class="text-xs font-bold uppercase tracking-wider">{{ isDark ? 'Dark Theme' : 'Light Theme' }}</span>
+                  <span class="text-[11px]" :class="isDark ? 'text-[#b4b4d4]' : 'text-[#8C6D57]'">
+                    {{ isDark ? 'Cosmic Navy & Gold' : 'Warm Editorial Cream' }}
+                  </span>
+                </div>
+              </div>
+              <button
+                type="button"
+                @click="toggleTheme"
+                class="w-full sm:w-auto px-4 py-2 rounded-xl font-bold text-xs uppercase tracking-wider transition-all duration-200 border cursor-pointer hover:scale-105 shadow-sm text-center"
+                :class="isDark
+                  ? 'bg-[#0f1233] text-[#F8D78B] border-[#D9AA55]/40 hover:bg-[#1b1f55]'
+                  : 'bg-[#171844] text-[#F8D78B] border-[#171844] hover:bg-[#242658]'"
+              >
+                Switch to {{ isDark ? 'Light ☀️' : 'Dark 🌙' }}
+              </button>
+            </div>
+
+            <!-- Direct Home, Shop, Student Login & Contact -->
+            <div class="grid grid-cols-3 gap-2 pb-3 border-b" :class="isDark ? 'border-[#D9AA55]/20' : 'border-[#EAE2D4]'">
+              <NuxtLink
+                to="/"
+                class="p-2.5 rounded-xl font-bold text-xs uppercase tracking-wider text-center border transition-colors"
+                :class="isDark
+                  ? 'bg-[#141845] text-[#F8F5EF] border-[#D9AA55]/30 hover:bg-[#1b1f55]'
+                  : 'bg-white text-[#171844] border-[#EAE2D4] hover:bg-[#EAE2D4]/40'"
+                @click="isMobileMenuOpen = false"
+              >
+                Home
+              </NuxtLink>
+              <NuxtLink
+                to="/shop"
+                class="p-2.5 rounded-xl font-bold text-xs uppercase tracking-wider text-center border flex items-center justify-center gap-1 transition-colors"
+                :class="isDark
+                  ? 'bg-gradient-to-r from-[#FF9F00]/20 to-[#FB641B]/20 text-[#F8F5EF] border-[#FF9F00]/50'
+                  : 'bg-gradient-to-r from-[#FF9F00]/15 to-[#FB641B]/15 text-[#171844] border-[#FF9F00]/40'"
+                @click="isMobileMenuOpen = false"
+              >
+                <span>🛍️</span>
+                <span>Shop</span>
+                <span v-if="cartTotalCount > 0" class="min-w-[16px] h-4 px-1 rounded-full bg-[#2874F0] text-white text-[9px] font-black flex items-center justify-center">
+                  {{ cartTotalCount }}
+                </span>
+              </NuxtLink>
+              <NuxtLink
+                to="/contact"
+                class="p-2.5 rounded-xl font-bold text-xs uppercase tracking-wider text-center border transition-colors"
+                :class="isDark
+                  ? 'bg-[#D9AA55] text-[#0f1233] border-[#F8D78B] font-black'
+                  : 'bg-[#171844] text-[#F8D78B] border-[#F8D78B]/30'"
+                @click="isMobileMenuOpen = false"
+              >
+                Contact
+              </NuxtLink>
+              <NuxtLink
+                v-if="!currentUser"
+                to="/login"
+                class="col-span-3 p-3 rounded-xl font-bold text-xs uppercase tracking-wider text-center flex items-center justify-center gap-2 border shadow-sm transition-colors"
+                :class="isDark
+                  ? 'bg-gradient-to-r from-[#141845] to-[#1b1f55] text-[#F8D78B] border-[#D9AA55]/40'
+                  : 'bg-gradient-to-r from-[#242658] to-[#171844] text-[#F8D78B] border-[#F8D78B]/30'"
+                @click="isMobileMenuOpen = false"
+              >
+                <svg class="w-4 h-4 text-[#F8D78B]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
+                </svg>
+                Student Login
+              </NuxtLink>
+              <NuxtLink
+                v-else
+                to="/portal"
+                class="col-span-3 p-3 rounded-xl bg-gradient-to-r from-[#242658] to-[#171844] text-[#F8D78B] font-bold text-xs uppercase tracking-wider text-center flex items-center justify-center gap-2 border border-[#F8D78B]/40 shadow-sm"
+                @click="isMobileMenuOpen = false"
+              >
+                <span class="w-2 h-2 rounded-full bg-[#35D9B0] animate-pulse"></span>
+                Enter Student Portal
+              </NuxtLink>
+            </div>
+
+            <!-- Section: About -->
+            <div class="space-y-1">
+              <div class="text-[11px] font-bold uppercase tracking-wider px-2 py-1" :class="isDark ? 'text-[#D9AA55]' : 'text-[#8C6D57]'">About</div>
+              <NuxtLink
+                v-for="item in aboutLinks"
+                :key="item.to"
+                :to="item.to"
+                class="block px-3 py-2 rounded-xl text-sm font-semibold transition-colors"
+                :class="isDark ? 'text-[#F8F5EF] hover:bg-white/10' : 'text-[#171844] hover:bg-[#EAE2D4]/50'"
+                @click="isMobileMenuOpen = false"
+              >
+                {{ item.label }}
+              </NuxtLink>
+            </div>
+
+            <!-- Section: Offerings -->
+            <div class="space-y-1">
+              <div class="text-[11px] font-bold uppercase tracking-wider px-2 py-1" :class="isDark ? 'text-[#D9AA55]' : 'text-[#8C6D57]'">Offerings</div>
+              <NuxtLink
+                v-for="item in offeringsLinks"
+                :key="item.to"
+                :to="item.to"
+                class="block px-3 py-2 rounded-xl text-sm font-semibold transition-colors"
+                :class="isDark ? 'text-[#F8F5EF] hover:bg-white/10' : 'text-[#171844] hover:bg-[#EAE2D4]/50'"
+                @click="isMobileMenuOpen = false"
+              >
+                {{ item.label }}
+              </NuxtLink>
+            </div>
+
+            <!-- Section: Community -->
+            <div class="space-y-1">
+              <div class="text-[11px] font-bold uppercase tracking-wider px-2 py-1" :class="isDark ? 'text-[#D9AA55]' : 'text-[#8C6D57]'">Community</div>
+              <NuxtLink
+                to="/community"
+                class="block px-3 py-2 rounded-xl text-sm font-semibold transition-colors"
+                :class="isDark ? 'text-[#F8F5EF] hover:bg-white/10' : 'text-[#171844] hover:bg-[#EAE2D4]/50'"
+                @click="isMobileMenuOpen = false"
+              >
+                Community Overview
+              </NuxtLink>
+            </div>
+
+            <!-- Section: Insights -->
+            <div class="space-y-1">
+              <div class="text-[11px] font-bold uppercase tracking-wider px-2 py-1" :class="isDark ? 'text-[#D9AA55]' : 'text-[#8C6D57]'">Insights & Resources</div>
+              <NuxtLink
+                v-for="item in insightLinks"
+                :key="item.to"
+                :to="item.to"
+                class="block px-3 py-2 rounded-xl text-sm font-semibold transition-colors"
+                :class="isDark ? 'text-[#F8F5EF] hover:bg-white/10' : 'text-[#171844] hover:bg-[#EAE2D4]/50'"
+                @click="isMobileMenuOpen = false"
+              >
+                {{ item.label }}
+              </NuxtLink>
+            </div>
+
+            <!-- Section: Policies -->
+            <div class="space-y-1 pt-2 border-t" :class="isDark ? 'border-[#D9AA55]/20' : 'border-[#EAE2D4]'">
+              <div class="text-[11px] font-bold uppercase tracking-wider px-2 py-1" :class="isDark ? 'text-[#D9AA55]' : 'text-[#8C6D57]'">Legal & Safety</div>
+              <div class="grid grid-cols-2 gap-1">
+                <NuxtLink
+                  v-for="item in legalLinks"
+                  :key="item.to"
+                  :to="item.to"
+                  class="block px-3 py-1.5 rounded-xl text-xs transition-colors"
+                  :class="isDark
+                    ? 'text-[#F8F5EF]/80 hover:text-[#F8D78B] hover:bg-white/10'
+                    : 'text-[#171844]/80 hover:text-[#171844] hover:bg-[#EAE2D4]/40'"
+                  @click="isMobileMenuOpen = false"
+                >
+                  {{ item.label }}
+                </NuxtLink>
+              </div>
+            </div>
           </div>
         </div>
-      </div>
-    </div>
+      </Teleport>
+    </ClientOnly>
   </header>
 </template>
 
 <script setup lang="ts">
-import { ref, onMounted, onUnmounted } from 'vue'
+import { ref, watch, onMounted, onUnmounted } from 'vue'
+import { useRoute } from 'vue-router'
 import { useShopCart } from '~/composables/useShopCart'
 import { useTheme } from '~/composables/useTheme'
 
+const route = useRoute()
 const { currentUser } = useAuth()
 const { cartTotalCount } = useShopCart()
 const { isDark, toggleTheme, initTheme } = useTheme()
@@ -635,12 +682,32 @@ const handleScroll = () => {
   isScrolled.value = window.scrollY > 20
 }
 
+watch(isMobileMenuOpen, (isOpen) => {
+  if (typeof document !== 'undefined') {
+    if (isOpen) {
+      document.body.style.overflow = 'hidden'
+    } else {
+      document.body.style.overflow = ''
+    }
+  }
+})
+
+watch(() => route.fullPath, () => {
+  isMobileMenuOpen.value = false
+  if (typeof document !== 'undefined') {
+    document.body.style.overflow = ''
+  }
+})
+
 onMounted(() => {
   initTheme()
   window.addEventListener('scroll', handleScroll, { passive: true })
 })
 
 onUnmounted(() => {
+  if (typeof document !== 'undefined') {
+    document.body.style.overflow = ''
+  }
   window.removeEventListener('scroll', handleScroll)
 })
 
