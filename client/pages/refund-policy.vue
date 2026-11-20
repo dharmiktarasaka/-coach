@@ -1,54 +1,99 @@
 <template>
-  <div class="py-28 md:py-36 bg-[#FAFAFA] min-h-screen text-[#0D1431]">
-    <UiContainer size="md">
-      <div class="space-y-12">
-        <div class="space-y-4">
-          <span class="text-xs font-bold uppercase tracking-wider px-3.5 py-1 rounded-full bg-[#171844] text-[#F8D78B] border border-[#F8D78B]/30">
-            Policy
-          </span>
-          <h1 class="font-display font-extrabold text-3xl sm:text-5xl text-[#171844] tracking-tight">
-            Refund & Cancellation Policy
-          </h1>
-          <p class="text-xs font-semibold text-[#8C6D57]">Last updated: October 2026</p>
-        </div>
+  <div class="narayan-subpage refund-page">
+    <section class="phero dark grain">
+      <i class="aurora" aria-hidden="true"><b></b><b></b><b></b></i>
+      <span class="mandala" aria-hidden="true">
+        <svg viewBox="-100 -100 200 200" xmlns="http://www.w3.org/2000/svg">
+          <circle r="98" fill="none" stroke="currentColor" stroke-width="0.28" class="dr" />
+          <circle r="80" fill="none" stroke="currentColor" stroke-width="0.28" class="dr" />
+          <circle r="56" fill="none" stroke="currentColor" stroke-width="0.28" class="dr" />
+          <circle r="36" fill="none" stroke="currentColor" stroke-width="0.28" class="dr" />
+          <ellipse cx="0" cy="-70" rx="6.5" ry="21" fill="none" stroke="currentColor" stroke-width="0.28" class="dr" />
+          <ellipse cx="0" cy="-70" rx="6.5" ry="21" transform="rotate(45)" fill="none" stroke="currentColor" stroke-width="0.28" class="dr" />
+          <ellipse cx="0" cy="-70" rx="6.5" ry="21" transform="rotate(90)" fill="none" stroke="currentColor" stroke-width="0.28" class="dr" />
+          <ellipse cx="0" cy="-70" rx="6.5" ry="21" transform="rotate(135)" fill="none" stroke="currentColor" stroke-width="0.28" class="dr" />
+        </svg>
+      </span>
+      <div class="wrap">
+        <p class="crumb"><NuxtLink to="/">Home</NuxtLink> / Legal / Refund Policy</p>
+        <p class="eyebrow">Trust &amp; Compliance</p>
+        <h1 style="margin-top:22px">Refund <em>Policy</em></h1>
+        <p class="lead hero-in">Clear guidelines regarding enrolment fees, transfers, and make-up sessions.</p>
+      </div>
+    </section>
 
-        <div class="bg-white border border-[#EAE2D4] rounded-3xl p-8 sm:p-12 shadow-sm space-y-6 text-sm text-[#352D47] leading-relaxed">
-          <section class="space-y-2">
-            <h2 class="text-lg font-bold text-[#171844]">1. Digital Courses</h2>
-            <p>
-              We offer a 14-day money-back guarantee for all self-paced digital courses. If you have completed less than 30% of the material and feel the course is not aligned with your needs, contact us for a prompt, courteous refund.
-            </p>
-          </section>
+    <UiPageBreadcrumb
+      :items="[
+        { label: 'Legal & Safety', to: '/privacy-policy' },
+        { label: 'Refund Policy' }
+      ]"
+      :prev="{ label: 'Terms', to: '/terms' }"
+      :next="{ label: 'Disclaimer', to: '/disclaimer' }"
+    />
 
-          <section class="space-y-2">
-            <h2 class="text-lg font-bold text-[#171844]">2. One-to-One Coaching & Mentorship</h2>
-            <p>
-              Due to the bespoke nature and limited calendar availability of private advisory, coaching packages are non-refundable once sessions have commenced. Unused sessions may be rescheduled with 48 hours notice.
+    <section class="sec policy-section">
+      <div class="wrap" style="max-width:880px">
+        <div class="space-y-6">
+          <div class="policy-card p-6 shadow-sm">
+            <h2 class="text-xl font-bold policy-heading mb-2">Our Standard Intake Commitments</h2>
+            <p class="text-sm policy-text leading-relaxed">
+              This policy defines our standard fee terms and session guarantee procedures. Updated in accordance with digital education practices.
             </p>
-          </section>
+          </div>
 
-          <section class="space-y-2">
-            <h2 class="text-lg font-bold text-[#171844]">3. Live Workshops & Retreats</h2>
-            <p>
-              Cancellations received 30 days prior to a scheduled in-person event qualify for a full refund minus an administrative processing fee. Cancellations made within 30 days can be transferred to a future cohort.
-            </p>
-          </section>
+          <div class="space-y-4">
+            <div class="policy-card p-5">
+              <strong class="policy-heading text-base block mb-1">Digital Course &amp; Intake Policy</strong>
+              <p class="text-sm policy-text leading-relaxed">As digital toolkits, recordings, and intellectual frameworks are accessible immediately upon registration, enrolment payments are non-refundable.</p>
+            </div>
 
-          <section class="space-y-2">
-            <h2 class="text-lg font-bold text-[#171844]">4. Membership Cancellations</h2>
-            <p>
-              You may cancel your recurring membership at any time. Your access will remain active through the end of your current billing period.
-            </p>
-          </section>
+            <div class="policy-card p-5 border-[#D9AA55]/40 bg-white/[0.03]">
+              <strong class="text-[#D9AA55] text-base block mb-1">Live Cohort Make-Up Guarantee</strong>
+              <p class="text-sm policy-text leading-relaxed">If you miss a scheduled live session (such as in The 1 AM Reset Blueprint), you are provided one free make-up session in a future cohort date.</p>
+            </div>
+
+            <div class="policy-card p-5">
+              <strong class="policy-heading text-base block mb-1">Cancellations Prior to Start</strong>
+              <p class="text-sm policy-text leading-relaxed">Written requests received 7+ days before an intensive commences may be transferred to a future cohort date at our discretion.</p>
+            </div>
+
+            <div class="policy-card p-5">
+              <strong class="policy-heading text-base block mb-1">1-to-1 Mentorship Rescheduling</strong>
+              <p class="text-sm policy-text leading-relaxed">Private sessions must be rescheduled with at least 24 hours advance notice to accommodate calendar logistics.</p>
+            </div>
+          </div>
         </div>
       </div>
-    </UiContainer>
+    </section>
   </div>
 </template>
 
 <script setup lang="ts">
-useSeoMeta({
-  title: 'Refund Policy — Narayan Presence',
-  description: 'Terms and conditions regarding refunds and cancellations.'
+useHead({
+  title: 'Refund Policy — The Narayan Presence',
+  meta: [{ name: 'description', content: 'Enrolment Refund & Cancellation Policy' }],
+  link: [{ rel: 'stylesheet', href: '/style.css' }]
 })
 </script>
+
+<style scoped>
+.policy-section {
+  color: var(--body);
+}
+
+.policy-heading {
+  color: var(--fg);
+  font-family: var(--serif);
+}
+
+.policy-text {
+  color: var(--body);
+}
+
+.policy-card {
+  background: var(--card);
+  border: 1px solid var(--line);
+  color: var(--body);
+  border-radius: 20px;
+}
+</style>

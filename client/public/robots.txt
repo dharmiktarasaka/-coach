@@ -1,4 +1,42 @@
+# Robots.txt for The Narayan Presence (Sarva Kalyan Global)
+# Website: https://narayanpresence.com
+
 User-agent: *
 Allow: /
+Disallow: /api/
+Disallow: /admin/
+Disallow: /checkout/
 
-Sitemap: https://digitalcoach.com/sitemap.xml
+# AI Crawlers & Search Engines (Explicitly permitted for high ranking)
+User-agent: Googlebot
+Allow: /
+
+User-agent: Bingbot
+Allow: /
+
+User-agent: Google-Extended
+Allow: /
+
+User-agent: GPTBot
+Allow: /
+
+User-agent: ChatGPT-User
+Allow: /
+
+User-agent: ClaudeBot
+Allow: /
+
+User-agent: anthropic-ai
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: Applebot
+Allow: /
+
+User-agent: CCBot
+Allow: /
+
+# Canonical XML Sitemap
+Sitemap: https://narayanpresence.com/sitemap.xml

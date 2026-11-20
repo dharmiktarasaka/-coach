@@ -1,54 +1,99 @@
 <template>
-  <div class="py-28 md:py-36 bg-[#FAFAFA] min-h-screen text-[#0D1431]">
-    <UiContainer size="md">
-      <div class="space-y-12">
-        <div class="space-y-4">
-          <span class="text-xs font-bold uppercase tracking-wider px-3.5 py-1 rounded-full bg-[#171844] text-[#F8D78B] border border-[#F8D78B]/30">
-            Safety & Notice
-          </span>
-          <h1 class="font-display font-extrabold text-3xl sm:text-5xl text-[#171844] tracking-tight">
-            Disclaimer & Safety Information
-          </h1>
-          <p class="text-xs font-semibold text-[#8C6D57]">Last updated: October 2026</p>
-        </div>
+  <div class="narayan-subpage disclaimer-page">
+    <section class="phero dark grain">
+      <i class="aurora" aria-hidden="true"><b></b><b></b><b></b></i>
+      <span class="mandala" aria-hidden="true">
+        <svg viewBox="-100 -100 200 200" xmlns="http://www.w3.org/2000/svg">
+          <circle r="98" fill="none" stroke="currentColor" stroke-width="0.28" class="dr" />
+          <circle r="80" fill="none" stroke="currentColor" stroke-width="0.28" class="dr" />
+          <circle r="56" fill="none" stroke="currentColor" stroke-width="0.28" class="dr" />
+          <circle r="36" fill="none" stroke="currentColor" stroke-width="0.28" class="dr" />
+          <ellipse cx="0" cy="-70" rx="6.5" ry="21" fill="none" stroke="currentColor" stroke-width="0.28" class="dr" />
+          <ellipse cx="0" cy="-70" rx="6.5" ry="21" transform="rotate(45)" fill="none" stroke="currentColor" stroke-width="0.28" class="dr" />
+          <ellipse cx="0" cy="-70" rx="6.5" ry="21" transform="rotate(90)" fill="none" stroke="currentColor" stroke-width="0.28" class="dr" />
+          <ellipse cx="0" cy="-70" rx="6.5" ry="21" transform="rotate(135)" fill="none" stroke="currentColor" stroke-width="0.28" class="dr" />
+        </svg>
+      </span>
+      <div class="wrap">
+        <p class="crumb"><NuxtLink to="/">Home</NuxtLink> / Legal / Disclaimer &amp; Safety</p>
+        <p class="eyebrow">Trust &amp; Compliance</p>
+        <h1 style="margin-top:22px">Educational <em>Disclaimer</em></h1>
+        <p class="lead hero-in">Understanding the scope, purpose, and professional boundaries of our work.</p>
+      </div>
+    </section>
 
-        <div class="bg-white border border-[#EAE2D4] rounded-3xl p-8 sm:p-12 shadow-sm space-y-6 text-sm text-[#352D47] leading-relaxed">
-          <section class="space-y-2">
-            <h2 class="text-lg font-bold text-[#171844]">1. Educational and Mentorship Nature</h2>
-            <p>
-              The programs, coaching, courses, and materials offered by Narayan Presence are educational and developmental in purpose. They are designed to support personal focus, strategic thinking, and emotional balance.
-            </p>
-          </section>
+    <UiPageBreadcrumb
+      :items="[
+        { label: 'Legal & Safety', to: '/privacy-policy' },
+        { label: 'Disclaimer & Safety' }
+      ]"
+      :prev="{ label: 'Refund Policy', to: '/refund-policy' }"
+      :next="{ label: 'Home', to: '/' }"
+    />
 
-          <section class="space-y-2">
-            <h2 class="text-lg font-bold text-[#171844]">2. Not Medical, Psychological, or Clinical Therapy</h2>
-            <p>
-              Narayan Presence does not provide clinical medical diagnosis, psychotherapy, psychiatric counseling, or mental healthcare treatments. If you are experiencing severe psychological distress or psychiatric emergencies, please consult a licensed healthcare professional immediately.
+    <section class="sec policy-section">
+      <div class="wrap" style="max-width:880px">
+        <div class="space-y-6">
+          <div class="policy-card p-6 shadow-sm">
+            <h2 class="text-xl font-bold policy-heading mb-2">Scope of Educational Engagement</h2>
+            <p class="text-sm policy-text leading-relaxed">
+              This policy defines our standard commitments, healthcare scope, and professional boundaries. Updated in accordance with digital education best practices.
             </p>
-          </section>
+          </div>
 
-          <section class="space-y-2">
-            <h2 class="text-lg font-bold text-[#171844]">3. Retreat & Physical Activity Safety</h2>
-            <p>
-              In-person retreats may involve gentle breathwork, walking meditations, and mindful physical movement. Participants are responsible for informing facilitators of any medical conditions or physical limitations prior to participation.
-            </p>
-          </section>
+          <div class="space-y-4">
+            <div class="policy-card p-5">
+              <strong class="policy-heading text-base block mb-1">Educational &amp; Coaching Scope</strong>
+              <p class="text-sm policy-text leading-relaxed">All programmes, publications, workshops, and coaching interactions are educational and contemplative in nature.</p>
+            </div>
 
-          <section class="space-y-2">
-            <h2 class="text-lg font-bold text-[#171844]">4. Financial & Business Decisions</h2>
-            <p>
-              Any business insights shared in mentorship do not constitute licensed legal, accounting, or securities investment advice. Always consult certified specialists for formal financial audits.
-            </p>
-          </section>
+            <div class="policy-card p-5">
+              <strong class="policy-heading text-base block mb-1">No Medical or Clinical Advice</strong>
+              <p class="text-sm policy-text leading-relaxed">The Narayan Presence does not diagnose, treat, prevent, or cure psychological, psychiatric, or physical medical conditions. Our work does not replace therapy or clinical consultation.</p>
+            </div>
+
+            <div class="policy-card p-5">
+              <strong class="policy-heading text-base block mb-1">No Guaranteed Results</strong>
+              <p class="text-sm policy-text leading-relaxed">We provide structured frameworks and methodologies. Measurable outcomes depend entirely on the participant's application, context, and personal agency.</p>
+            </div>
+
+            <div class="policy-card p-5 border-[#D9AA55]/40 bg-white/[0.03]">
+              <strong class="text-[#D9AA55] text-base block mb-1">Crisis Support</strong>
+              <p class="text-sm policy-text leading-relaxed">If you are experiencing severe psychological distress, depression, or an acute mental health emergency, please immediately contact your physician, psychiatrist, or local mental health helpline.</p>
+            </div>
+          </div>
         </div>
       </div>
-    </UiContainer>
+    </section>
   </div>
 </template>
 
 <script setup lang="ts">
-useSeoMeta({
-  title: 'Disclaimer & Safety Information — Narayan Presence',
-  description: 'Safety guidelines and educational disclaimers.'
+useHead({
+  title: 'Disclaimer & Safety — The Narayan Presence',
+  meta: [{ name: 'description', content: 'Educational Disclaimer & Safety Guidelines' }],
+  link: [{ rel: 'stylesheet', href: '/style.css' }]
 })
 </script>
+
+<style scoped>
+.policy-section {
+  color: var(--body);
+}
+
+.policy-heading {
+  color: var(--fg);
+  font-family: var(--serif);
+}
+
+.policy-text {
+  color: var(--body);
+}
+
+.policy-card {
+  background: var(--card);
+  border: 1px solid var(--line);
+  color: var(--body);
+  border-radius: 20px;
+}
+</style>

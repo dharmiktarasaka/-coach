@@ -1,124 +1,80 @@
 export default defineEventHandler((event) => {
-  const baseUrl = process.env.NUXT_PUBLIC_SITE_URL || 'https://digitalcoach.com'
+  const baseUrl = process.env.NUXT_PUBLIC_SITE_URL || 'https://narayanpresence.com'
 
   const routes = [
-    // --- 25 CANONICAL ARCHITECTURE PAGES ---
-    '/',
-    '/who-we-help',
-    '/who-we-help/coaches',
-    '/who-we-help/experts',
-    '/who-we-help/consultants',
-    '/what-we-build',
-    '/how-it-works',
-    '/programs',
-    '/scorecard',
-    '/workshop',
-    '/resources',
-    '/ai-platform',
-    '/about',
-    '/apply',
-    '/case-studies',
-    '/research',
-    '/contact',
-    '/who-we-help/coaches/life-coach',
-    '/who-we-help/coaches/business-coach',
-    '/who-we-help/coaches/career-coach',
-    '/who-we-help/coaches/wellness-coach',
-    '/who-we-help/coaches/leadership-coach',
-    '/who-we-help/coaches/spiritual-coach',
-    '/who-we-help/women',
-    '/who-we-help/professionals',
+    // --- CORE BRAND & PILLAR ARCHITECTURE PAGES ---
+    { path: '/', priority: '1.0', changefreq: 'daily' },
+    { path: '/founder', priority: '0.95', changefreq: 'weekly' },
+    { path: '/about', priority: '0.9', changefreq: 'weekly' },
+    { path: '/methodology', priority: '0.9', changefreq: 'weekly' },
+    { path: '/workshops', priority: '0.9', changefreq: 'weekly' },
+    { path: '/coaching', priority: '0.9', changefreq: 'weekly' },
+    { path: '/courses', priority: '0.85', changefreq: 'weekly' },
+    { path: '/products', priority: '0.85', changefreq: 'weekly' },
+    { path: '/resources', priority: '0.9', changefreq: 'daily' },
+    { path: '/community', priority: '0.8', changefreq: 'weekly' },
+    { path: '/membership', priority: '0.8', changefreq: 'weekly' },
+    { path: '/testimonials', priority: '0.8', changefreq: 'weekly' },
+    { path: '/faqs', priority: '0.8', changefreq: 'weekly' },
+    { path: '/contact', priority: '0.8', changefreq: 'monthly' },
 
-    // --- SEO Niche & Resource Articles ---
+    // --- TRUST, GOVERNANCE & LEGAL ---
+    { path: '/privacy-policy', priority: '0.5', changefreq: 'monthly' },
+    { path: '/terms', priority: '0.5', changefreq: 'monthly' },
+    { path: '/disclaimer', priority: '0.5', changefreq: 'monthly' },
+    { path: '/refund-policy', priority: '0.5', changefreq: 'monthly' },
 
-    '/coaching-business',
-    '/coaching-business-india',
-    '/coaching-business-model',
-    '/online-coaching-business-india',
-    '/online-coaching-business-model',
-    '/start-coaching-business-from-home',
-    '/get-coaching-clients',
-    '/get-coaching-clients-india',
-    '/client-acquisition',
-    '/lead-generation-for-coaches',
-    '/meta-ads-for-coaches',
-    '/facebook-ads-for-coaches',
-    '/coaching-sales-funnel',
-    '/coaching-funnel',
-    '/vsl-for-coaches',
-    '/coaching-webinar-funnel',
-    '/coaching-workshop-funnel',
-    '/coaching-lead-magnet',
-    '/high-ticket-coaching',
-    '/high-ticket-coaching-india',
-    '/sell-coaching',
-    '/sell-coaching-packages',
-    '/coaching-discovery-call',
-    '/coaching-sales-script',
-    '/coaching-offer',
-    '/create-coaching-program',
-    '/coaching-program-structure',
-    '/coaching-program-ideas',
-    '/coaching-package-ideas',
-    '/coaching-pricing',
-    '/coaching-pricing-india',
-    '/life-coach-business/pricing',
-    '/business-coach-business/pricing',
-    '/ai-for-coaches',
-    '/ai-tools-for-coaches',
-    '/ai-coaching-business',
-    '/ai-for-coaching-business',
-    '/ai-coach-platform',
-    '/coaching-business-automation',
-    '/whatsapp-marketing-for-coaches',
-    '/whatsapp-automation-for-coaches',
-    '/coach-crm',
-    '/coaching-business-software',
-    '/coaching-management-software-india',
-    '/coaching-business-system',
-    '/coaching-business-consulting',
-    '/coaching-business-consulting-india',
-    '/coaching-business-plan',
-    '/coaching-business-roadmap',
-    '/coaching-business-ideas',
-    '/coaching-case-studies',
-    '/coaching-testimonials',
-    '/scale-coaching-business',
-    '/scale-coaching-business-india',
-    '/life-coach-business',
-    '/business-coach-business',
-    '/career-coach-business',
-    '/wellness-coach-business',
-    '/health-coach-business',
-    '/spiritual-coach-business',
-    '/relationship-coach-business',
-    '/executive-coach-business',
-    '/leadership-coach-business',
-    '/consultant-to-coach',
-    '/turn-expertise-into-coaching',
-    '/monetize-expertise',
-    '/coaching-business-for-doctors',
-    '/coaching-business-for-consultants',
-    '/coaching-business-for-trainers',
-    '/coaching-business-for-creators',
-    '/privacy-policy',
-    '/terms',
-    '/disclaimer'
+    // --- TARGETED NICHE & COACHING KNOWLEDGE ARCHITECTURE ---
+    { path: '/who-we-help', priority: '0.8', changefreq: 'weekly' },
+    { path: '/who-we-help/coaches', priority: '0.8', changefreq: 'weekly' },
+    { path: '/who-we-help/experts', priority: '0.8', changefreq: 'weekly' },
+    { path: '/who-we-help/consultants', priority: '0.8', changefreq: 'weekly' },
+    { path: '/who-we-help/women', priority: '0.8', changefreq: 'weekly' },
+    { path: '/who-we-help/professionals', priority: '0.8', changefreq: 'weekly' },
+    { path: '/who-we-help/coaches/life-coach', priority: '0.75', changefreq: 'weekly' },
+    { path: '/who-we-help/coaches/wellness-coach', priority: '0.75', changefreq: 'weekly' },
+    { path: '/who-we-help/coaches/spiritual-coach', priority: '0.75', changefreq: 'weekly' },
+    { path: '/who-we-help/coaches/leadership-coach', priority: '0.75', changefreq: 'weekly' },
+    { path: '/who-we-help/coaches/business-coach', priority: '0.75', changefreq: 'weekly' },
+    { path: '/who-we-help/coaches/career-coach', priority: '0.75', changefreq: 'weekly' },
+    { path: '/what-we-build', priority: '0.8', changefreq: 'weekly' },
+    { path: '/how-it-works', priority: '0.8', changefreq: 'weekly' },
+    { path: '/programs', priority: '0.8', changefreq: 'weekly' },
+    { path: '/workshop', priority: '0.8', changefreq: 'weekly' },
+    { path: '/coaching-business', priority: '0.75', changefreq: 'weekly' },
+    { path: '/coaching-business-india', priority: '0.75', changefreq: 'weekly' },
+    { path: '/coaching-business-model', priority: '0.75', changefreq: 'weekly' },
+    { path: '/online-coaching-business-india', priority: '0.75', changefreq: 'weekly' },
+    { path: '/start-coaching-business-from-home', priority: '0.75', changefreq: 'weekly' },
+    { path: '/get-coaching-clients', priority: '0.75', changefreq: 'weekly' },
+    { path: '/get-coaching-clients-india', priority: '0.75', changefreq: 'weekly' },
+    { path: '/client-acquisition', priority: '0.75', changefreq: 'weekly' },
+    { path: '/lead-generation-for-coaches', priority: '0.75', changefreq: 'weekly' },
+    { path: '/meta-ads-for-coaches', priority: '0.75', changefreq: 'weekly' },
+    { path: '/facebook-ads-for-coaches', priority: '0.75', changefreq: 'weekly' },
+    { path: '/coaching-sales-funnel', priority: '0.75', changefreq: 'weekly' },
+    { path: '/high-ticket-coaching', priority: '0.75', changefreq: 'weekly' },
+    { path: '/high-ticket-coaching-india', priority: '0.75', changefreq: 'weekly' },
+    { path: '/create-coaching-program', priority: '0.75', changefreq: 'weekly' },
+    { path: '/coaching-pricing-india', priority: '0.75', changefreq: 'weekly' },
+    { path: '/whatsapp-automation-for-coaches', priority: '0.75', changefreq: 'weekly' },
+    { path: '/scale-coaching-business', priority: '0.75', changefreq: 'weekly' },
+    { path: '/turn-expertise-into-coaching', priority: '0.75', changefreq: 'weekly' }
   ]
 
   const sitemapXml = `<?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
 ${routes
   .map(
-    (route) => `  <url>
-    <loc>${baseUrl}${route}</loc>
-    <changefreq>${route === '/' ? 'daily' : 'weekly'}</changefreq>
-    <priority>${route === '/' ? '1.0' : route.includes('coaching') ? '0.9' : '0.8'}</priority>
+    (item) => `  <url>
+    <loc>${baseUrl}${item.path}</loc>
+    <changefreq>${item.changefreq}</changefreq>
+    <priority>${item.priority}</priority>
   </url>`
   )
   .join('\n')}
 </urlset>`
 
-  setHeader(event, 'content-type', 'application/xml')
+  setHeader(event, 'content-type', 'application/xml; charset=utf-8')
   return sitemapXml
 })

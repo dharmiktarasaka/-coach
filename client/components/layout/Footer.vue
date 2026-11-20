@@ -43,16 +43,16 @@
             <div class="text-xs font-bold uppercase tracking-wider text-[#F8D78B]">Offerings</div>
             <ul class="space-y-2 text-xs">
               <li>
-                <NuxtLink to="/courses" class="text-[#EAE2D4]/80 hover:text-white transition-colors">Courses</NuxtLink>
+                <NuxtLink to="/courses" class="text-[#EAE2D4]/80 hover:text-white transition-colors">Courses & Programmes</NuxtLink>
               </li>
               <li>
-                <NuxtLink to="/workshops" class="text-[#EAE2D4]/80 hover:text-white transition-colors">Workshops & Events</NuxtLink>
+                <NuxtLink to="/workshops" class="text-[#EAE2D4]/80 hover:text-white transition-colors">1 AM Reset Blueprint</NuxtLink>
               </li>
               <li>
                 <NuxtLink to="/coaching" class="text-[#EAE2D4]/80 hover:text-white transition-colors">1-to-1 Coaching</NuxtLink>
               </li>
               <li>
-                <NuxtLink to="/membership" class="text-[#EAE2D4]/80 hover:text-white transition-colors">Membership</NuxtLink>
+                <NuxtLink to="/membership" class="text-[#EAE2D4]/80 hover:text-white transition-colors">Membership & Circle</NuxtLink>
               </li>
               <li>
                 <NuxtLink to="/products" class="text-[#EAE2D4]/80 hover:text-white transition-colors">Books & Digital Products</NuxtLink>
@@ -68,7 +68,7 @@
                 <NuxtLink to="/community" class="text-[#EAE2D4]/80 hover:text-white transition-colors">Community Overview</NuxtLink>
               </li>
               <li>
-                <NuxtLink to="/blog" class="text-[#EAE2D4]/80 hover:text-white transition-colors">Blog</NuxtLink>
+                <NuxtLink to="/resources" class="text-[#EAE2D4]/80 hover:text-white transition-colors">Journal & Resources</NuxtLink>
               </li>
               <li>
                 <NuxtLink to="/faqs" class="text-[#EAE2D4]/80 hover:text-white transition-colors">FAQs</NuxtLink>

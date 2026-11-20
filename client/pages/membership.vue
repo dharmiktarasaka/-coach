@@ -1,62 +1,207 @@
 <template>
-  <div class="py-28 md:py-36 bg-[#FAFAFA] min-h-screen text-[#0D1431]">
-    <UiContainer size="md">
-      <div class="space-y-16">
-        <!-- Header -->
-        <div class="space-y-4 text-center max-w-xl mx-auto">
-          <div class="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-[#171844] text-[#F8D78B] text-xs font-semibold uppercase tracking-wider border border-[#F8D78B]/30">
-            Ongoing Practice
-          </div>
-          <h1 class="font-display font-extrabold text-4xl sm:text-5xl text-[#171844] tracking-tight">
-            The Presence Circle
-          </h1>
-          <p class="text-base sm:text-lg text-[#352D47] leading-relaxed">
-            A private membership community for continuous inner mastery, monthly live masterclasses, and curated practice tools.
-          </p>
-        </div>
+  <div class="narayan-subpage community-page">
+    <section class="phero dark grain">
+      <i class="aurora" aria-hidden="true"><b></b><b></b><b></b></i>
+      <span class="mandala" aria-hidden="true"><svg viewBox="-100 -100 200 200" xmlns="http://www.w3.org/2000/svg">
+          <circle r="98" fill="none" stroke="currentColor" stroke-width="0.28" class="dr" />
+          <circle r="80" fill="none" stroke="currentColor" stroke-width="0.28" class="dr" />
+          <circle r="56" fill="none" stroke="currentColor" stroke-width="0.28" class="dr" />
+          <circle r="36" fill="none" stroke="currentColor" stroke-width="0.28" class="dr" />
+          <ellipse cx="0" cy="-70" rx="6.5" ry="21" fill="none" stroke="currentColor" stroke-width="0.28" class="dr" />
+          <ellipse cx="0" cy="-70" rx="6.5" ry="21" transform="rotate(45)" fill="none" stroke="currentColor" stroke-width="0.28" class="dr" />
+          <ellipse cx="0" cy="-70" rx="6.5" ry="21" transform="rotate(90)" fill="none" stroke="currentColor" stroke-width="0.28" class="dr" />
+          <ellipse cx="0" cy="-70" rx="6.5" ry="21" transform="rotate(135)" fill="none" stroke="currentColor" stroke-width="0.28" class="dr" />
+        </svg></span>
+      <div class="wrap">
+        <p class="crumb"><NuxtLink to="/">Home</NuxtLink> / Connect / Membership</p>
+        <p class="eyebrow">Presence Circle</p>
+        <h1 style="margin-top:22px">A place to <em>keep going</em> together.</h1>
+        <p class="lead hero-in">
+          Presence Circle is the community and ongoing space for participants who finish a programme and want to maintain their practice with others.
+        </p>
+      </div>
+    </section>
 
-        <!-- Membership Card -->
-        <div class="bg-white border border-[#EAE2D4] rounded-3xl p-8 sm:p-12 shadow-sm space-y-8">
-          <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-6 border-b border-[#EAE2D4]">
-            <div>
-              <span class="text-xs font-bold text-[#8C6D57] uppercase tracking-wider">All-Access Member</span>
-              <h2 class="text-2xl font-bold text-[#171844] mt-0.5">Presence Circle Annual</h2>
-            </div>
-            <div class="text-left sm:text-right">
-              <div class="text-3xl font-extrabold text-[#171844]">$49<span class="text-sm font-normal text-[#8C6D57]">/month</span></div>
-              <div class="text-xs text-[#35D9B0] font-semibold">Billed annually ($490/yr)</div>
-            </div>
-          </div>
+    <UiPageBreadcrumb
+      :items="[
+        { label: 'Offerings', to: '/courses' },
+        { label: 'Membership & Circle' }
+      ]"
+      :prev="{ label: '1-to-1 Coaching', to: '/coaching' }"
+      :next="{ label: 'Books & Digital Products', to: '/products' }"
+    />
 
-          <div class="space-y-4">
-            <h3 class="text-sm font-bold uppercase tracking-wider text-[#171844]">Everything Included:</h3>
-            <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 text-sm text-[#352D47]">
-              <div class="flex items-center gap-2">✓ Monthly Live Coaching Calls</div>
-              <div class="flex items-center gap-2">✓ Full Course Archive Access</div>
-              <div class="flex items-center gap-2">✓ Private Community Discord</div>
-              <div class="flex items-center gap-2">✓ Guided Audio Meditations</div>
-              <div class="flex items-center gap-2">✓ Priority Retreat Booking</div>
-              <div class="flex items-center gap-2">✓ Quarterly Reading Lists</div>
-            </div>
+    <section class="sec">
+      <div class="wrap">
+        <p class="eyebrow">Circle Ecosystem</p>
+        <h2 class="h2">What membership <em>includes</em></h2>
+        <div class="cards" style="margin-top:36px">
+          <div class="card theme-card">
+            <span class="text-xs font-bold uppercase tracking-wider text-[#D9AA55]">Monthly Practice</span>
+            <h3 class="theme-card-title">Live Renewal Sessions</h3>
+            <p class="theme-card-text">A recurring live session to review, recalibrate, and renew your daily practice routine.</p>
           </div>
-
-          <div class="pt-6 border-t border-[#EAE2D4]">
-            <NuxtLink
-              to="/contact"
-              class="block w-full py-4 rounded-xl bg-[#171844] hover:bg-[#242658] text-[#F8D78B] font-bold text-center text-xs uppercase tracking-wider transition-colors shadow-sm"
-            >
-              Join The Presence Circle &rarr;
-            </NuxtLink>
+          <div class="card theme-card">
+            <span class="text-xs font-bold uppercase tracking-wider text-[#D9AA55]">Member Area</span>
+            <h3 class="theme-card-title">Permanent Resource Portal</h3>
+            <p class="theme-card-text">All lessons, worksheets, audio toolkits, and habit trackers remain in your private portal.</p>
+          </div>
+          <div class="card theme-card">
+            <span class="text-xs font-bold uppercase tracking-wider text-[#D9AA55]">Clear Boundaries</span>
+            <h3 class="theme-card-title">Community Guidelines</h3>
+            <p class="theme-card-text">Strict community rules on privacy, mutual respect, and the limits of peer encouragement.</p>
           </div>
         </div>
       </div>
-    </UiContainer>
+    </section>
+
+    <!-- Member Portal Login Card -->
+    <section class="sec alt">
+      <div class="wrap flex items-center justify-between flex-wrap gap-6 portal-banner p-8 sm:p-12 rounded-3xl border">
+        <div>
+          <p class="eyebrow">Already enrolled?</p>
+          <h2 class="portal-heading" style="font-size:clamp(26px,3.5vw,40px);margin-top:12px">Access your member portal</h2>
+          <p class="portal-desc" style="margin-top:8px">Log in to view your active programmes, toolkits, and scheduled sessions.</p>
+        </div>
+        <div>
+          <a class="btn portal-btn" href="https://r6e8zx.flexi-funnels.com/membership/nry1m94r/login" target="_blank" rel="noopener">
+            Student / Member Login &rarr;
+          </a>
+        </div>
+      </div>
+    </section>
   </div>
 </template>
 
 <script setup lang="ts">
-useSeoMeta({
-  title: 'Membership — Narayan Presence',
-  description: 'Join the Presence Circle community membership.'
+useHead({
+  title: 'Membership & Presence Circle — Narayan Presence',
+  meta: [{ name: 'description', content: 'Presence Circle: ongoing support, monthly practice sessions, and peer accountability.' }],
+  link: [{ rel: 'stylesheet', href: '/style.css' }]
 })
 </script>
+
+<style scoped>
+.narayan-subpage {
+  font-family: 'DM Sans', -apple-system, sans-serif;
+  color: var(--body);
+}
+.narayan-subpage h1, .narayan-subpage h2, .narayan-subpage h3 {
+  font-family: 'Fraunces', Georgia, serif;
+}
+
+/* Theme-Aware Cards */
+.theme-card {
+  background: var(--card);
+  border: 1px solid var(--line);
+  border-radius: 20px;
+  padding: 28px;
+  transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+}
+:root[data-theme="dark"] .theme-card {
+  background: #141845;
+  border-color: rgba(217, 170, 85, 0.25);
+  box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.4);
+}
+:root[data-theme="light"] .theme-card {
+  background: #ffffff;
+  border-color: #EAE2D4;
+  box-shadow: 0 10px 30px -10px rgba(23, 27, 72, 0.05);
+}
+
+.theme-card-title {
+  font-family: 'Fraunces', Georgia, serif;
+  font-size: 22px;
+  margin-top: 8px;
+  color: var(--fg);
+}
+:root[data-theme="dark"] .theme-card-title {
+  color: #F8F5EF !important;
+}
+:root[data-theme="light"] .theme-card-title {
+  color: #171848 !important;
+}
+
+.theme-card-text {
+  margin-top: 8px;
+  line-height: 1.6;
+  color: var(--body);
+}
+:root[data-theme="dark"] .theme-card-text {
+  color: #d6d6ea !important;
+}
+:root[data-theme="light"] .theme-card-text {
+  color: #4A4B68 !important;
+}
+
+/* Member Portal Banner */
+.portal-banner {
+  background: var(--card);
+  border-color: var(--line);
+  box-shadow: 0 20px 45px -20px rgba(0, 0, 0, 0.25);
+  transition: all 0.3s ease;
+}
+:root[data-theme="dark"] .portal-banner {
+  background: #141845;
+  border-color: rgba(217, 170, 85, 0.35);
+  box-shadow: 0 25px 50px -20px rgba(0, 0, 0, 0.6);
+}
+:root[data-theme="light"] .portal-banner {
+  background: #ffffff;
+  border-color: #EAE2D4;
+  box-shadow: 0 20px 45px -20px rgba(23, 27, 72, 0.08);
+}
+
+.portal-heading {
+  font-family: 'Fraunces', Georgia, serif;
+  font-weight: 300;
+  line-height: 1.15;
+  color: var(--fg);
+}
+:root[data-theme="dark"] .portal-heading {
+  color: #F8F5EF !important;
+}
+:root[data-theme="light"] .portal-heading {
+  color: #171848 !important;
+}
+
+.portal-desc {
+  color: var(--body);
+}
+:root[data-theme="dark"] .portal-desc {
+  color: #d6d6ea !important;
+}
+:root[data-theme="light"] .portal-desc {
+  color: #4A4B68 !important;
+}
+
+.portal-btn {
+  font-weight: 700;
+  border-radius: 999px;
+  padding: 14px 28px;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  transition: all 0.25s ease;
+}
+:root[data-theme="dark"] .portal-btn {
+  background: #D9AA55;
+  color: #0f1233;
+  border: 1.5px solid #F8D78B;
+}
+:root[data-theme="dark"] .portal-btn:hover {
+  background: #f0c36d;
+  box-shadow: 0 12px 30px -8px rgba(217, 170, 85, 0.5);
+  transform: translateY(-2px);
+}
+:root[data-theme="light"] .portal-btn {
+  background: #171844;
+  color: #F8D78B;
+  border: 1.5px solid #171844;
+}
+:root[data-theme="light"] .portal-btn:hover {
+  background: #242658;
+  box-shadow: 0 12px 30px -8px rgba(23, 24, 68, 0.35);
+  transform: translateY(-2px);
+}
+</style>
