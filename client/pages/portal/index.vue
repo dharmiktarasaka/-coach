@@ -1,5 +1,5 @@
 <template>
-  <div class="min-h-screen bg-[#FAFAFA] text-[#0D1431] pt-24 pb-16">
+  <div class="min-h-screen pt-24 pb-16 transition-colors duration-300" :class="isDark ? 'bg-[#0f1233] text-[#F8F5EF]' : 'bg-[#FAFAFA] text-[#0D1431]'">
     <UiContainer size="xl">
       <!-- Portal Top Navigation & Student Header -->
       <div class="bg-white border border-[#EAE2D4] rounded-3xl p-6 sm:p-8 shadow-sm mb-8">
@@ -1401,6 +1401,9 @@
 
 <script setup lang="ts">
 import { ref, computed, watch, onMounted } from 'vue'
+import { useTheme } from '~/composables/useTheme'
+
+const { isDark } = useTheme()
 
 const { currentUser, authToken, refreshUser, logout } = useAuth()
 

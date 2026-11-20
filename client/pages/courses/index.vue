@@ -39,24 +39,30 @@
         <div class="flex flex-wrap items-center gap-2.5 sm:gap-3 mb-8">
           <button
             type="button"
-            class="px-5 py-2 rounded-full text-xs font-bold uppercase tracking-wider transition-all"
-            :class="selectedFilter === 'all' ? 'bg-[#D9AA55] text-[#0f1233] font-bold shadow-md' : 'bg-white/10 text-current border border-current/20 hover:bg-white/20'"
+            class="px-5 py-2 rounded-full text-xs font-bold uppercase tracking-wider transition-all cursor-pointer"
+            :class="selectedFilter === 'all'
+              ? 'bg-[#D9AA55] text-[#0f1233] font-bold shadow-md'
+              : (isDark ? 'bg-white/10 text-[#F8F5EF] border border-[#D9AA55]/30 hover:bg-white/20' : 'bg-black/5 text-[#171844] border border-[#EAE2D4] hover:bg-black/10')"
             @click="selectedFilter = 'all'"
           >
             All 11 Programmes
           </button>
           <button
             type="button"
-            class="px-5 py-2 rounded-full text-xs font-bold uppercase tracking-wider transition-all"
-            :class="selectedFilter === 'academy' ? 'bg-[#D9AA55] text-[#0f1233] font-bold shadow-md' : 'bg-white/10 text-current border border-current/20 hover:bg-white/20'"
+            class="px-5 py-2 rounded-full text-xs font-bold uppercase tracking-wider transition-all cursor-pointer"
+            :class="selectedFilter === 'academy'
+              ? 'bg-[#D9AA55] text-[#0f1233] font-bold shadow-md'
+              : (isDark ? 'bg-white/10 text-[#F8F5EF] border border-[#D9AA55]/30 hover:bg-white/20' : 'bg-black/5 text-[#171844] border border-[#EAE2D4] hover:bg-black/10')"
             @click="selectedFilter = 'academy'"
           >
             Presence Academy (7)
           </button>
           <button
             type="button"
-            class="px-5 py-2 rounded-full text-xs font-bold uppercase tracking-wider transition-all"
-            :class="selectedFilter === 'business' ? 'bg-[#D9AA55] text-[#0f1233] font-bold shadow-md' : 'bg-white/10 text-current border border-current/20 hover:bg-white/20'"
+            class="px-5 py-2 rounded-full text-xs font-bold uppercase tracking-wider transition-all cursor-pointer"
+            :class="selectedFilter === 'business'
+              ? 'bg-[#D9AA55] text-[#0f1233] font-bold shadow-md'
+              : (isDark ? 'bg-white/10 text-[#F8F5EF] border border-[#D9AA55]/30 hover:bg-white/20' : 'bg-black/5 text-[#171844] border border-[#EAE2D4] hover:bg-black/10')"
             @click="selectedFilter = 'business'"
           >
             Presence Business (4)
@@ -104,7 +110,9 @@
 
 <script setup lang="ts">
 import { ref, computed } from 'vue'
+import { useTheme } from '~/composables/useTheme'
 
+const { isDark } = useTheme()
 const selectedFilter = ref('all')
 
 const programmes = [
@@ -140,7 +148,7 @@ useHead({
 <style scoped>
 .narayan-subpage {
   font-family: 'DM Sans', -apple-system, sans-serif;
-  color: #171848;
+  color: var(--body);
 }
 .narayan-subpage h1,
 .narayan-subpage h2,
@@ -160,11 +168,15 @@ useHead({
   text-decoration: none;
   transition: all 0.25s ease;
 }
-:root[data-theme="dark"] .rw {
+:root[data-theme="dark"] .rw,
+html.dark .rw,
+[data-theme="dark"] .rw {
   background: #141845;
   border-color: rgba(217, 170, 85, 0.25);
 }
-:root[data-theme="light"] .rw {
+:root[data-theme="light"] .rw,
+html.light .rw,
+[data-theme="light"] .rw {
   background: #ffffff;
   border-color: #EAE2D4;
 }

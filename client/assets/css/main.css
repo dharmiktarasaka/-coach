@@ -97,3 +97,176 @@ html.dark ::-webkit-scrollbar-thumb:hover,
     scroll-behavior: auto !important;
   }
 }
+
+/* ==========================================================================
+   Universal Theme Harmonizer & Contrast Protection
+   ========================================================================== */
+
+/* Dark Theme Background Harmonization */
+html.dark [class*="bg-[#FAFAFA]"],
+[data-theme="dark"] [class*="bg-[#FAFAFA]"],
+body.dark [class*="bg-[#FAFAFA]"],
+html.dark [class*="bg-[#FBF6F6]"],
+[data-theme="dark"] [class*="bg-[#FBF6F6]"],
+body.dark [class*="bg-[#FBF6F6]"],
+html.dark [class*="bg-[#F5EFEF]"],
+[data-theme="dark"] [class*="bg-[#F5EFEF]"],
+body.dark [class*="bg-[#F5EFEF]"] {
+  background-color: #0f1233 !important;
+  color: #F8F5EF !important;
+}
+
+/* Dark Theme Cards Harmonization */
+html.dark .bg-white,
+[data-theme="dark"] .bg-white,
+body.dark .bg-white {
+  background-color: #141845 !important;
+  border-color: rgba(217, 170, 85, 0.25) !important;
+  color: #F8F5EF !important;
+}
+
+/* Headings inside white-designated cards or elements in dark theme */
+html.dark .bg-white h1,
+html.dark .bg-white h2,
+html.dark .bg-white h3,
+html.dark .bg-white h4,
+html.dark .bg-white h5,
+html.dark .bg-white h6,
+[data-theme="dark"] .bg-white h1,
+[data-theme="dark"] .bg-white h2,
+[data-theme="dark"] .bg-white h3,
+[data-theme="dark"] .bg-white h4,
+[data-theme="dark"] .bg-white h5,
+[data-theme="dark"] .bg-white h6,
+body.dark .bg-white h1,
+body.dark .bg-white h2,
+body.dark .bg-white h3,
+body.dark .bg-white h4 {
+  color: #F8F5EF !important;
+}
+
+/* Hardcoded dark text classes in dark mode */
+html.dark [class*="text-[#171844]"],
+[data-theme="dark"] [class*="text-[#171844]"],
+body.dark [class*="text-[#171844]"],
+html.dark [class*="text-[#1A1A1A]"],
+[data-theme="dark"] [class*="text-[#1A1A1A]"],
+body.dark [class*="text-[#1A1A1A]"],
+html.dark [class*="text-[#0D1431]"],
+[data-theme="dark"] [class*="text-[#0D1431]"],
+body.dark [class*="text-[#0D1431]"] {
+  color: #F8F5EF !important;
+}
+
+/* Body / Secondary text in dark mode */
+html.dark [class*="text-[#352D47]"],
+[data-theme="dark"] [class*="text-[#352D47]"],
+body.dark [class*="text-[#352D47]"],
+html.dark [class*="text-[#524F4E]"],
+[data-theme="dark"] [class*="text-[#524F4E]"],
+body.dark [class*="text-[#524F4E]"] {
+  color: #d6d6ea !important;
+}
+
+/* Warm accent / Eyebrow in dark mode */
+html.dark [class*="text-[#8C6D57]"],
+[data-theme="dark"] [class*="text-[#8C6D57]"],
+body.dark [class*="text-[#8C6D57]"],
+html.dark [class*="text-[#8C8685]"],
+[data-theme="dark"] [class*="text-[#8C8685]"],
+body.dark [class*="text-[#8C8685]"] {
+  color: #D9AA55 !important;
+}
+
+/* Borders in dark mode */
+html.dark [class*="border-[#EAE2D4]"],
+[data-theme="dark"] [class*="border-[#EAE2D4]"],
+body.dark [class*="border-[#EAE2D4]"],
+html.dark [class*="border-[#EAE4E4]"],
+[data-theme="dark"] [class*="border-[#EAE4E4]"],
+body.dark [class*="border-[#EAE4E4]"] {
+  border-color: rgba(217, 170, 85, 0.25) !important;
+}
+
+/* Light Theme Explicit Restorations */
+html.light [class*="bg-[#FAFAFA]"],
+[data-theme="light"] [class*="bg-[#FAFAFA]"],
+body.light [class*="bg-[#FAFAFA]"] {
+  background-color: #FAFAFA !important;
+  color: #0D1431 !important;
+}
+
+html.light .bg-white,
+[data-theme="light"] .bg-white,
+body.light .bg-white {
+  background-color: #ffffff !important;
+  border-color: #EAE2D4 !important;
+  color: #171848 !important;
+}
+
+html.light .bg-white h1,
+html.light .bg-white h2,
+html.light .bg-white h3,
+html.light .bg-white h4,
+[data-theme="light"] .bg-white h1,
+[data-theme="light"] .bg-white h2,
+[data-theme="light"] .bg-white h3,
+[data-theme="light"] .bg-white h4,
+body.light .bg-white h1,
+body.light .bg-white h2,
+body.light .bg-white h3,
+body.light .bg-white h4 {
+  color: #171848 !important;
+}
+
+html.light .bg-white p,
+html.light .bg-white li,
+[data-theme="light"] .bg-white p,
+[data-theme="light"] .bg-white li {
+  color: #352D47 !important;
+}
+
+/* Portal Banner Styling */
+.portal-banner {
+  transition: background-color 0.3s ease, border-color 0.3s ease, color 0.3s ease;
+}
+
+html.dark .portal-banner,
+[data-theme="dark"] .portal-banner,
+body.dark .portal-banner {
+  background: #141845 !important;
+  border-color: rgba(217, 170, 85, 0.35) !important;
+  box-shadow: 0 25px 50px -20px rgba(0, 0, 0, 0.6) !important;
+}
+
+html.dark .portal-heading,
+[data-theme="dark"] .portal-heading,
+body.dark .portal-heading {
+  color: #F8F5EF !important;
+}
+
+html.dark .portal-desc,
+[data-theme="dark"] .portal-desc,
+body.dark .portal-desc {
+  color: #d6d6ea !important;
+}
+
+[data-theme="light"] .portal-banner,
+html.light .portal-banner,
+body.light .portal-banner {
+  background: #ffffff !important;
+  border-color: #EAE2D4 !important;
+  box-shadow: 0 20px 45px -20px rgba(23, 27, 72, 0.08) !important;
+}
+
+[data-theme="light"] .portal-heading,
+html.light .portal-heading,
+body.light .portal-heading {
+  color: #171848 !important;
+}
+
+[data-theme="light"] .portal-desc,
+html.light .portal-desc,
+body.light .portal-desc {
+  color: #4A4B68 !important;
+}

@@ -1,5 +1,5 @@
 <template>
-  <div class="py-28 md:py-36 bg-[#FAFAFA] min-h-screen text-[#0D1431]">
+  <div class="py-28 md:py-36 min-h-screen transition-colors duration-300" :class="isDark ? 'bg-[#0f1233] text-[#F8F5EF]' : 'bg-[#FAFAFA] text-[#0D1431]'">
     <UiContainer size="md">
       <div class="space-y-12">
         <NuxtLink to="/courses" class="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-[#8C6D57] hover:text-[#171844] transition-colors">
@@ -55,8 +55,8 @@
 
           <div class="pt-6 border-t border-[#EAE2D4] flex flex-col sm:flex-row items-center justify-between gap-4">
             <div>
-              <div class="text-xs text-[#8C6D57]">Enrollment Fee</div>
-              <div class="text-3xl font-extrabold text-[#171844]">$299</div>
+              <div class="text-xs text-[#8C6D57]">Enrollment Status</div>
+              <div class="text-xl font-extrabold text-[#171844]">Admissions Open</div>
             </div>
             <NuxtLink
               to="/contact"
@@ -73,6 +73,9 @@
 
 <script setup lang="ts">
 import { computed } from 'vue'
+import { useTheme } from '~/composables/useTheme'
+
+const { isDark } = useTheme()
 const route = useRoute()
 const slug = computed(() => (route.params.slug as string) || 'course')
 

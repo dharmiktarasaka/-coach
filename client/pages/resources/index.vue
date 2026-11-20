@@ -334,7 +334,7 @@ useHead({
 <style scoped>
 .narayan-subpage {
   font-family: 'DM Sans', -apple-system, sans-serif;
-  color: #171848;
+  color: var(--body);
 }
 
 .narayan-subpage h1,

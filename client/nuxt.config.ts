@@ -19,7 +19,9 @@ export default defineNuxtConfig({
   app: {
     head: {
       htmlAttrs: {
-        lang: 'en'
+        lang: 'en',
+        class: 'dark',
+        'data-theme': 'dark'
       },
       title: 'The Narayan Presence — Mental Clarity Coaching & Conscious Living',
       titleTemplate: '%s | The Narayan Presence',
@@ -59,6 +61,12 @@ export default defineNuxtConfig({
         { rel: 'preconnect', href: 'https://fonts.googleapis.com' },
         { rel: 'preconnect', href: 'https://fonts.gstatic.com', crossorigin: '' },
         { rel: 'stylesheet', href: 'https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&family=Fraunces:ital,opsz,wght@0,9..144,300..800;1,9..144,300..800&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap' }
+      ],
+      script: [
+        {
+          innerHTML: `(function(){try{var t=localStorage.getItem('np-theme');if(t==='light'){document.documentElement.classList.remove('dark');document.documentElement.classList.add('light');document.documentElement.setAttribute('data-theme','light');if(document.body){document.body.classList.remove('dark');document.body.classList.add('light');document.body.setAttribute('data-theme','light');}}else{document.documentElement.classList.remove('light');document.documentElement.classList.add('dark');document.documentElement.setAttribute('data-theme','dark');if(document.body){document.body.classList.remove('light');document.body.classList.add('dark');document.body.setAttribute('data-theme','dark');}}}catch(e){}})()`,
+          type: 'text/javascript'
+        }
       ]
     }
   },

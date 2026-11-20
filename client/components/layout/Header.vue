@@ -366,35 +366,40 @@
             </svg>
           </NuxtLink>
 
-          <!-- Shop Icon Button -->
+          <!-- Shop Button -->
           <NuxtLink
             to="/shop"
-            class="relative inline-flex items-center justify-center w-8 h-8 sm:w-10 sm:h-10 sm:px-3.5 sm:py-2.5 rounded-lg sm:rounded-xl border font-bold text-xs uppercase tracking-wider transition-all duration-200 shadow-sm hover:scale-[1.04] group shrink-0"
+            class="relative inline-flex items-center justify-center w-8 h-8 sm:w-10 sm:h-10 md:w-auto md:px-3.5 md:py-2.5 rounded-lg sm:rounded-xl border font-bold text-xs uppercase tracking-wider transition-all duration-200 shadow-sm hover:scale-[1.03] group shrink-0"
             :class="isDark
-              ? 'bg-gradient-to-r from-[#FF9F00]/20 to-[#FB641B]/20 hover:from-[#FF9F00]/30 hover:to-[#FB641B]/30 border-[#FF9F00]/50 text-[#F8F5EF]'
-              : 'bg-gradient-to-r from-[#FF9F00]/15 to-[#FB641B]/15 hover:from-[#FF9F00]/25 hover:to-[#FB641B]/25 border-[#FF9F00]/50 text-[#171844]'"
+              ? 'bg-[#141845] hover:bg-[#1c2260] border-[#D9AA55]/35 hover:border-[#D9AA55]/70 text-[#F8F5EF] shadow-black/20'
+              : 'bg-white hover:bg-[#EAE2D4]/50 border-[#EAE2D4] hover:border-[#171844]/30 text-[#171844] shadow-sm'"
             title="Narayan Presence Store & Products"
             aria-label="Open Shop"
           >
-            <div class="relative flex items-center">
-              <svg class="w-4 h-4 text-[#FB641B] group-hover:scale-110 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <div class="relative flex items-center justify-center">
+              <svg class="w-4 h-4 transition-transform group-hover:scale-110" :class="isDark ? 'text-[#F8D78B]' : 'text-[#8C6D57]'" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.2" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z" />
               </svg>
               <!-- Cart Count Badge -->
               <span
                 v-if="cartTotalCount > 0"
-                class="absolute -top-2 -right-2 min-w-[15px] h-[15px] px-1 bg-[#2874F0] text-white text-[8px] font-black rounded-full flex items-center justify-center border border-white shadow-sm"
+                class="absolute -top-2 -right-2.5 min-w-[16px] h-4 px-1 rounded-full text-[9px] font-black flex items-center justify-center border shadow-sm"
+                :class="isDark
+                  ? 'bg-[#D9AA55] text-[#0f1233] border-[#0f1233]'
+                  : 'bg-[#171844] text-[#F8D78B] border-white'"
               >
                 {{ cartTotalCount }}
               </span>
             </div>
-            <span class="hidden md:inline font-extrabold" :class="isDark ? 'text-[#F8F5EF]' : 'text-[#171844]'">Shop</span>
+            <span class="hidden md:inline ml-2 font-bold text-xs tracking-wider" :class="isDark ? 'text-[#F8F5EF]' : 'text-[#171844]'">
+              Shop
+            </span>
           </NuxtLink>
 
           <!-- Light / Dark Theme Switcher Button -->
           <button
             type="button"
-            id="theme"
+            id="theme-toggle"
             @click="toggleTheme"
             class="relative inline-flex items-center justify-center w-8 h-8 sm:w-10 sm:h-10 rounded-lg sm:rounded-xl transition-all duration-300 border focus:outline-none focus-visible:ring-2 focus-visible:ring-[#D9AA55] group cursor-pointer shadow-sm hover:scale-105 shrink-0"
             :class="[
@@ -533,17 +538,21 @@
               </NuxtLink>
               <NuxtLink
                 to="/shop"
-                class="p-2.5 rounded-xl font-bold text-xs uppercase tracking-wider text-center border flex items-center justify-center gap-1 transition-colors"
+                class="p-2.5 rounded-xl font-bold text-xs uppercase tracking-wider text-center border flex items-center justify-center gap-2 transition-colors"
                 :class="isDark
-                  ? 'bg-gradient-to-r from-[#FF9F00]/20 to-[#FB641B]/20 text-[#F8F5EF] border-[#FF9F00]/50'
-                  : 'bg-gradient-to-r from-[#FF9F00]/15 to-[#FB641B]/15 text-[#171844] border-[#FF9F00]/40'"
+                  ? 'bg-[#141845] hover:bg-[#1b1f55] text-[#F8F5EF] border-[#D9AA55]/30'
+                  : 'bg-white hover:bg-[#EAE2D4]/40 text-[#171844] border-[#EAE2D4]'"
                 @click="isMobileMenuOpen = false"
               >
-                <span>🛍️</span>
+                <div class="relative flex items-center">
+                  <svg class="w-4 h-4 text-[#D9AA55]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z" />
+                  </svg>
+                  <span v-if="cartTotalCount > 0" class="absolute -top-2 -right-2.5 min-w-[15px] h-[15px] px-1 rounded-full bg-[#D9AA55] text-[#0f1233] text-[8px] font-black flex items-center justify-center border border-[#0f1233]">
+                    {{ cartTotalCount }}
+                  </span>
+                </div>
                 <span>Shop</span>
-                <span v-if="cartTotalCount > 0" class="min-w-[16px] h-4 px-1 rounded-full bg-[#2874F0] text-white text-[9px] font-black flex items-center justify-center">
-                  {{ cartTotalCount }}
-                </span>
               </NuxtLink>
               <NuxtLink
                 to="/contact"

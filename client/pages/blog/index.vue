@@ -1,5 +1,5 @@
 <template>
-  <div class="py-28 md:py-36 bg-[#FAFAFA] min-h-screen text-[#0D1431]">
+  <div class="py-28 md:py-36 min-h-screen transition-colors duration-300" :class="isDark ? 'bg-[#0f1233] text-[#F8F5EF]' : 'bg-[#FAFAFA] text-[#0D1431]'">
     <UiContainer size="lg">
       <div class="space-y-14">
         <!-- Header -->
@@ -56,6 +56,10 @@
 </template>
 
 <script setup lang="ts">
+import { useTheme } from '~/composables/useTheme'
+
+const { isDark } = useTheme()
+
 useSeoMeta({
   title: 'Blog — Narayan Presence',
   description: 'Read the latest essays, articles, and insights from Narayan Presence.'

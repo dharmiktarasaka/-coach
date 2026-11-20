@@ -35,15 +35,6 @@
   var burger=document.getElementById('burger');
   if(burger)burger.addEventListener('click',function(){var o=nav.classList.toggle('open');burger.setAttribute('aria-expanded',o)});
 
-  var tg=document.getElementById('theme');
-  function setTheme(v){document.documentElement.setAttribute('data-theme',v);if(tg)tg.textContent=v==='dark'?'☀':'☾';if(tg)tg.setAttribute('aria-label',v==='dark'?'Switch to light theme':'Switch to dark theme');try{localStorage.setItem('np-theme',v)}catch(e){}}
-  var saved=null;try{saved=localStorage.getItem('np-theme')}catch(e){}
-  if(saved)setTheme(saved);else if(tg)tg.textContent=(window.matchMedia&&matchMedia('(prefers-color-scheme: dark)').matches)?'☀':'☾';
-  if(tg)tg.addEventListener('click',function(){
-    var cur=document.documentElement.getAttribute('data-theme')||((window.matchMedia&&matchMedia('(prefers-color-scheme: dark)').matches)?'dark':'light');
-    setTheme(cur==='dark'?'light':'dark');
-  });
-
   // tab groups (picker, P.A.U.S.E.)
   [].forEach.call(document.querySelectorAll('[data-tabgroup]'),function(g){
     var tabs=[].slice.call(g.querySelectorAll('[role=tab]'));

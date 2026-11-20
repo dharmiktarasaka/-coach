@@ -1,5 +1,5 @@
 <template>
-  <div class="py-28 md:py-36 bg-[#FAFAFA] min-h-screen text-[#0D1431]">
+  <div class="py-28 md:py-36 min-h-screen transition-colors duration-300" :class="isDark ? 'bg-[#0f1233] text-[#F8F5EF]' : 'bg-[#FAFAFA] text-[#0D1431]'">
     <UiContainer size="md">
       <div class="space-y-12">
         <NuxtLink to="/blog" class="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-[#8C6D57] hover:text-[#171844] transition-colors">
@@ -39,6 +39,9 @@
 
 <script setup lang="ts">
 import { computed } from 'vue'
+import { useTheme } from '~/composables/useTheme'
+
+const { isDark } = useTheme()
 const route = useRoute()
 const category = computed(() => (route.params.category as string) || 'journal')
 

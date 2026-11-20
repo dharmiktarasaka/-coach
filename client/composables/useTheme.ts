@@ -1,11 +1,11 @@
-import { ref, computed } from 'vue'
+import { computed } from 'vue'
 
 export type ThemeMode = 'light' | 'dark'
 
-const currentTheme = ref<ThemeMode>('dark')
-const isMounted = ref(false)
-
 export const useTheme = () => {
+  const currentTheme = useState<ThemeMode>('narayan_theme_mode', () => 'dark')
+  const isMounted = useState<boolean>('narayan_theme_mounted', () => false)
+
   const applyTheme = (theme: ThemeMode) => {
     currentTheme.value = theme
     if (typeof document !== 'undefined') {
@@ -54,7 +54,7 @@ export const useTheme = () => {
       applyTheme(saved)
     } else {
       const prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches
-      applyTheme(prefersDark ? 'dark' : 'dark')
+      applyTheme(prefersDark ? 'dark' : 'light')
     }
   }
 
