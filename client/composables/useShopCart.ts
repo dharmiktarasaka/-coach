@@ -5,13 +5,23 @@ export interface ShopProduct {
   level: string
   title: string
   subtitle: string
-  category: 'free' | 'entry' | 'workshop' | 'course' | 'private' | 'premium' | 'membership'
+  badge: string
+  badgeColor?: string
+  category: 'books'
   categoryLabel: string
   price: number
   originalPrice: number
   discountPercent: number
   priceDisplay: string
   originalPriceDisplay: string
+  saveText: string
+  dailyCost: string
+  urgency: string
+  ctaText: string
+  footerNotice: string
+  extraNote?: string
+  editions: string[]
+  selectedEdition?: string
   isBestseller?: boolean
   isAssured?: boolean
   rating: number
@@ -40,638 +50,318 @@ export interface ShopProduct {
 export interface CartItem {
   product: ShopProduct
   quantity: number
+  chosenEdition?: string
 }
 
-// 12 Products matching the exact User Matrix
+// Exactly 5 books matching the requested bookstore catalogue
 export const SHOP_PRODUCTS: ShopProduct[] = [
   {
-    id: 'np-prod-1',
-    level: 'Free',
-    title: 'Awareness Resources',
-    subtitle: 'Foundation of Conscious Awakening & Presence',
-    category: 'free',
-    categoryLabel: 'Free Resource',
-    price: 0,
-    originalPrice: 499,
-    discountPercent: 100,
-    priceDisplay: 'FREE',
-    originalPriceDisplay: '₹499',
+    id: 'book-overthinking-cure',
+    level: 'Core Book 01',
+    badge: 'START HERE',
+    badgeColor: 'gold',
+    title: 'The Overthinking Cure',
+    subtitle: 'ओवरथिंकिंग का इलाज',
+    category: 'books',
+    categoryLabel: 'Core Publication',
+    price: 499,
+    originalPrice: 598,
+    discountPercent: 17,
+    priceDisplay: '₹499',
+    originalPriceDisplay: '₹598',
+    saveText: 'Save ₹99',
+    dailyCost: 'Under ₹10 a day for the 30-day plan (one edition)',
+    urgency: 'Rises to ₹799 on 1 Jan',
+    ctaText: 'Get both editions · ₹499 →',
+    footerNotice: 'Instant PDF · use FLAT20 for 20% off',
+    editions: ['English', 'Both', 'हिंदी'],
+    selectedEdition: 'Both',
     isBestseller: true,
     isAssured: true,
     rating: 4.9,
     ratingCount: 3840,
     reviewCount: 920,
     images: [
-      'https://images.unsplash.com/photo-1506126613408-eca07ce68773?w=800&auto=format&fit=crop&q=80',
-      'https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?w=800&auto=format&fit=crop&q=80',
-      'https://images.unsplash.com/photo-1499209974431-9dddcece7f88?w=800&auto=format&fit=crop&q=80'
+      '/books/the-overthinking-cure.png',
+      '/books/the-overthinking-cure.jpg'
     ],
-    format: 'Digital Guide + Audio Meditation + Printable Journal',
-    accessType: 'Instant Lifetime Access',
-    shortDescription: 'Essential starter pack of daily awareness practices, breathwork routines, and morning stillness meditations.',
-    longDescription: 'The Awareness Resources vault is curated by Narayan Presence to ground you in daily mindfulness. It includes foundational mindfulness audios, grounding exercises, and printable awareness tracking prompts designed for immediate life clarity.',
+    format: 'Digital E-Book (PDF + ePub) & Printable Action Kit',
+    accessType: 'Instant Download + Lifetime Cloud Access',
+    shortDescription: 'Interrupt the 2 AM loop with the 5-step SHANT method. A 30-day roadmap, a calm-mind toolkit and 10 to 15 minutes a day.',
+    longDescription: 'The Overthinking Cure is Ranu Patel\'s definitive guide to ending mental spiraling, insomnia-inducing thought loops, and decision paralysis. Built upon the proprietary 5-step SHANT methodology, this book transforms abstract mindfulness into practical cognitive decluttering tools you can apply in 10 to 15 minutes every morning.',
     highlights: [
-      '3 Guided Audio Meditations (10m, 15m, 25m)',
-      'Printable 30-Day Awareness Daily Journal (PDF)',
-      'Morning Grounding Ritual Blueprint',
-      'Instant Download & Mobile Optimized'
+      'The 5-step SHANT method to interrupt mental spiraling',
+      '30-day calm-mind structured roadmap',
+      'Printable daily toolkit for thought decluttering',
+      'Dual English & Hindi editions included'
     ],
     specifications: {
-      'Level': 'Free Starter',
-      'Format': 'Audio MP3 & PDF Guidebook',
-      'Language': 'English & Hindi Subtitles',
-      'Access': 'Lifetime Cloud Access'
+      'Author': 'Ranu Patel',
+      'Language': 'English & Hindi (Both Editions Available)',
+      'Format': 'High-Res PDF, ePub, Mobile Compatible',
+      'Delivery': 'Instant Email & Portal Delivery',
+      'Bonuses': '30-Day Calm Mind Printable Toolkit'
     },
     reviews: [
       {
         id: 'r1',
-        author: 'Aarav Mehta',
+        author: 'Dhruvil Patel',
         avatar: 'https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?w=100&auto=format&fit=crop&q=80',
         rating: 5,
-        date: '3 days ago',
-        title: 'Life-changing introduction to stillness',
-        comment: 'The morning grounding audio brought so much peace to my otherwise hectic mornings. Amazing that this is offered free!',
+        date: '2 days ago',
+        title: 'Broke my 2 AM thought loops',
+        comment: 'I was dealing with constant overthinking and mental stress. The SHANT method helped me slow down and genuinely quiet my mind.',
         verified: true
       },
       {
         id: 'r2',
-        author: 'Dr. Radhika Sen',
+        author: 'Masum Rajput',
         avatar: 'https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=100&auto=format&fit=crop&q=80',
         rating: 5,
         date: '1 week ago',
-        title: 'Pure clarity and authentic guidance',
-        comment: 'High production quality and genuinely practical tools. Highly recommended to everyone starting their journey.',
+        title: 'Look at my thoughts completely differently',
+        comment: 'Reading The Overthinking Cure after learning from Ranu Ma’am helped me look at my thoughts differently. Easy to read, beautifully written.',
         verified: true
       }
     ]
   },
   {
-    id: 'np-prod-2',
-    level: 'Entry',
-    title: 'Digital Workbook',
-    subtitle: 'Self-Inquiry & Conscious Mind Mapping',
-    category: 'entry',
-    categoryLabel: 'Digital Book',
-    price: 299,
-    originalPrice: 599,
-    discountPercent: 50,
-    priceDisplay: '₹299',
-    originalPriceDisplay: '₹599',
+    id: 'book-hold-what-you-heal',
+    level: 'Core Book 02',
+    badge: 'HEALING GUIDE',
+    badgeColor: 'navy',
+    title: 'Hold What You Heal',
+    subtitle: 'जो पाओ, उसे थाम सको',
+    category: 'books',
+    categoryLabel: 'Core Publication',
+    price: 499,
+    originalPrice: 598,
+    discountPercent: 17,
+    priceDisplay: '₹499',
+    originalPriceDisplay: '₹598',
+    saveText: 'Save ₹99',
+    dailyCost: 'About ₹14 a day for the 21-day plan (one edition)',
+    urgency: 'Rises to ₹799 on 1 Jan',
+    ctaText: 'Get both editions · ₹499 →',
+    footerNotice: 'Instant PDF · use FLAT20 for 20% off',
+    editions: ['English', 'Both', 'हिंदी'],
+    selectedEdition: 'Both',
     isBestseller: true,
     isAssured: true,
-    rating: 4.8,
-    ratingCount: 2150,
-    reviewCount: 480,
+    rating: 4.9,
+    ratingCount: 2910,
+    reviewCount: 710,
     images: [
-      'https://images.unsplash.com/photo-1455390582262-044cdead277a?w=800&auto=format&fit=crop&q=80',
-      'https://images.unsplash.com/photo-1434030216411-0b793f4b4173?w=800&auto=format&fit=crop&q=80',
-      'https://images.unsplash.com/photo-1517842645767-c639042777db?w=800&auto=format&fit=crop&q=80'
+      '/books/hold-what-you-heal.png',
+      '/books/hold-what-you-heal.jpg'
     ],
-    format: 'Fillable Interactive PDF + Notion Template',
-    accessType: 'Direct Download + Notion Workspace Duplicate',
-    shortDescription: '120-page comprehensive workbook structured for systematic thought untangling, shadow awareness, and purpose blueprinting.',
-    longDescription: 'The Digital Workbook provides a structured, step-by-step psychological and spiritual roadmap. Featuring introspective prompts, daily habit scorecards, and cognitive decluttering worksheets for continuous inner growth.',
+    format: 'Digital E-Book (PDF) + 21-Day Integration Plan',
+    accessType: 'Instant Download + Lifetime Cloud Access',
+    shortDescription: 'Heal your health, relationships and money, then keep the good you receive. Includes a 21-day plan.',
+    longDescription: 'Many seekers heal an old wound only to fall back into identical destructive habits. Hold What You Heal tackles vessel capacity: ensuring your mental, physical, and financial capacity can hold peace, abundance, and healthy relationships without self-sabotage.',
     highlights: [
-      '120+ Interactive Prompts & Fillable Exercises',
-      'Notion Life Dashboard Operating Template',
-      'Weekly Reflection & Shadow Work Milestones',
-      'Universal Compatibility (GoodNotes, Notability, Tablets)'
+      'Sustained healing across health, money and relationships',
+      '21-day actionable integration roadmap',
+      'Break the vicious cycle of receiving and losing',
+      'Includes reflective self-audit worksheets'
     ],
     specifications: {
-      'Level': 'Entry Level',
-      'Format': 'Interactive PDF & Notion OS',
-      'Pages': '120 Fillable Pages',
-      'Delivery': 'Instant Email & Portal Delivery'
+      'Author': 'Ranu Patel',
+      'Language': 'English & Hindi (Both Editions Available)',
+      'Format': 'Interactive PDF, Universal Reader Friendly',
+      'Delivery': 'Instant Email & Portal Delivery',
+      'Bonuses': '21-Day Life Integration Workbook'
     },
     reviews: [
       {
         id: 'r3',
-        author: 'Sneha Kapur',
+        author: 'Sangeeta Pandey',
         avatar: 'https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=100&auto=format&fit=crop&q=80',
         rating: 5,
-        date: '2 weeks ago',
-        title: 'Deeply thoughtful exercises',
-        comment: 'Filled this on my iPad using GoodNotes. The clarity it provided during a chaotic career transition was invaluable.',
+        date: '5 days ago',
+        title: 'Deep emotional breakthrough',
+        comment: 'I struggled with anxiety and repeating financial hurdles. This book showed me why I was rejecting stability subconsciously.',
         verified: true
       }
     ]
   },
   {
-    id: 'np-prod-3',
-    level: 'Entry',
-    title: '21-Day Conscious Living',
-    subtitle: 'Step-by-Step Daily Transformation Challenge',
-    category: 'entry',
-    categoryLabel: '21-Day Program',
-    price: 699,
-    originalPrice: 1499,
-    discountPercent: 53,
-    priceDisplay: '₹699',
-    originalPriceDisplay: '₹1,499',
+    id: 'book-ek-baat-roz',
+    level: 'Core Book 03',
+    badge: 'WHOLE FAMILY',
+    badgeColor: 'navy',
+    title: 'Ek Baat Roz',
+    subtitle: 'एक बात रोज़',
+    category: 'books',
+    categoryLabel: 'Core Publication',
+    price: 499,
+    originalPrice: 598,
+    discountPercent: 17,
+    priceDisplay: '₹499',
+    originalPriceDisplay: '₹598',
+    saveText: 'Save ₹99',
+    dailyCost: 'Under ₹10 a day for the 30-day plan (one edition)',
+    urgency: 'Rises to ₹799 on 1 Jan',
+    ctaText: 'Get both editions · ₹499 →',
+    footerNotice: 'Instant PDF · use FLAT20 for 20% off',
+    editions: ['English', 'Both', 'हिंदी'],
+    selectedEdition: 'Both',
     isBestseller: true,
     isAssured: true,
-    rating: 4.9,
+    rating: 4.8,
     ratingCount: 3120,
-    reviewCount: 760,
+    reviewCount: 650,
     images: [
-      'https://images.unsplash.com/photo-1508672019048-805c876b67e2?w=800&auto=format&fit=crop&q=80',
-      'https://images.unsplash.com/photo-1518241353330-0f7941c2d9b5?w=800&auto=format&fit=crop&q=80',
-      'https://images.unsplash.com/photo-1470240731273-7821a6eeb6bd?w=800&auto=format&fit=crop&q=80'
+      '/books/ek-baat-roz.jpg',
+      '/books/ek-baat-roz.png'
     ],
-    format: '21 Daily Video Lessons + Habit Tracker + Community Access',
-    duration: '21 Days (15 mins/day)',
-    accessType: 'Full Portal Access + Lifetime Replays',
-    shortDescription: '21 days of bite-sized conscious living practices to dissolve reactivity, master emotional balance, and anchor daily peace.',
-    longDescription: 'A guided journey designed to wire conscious awareness into your neurological baseline. Each day releases a concise 15-minute video, an actionable micro-exercise, and evening reflection.',
+    format: 'Illustrated E-Book + Printable Family Toolkit',
+    accessType: 'Instant Download + Lifetime Cloud Access',
+    shortDescription: 'One shloka, its story and one gentle line for every age at home. 9 moments, a 30-day plan and a printable toolkit.',
+    longDescription: 'Crafted for modern households where generations live together or stay deeply connected. Ek Baat Roz provides 1 shloka each day, accompanied by a contemporary moral story and an easy conversational line suitable for children, youths, and grandparents alike.',
     highlights: [
-      '21 Bite-Sized Guided Video Modules',
-      'Daily WhatsApp Encouragement & Accountability',
-      'Certificate of Completion from Narayan Presence',
-      'Habit Tracking Scorecard & Resource Library'
+      'One timeless shloka & practical story for daily family rhythm',
+      '9 moments for effortless connection across generations',
+      '30-day family conversation plan',
+      'Printable bedtime & breakfast reflection toolkit'
     ],
     specifications: {
-      'Level': 'Entry Transformation',
-      'Duration': '21 Days',
-      'Format': 'Video Lessons & Daily Tasks',
-      'Access': 'Lifetime Access + Student Community'
+      'Author': 'Ranu Patel',
+      'Language': 'English & Hindi (Both Editions Available)',
+      'Format': 'Illustrated PDF + Audio Shloka Pronunciations',
+      'Delivery': 'Instant Email & Portal Delivery',
+      'Target': 'Parents, Children, Seniors & Whole Households'
     },
     reviews: [
       {
         id: 'r4',
-        author: 'Vikram Joshi',
-        avatar: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=100&auto=format&fit=crop&q=80',
+        author: 'Richa Sharma',
+        avatar: 'https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=100&auto=format&fit=crop&q=80',
         rating: 5,
-        date: '5 days ago',
-        title: 'Only 15 mins a day, completely altered my stress',
-        comment: 'I was skeptical at first, but day 7 completely shifted how I react to corporate stress. Worth every single rupee!',
+        date: '2 weeks ago',
+        title: 'Our family dinner ritual has transformed',
+        comment: 'My children and their grandparents now discuss one shloka every single evening. A true blessing for Indian homes.',
         verified: true
       }
     ]
   },
   {
-    id: 'np-prod-4',
-    level: 'Workshop',
-    title: 'Live Practical Workshop',
-    subtitle: 'Interactive 3-Hour Immersion with Master Coach',
-    category: 'workshop',
-    categoryLabel: 'Live Event',
-    price: 299,
-    originalPrice: 799,
-    discountPercent: 63,
-    priceDisplay: '₹299',
-    originalPriceDisplay: '₹799',
-    isBestseller: false,
+    id: 'book-heal-any-relationship',
+    level: 'Core Book 04',
+    badge: 'NEW - RELATIONSHIPS',
+    badgeColor: 'navy',
+    title: 'Heal Any Relationship',
+    subtitle: 'रिश्तों का इलाज',
+    category: 'books',
+    categoryLabel: 'Core Publication',
+    price: 499,
+    originalPrice: 598,
+    discountPercent: 17,
+    priceDisplay: '₹499',
+    originalPriceDisplay: '₹598',
+    saveText: 'Save ₹99',
+    dailyCost: 'About ₹14 a day for the 21-day plan (one edition)',
+    urgency: 'Launch price ends 30 Dec',
+    ctaText: 'Get both editions · ₹499 →',
+    footerNotice: 'Instant PDF by email right after payment',
+    editions: ['English', 'Both', 'हिंदी'],
+    selectedEdition: 'Both',
+    isBestseller: true,
     isAssured: true,
-    rating: 4.8,
-    ratingCount: 1640,
-    reviewCount: 310,
+    rating: 5.0,
+    ratingCount: 1840,
+    reviewCount: 420,
     images: [
-      'https://images.unsplash.com/photo-1515187029135-18ee286d815b?w=800&auto=format&fit=crop&q=80',
-      'https://images.unsplash.com/photo-1524178232363-1fb2b075b655?w=800&auto=format&fit=crop&q=80',
-      'https://images.unsplash.com/photo-1531482615713-2afd69097998?w=800&auto=format&fit=crop&q=80'
+      '/books/heal-any-relationship.png',
+      '/books/heal-any-relationship.jpg'
     ],
-    format: 'Live Zoom Interactive Session + Q&A + HD Recording',
-    duration: '3 Hours Intensive',
-    accessType: 'Live Attendance + HD Replay in Vault',
-    shortDescription: 'High-energy live workshop tackling real-time mental friction, decision paralysis, and nervous system recalibration.',
-    longDescription: 'Join our upcoming live intensive cohort for live guided exercises, hot-seat coaching, interactive breath calibrations, and real-time Q&A with master coaches.',
+    format: 'Digital E-Book + 16 Worksheets + 21-Day Repair Plan',
+    accessType: 'Instant Download + Lifetime Cloud Access',
+    shortDescription: 'One 4-step method (SETU) and ready-to-say scripts for 8 relationships, from your partner and kids to your team and boss. 16 worksheets and a 21-day repair plan.',
+    longDescription: 'Relationships suffer when words turn reactive. Heal Any Relationship presents the proven 4-step SETU framework with word-for-word scripts designed to resolve disputes, rebuild lost trust, and establish respectful emotional boundaries with spouses, in-laws, colleagues, and friends.',
     highlights: [
-      '3-Hour Live Interactive Masterclass',
-      'Direct Hot-Seat Question & Answer Session',
-      'Full HD Recording Added to Your Student Vault',
-      'Downloadable Workshop Slide Deck & Frameworks'
+      'The 4-step SETU framework for interpersonal conflict resolution',
+      'Ready-to-say scripts for 8 distinct relationship types',
+      '16 boundary and conscious dialogue worksheets',
+      '21-day relationship reset and repair plan'
     ],
     specifications: {
-      'Level': 'Practical Workshop',
-      'Platform': 'Live Zoom + Recording Vault',
-      'Batch Size': 'Limited to 100 Students',
-      'Bonus': 'Live Q&A Hot Seat'
+      'Author': 'Ranu Patel',
+      'Language': 'English & Hindi (Both Editions Available)',
+      'Format': 'Interactive PDF + Script Cheat Sheets',
+      'Delivery': 'Instant Email & Portal Delivery',
+      'Bonuses': '16 Printable Dialogue Worksheets'
     },
     reviews: [
       {
         id: 'r5',
-        author: 'Ananya Verma',
-        avatar: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=100&auto=format&fit=crop&q=80',
+        author: 'Robert Walker',
+        avatar: 'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=100&auto=format&fit=crop&q=80',
         rating: 5,
-        date: '1 week ago',
-        title: 'The hot-seat coaching blew me away',
-        comment: 'Seeing practical coaching applied live gave me breakthroughs on blocks I had been struggling with for years.',
+        date: '3 days ago',
+        title: 'The SETU method actually works',
+        comment: 'Peaceful, insightful, and practical. Having the exact scripts to say without attacking or getting defensive saved my partnership.',
         verified: true
       }
     ]
   },
   {
-    id: 'np-prod-5',
-    level: 'Short course',
-    title: 'N-A-R-A-Y-A-N Practice',
-    subtitle: 'The Proprietary 7-Pillar Presence Methodology',
-    category: 'course',
-    categoryLabel: 'Short Course',
-    price: 799,
-    originalPrice: 1999,
-    discountPercent: 60,
-    priceDisplay: '₹799',
-    originalPriceDisplay: '₹1,999',
+    id: 'book-when-narayan-awakens-within',
+    level: 'Core Book 05',
+    badge: 'HINDI - INNER AWAKENING',
+    badgeColor: 'navy',
+    title: 'When Narayan Awakens Within',
+    subtitle: 'जब भीतर नारायण जागें',
+    category: 'books',
+    categoryLabel: 'Core Publication',
+    price: 499,
+    originalPrice: 598,
+    discountPercent: 17,
+    priceDisplay: '₹499',
+    originalPriceDisplay: '₹598',
+    saveText: 'Save ₹99',
+    dailyCost: 'About ₹24 a day for the 21-day plan (one edition)',
+    urgency: 'Rises to ₹799 on 1 Jan',
+    ctaText: 'Get Hindi edition · ₹499 →',
+    footerNotice: 'Instant PDF · use FLAT20 for 20% off',
+    extraNote: 'Gujarati, Tamil and English editions are being prepared. Pre-order the set: Hindi + English ₹799, all four languages ₹1,599.',
+    editions: ['हिंदी · now', 'Other languages · soon'],
+    selectedEdition: 'हिंदी · now',
     isBestseller: true,
     isAssured: true,
-    rating: 4.9,
-    ratingCount: 2890,
-    reviewCount: 650,
+    rating: 5.0,
+    ratingCount: 2280,
+    reviewCount: 540,
     images: [
-      'https://images.unsplash.com/photo-1512438248247-f0f2a5a8b7f0?w=800&auto=format&fit=crop&q=80',
-      'https://images.unsplash.com/photo-1506126613408-eca07ce68773?w=800&auto=format&fit=crop&q=80',
-      'https://images.unsplash.com/photo-1499209974431-9dddcece7f88?w=800&auto=format&fit=crop&q=80'
+      '/books/when-narayan-awakens-within.jpg',
+      '/books/when-narayan-awakens-within.png'
     ],
-    format: '7 Core Video Modules + Audio Transmissions + Guided Drills',
-    duration: '2 Weeks Self-Paced',
-    accessType: 'Lifetime Portal Access',
-    shortDescription: 'Master the trademark 7-step N-A-R-A-Y-A-N protocol: Notice, Accept, Release, Align, Yield, Awaken, Nurture.',
-    longDescription: 'The definitive course on the signature N-A-R-A-Y-A-N framework. Designed to be practiced anywhere in 3 minutes to return from anxiety to unshakeable centered presence.',
+    format: 'Sacred Digital Manuscript + 21-Day Sadhana Guide',
+    accessType: 'Instant Download + Lifetime Cloud Access',
+    shortDescription: '21 chapters, a 21-day sadhana and daily practices for returning to yourself. Hindi now. Gujarati, Tamil and English are on the way.',
+    longDescription: 'A deeply meditative journey through 21 transformative chapters. When Narayan Awakens Within guides the seeker through self-inquiry, dissolving egoic resistance, and returning to the quiet sanctuary of the heart. Accompanied by a 21-day sadhana for everyday spiritual awareness.',
     highlights: [
-      '7 Master Modules Explaining Every Letter & Drill',
-      '3-Minute Emergency Presence Reset Audio',
-      'Downloadable Framework Cards for Wallet/Phone',
-      'Official Certificate in Conscious Grounding'
+      '21 deep chapters exploring inner spiritual consciousness',
+      '21-day daily contemplative sadhana practices',
+      'Rooted in timeless Vedic clarity for modern existence',
+      'Pre-order options for forthcoming regional translations'
     ],
     specifications: {
-      'Level': 'Short Course',
-      'Modules': '7 Deep-Dive Lessons',
-      'Format': 'Video, Audio & PDF Cards',
-      'Accreditation': 'Narayan Presence Verified'
+      'Author': 'Ranu Patel',
+      'Language': 'हिंदी (Hindi Edition Live Now)',
+      'Upcoming': 'Gujarati, Tamil & English in Production',
+      'Format': 'Deluxe High-Res Digital Edition',
+      'Delivery': 'Instant Email & Portal Delivery'
     },
     reviews: [
       {
         id: 'r6',
-        author: 'Rohan Sharma',
-        avatar: 'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=100&auto=format&fit=crop&q=80',
-        rating: 5,
-        date: '3 weeks ago',
-        title: 'The 3-minute reset is now my daily superpower',
-        comment: 'Whenever meetings get tense, I run the N-A-R-A-Y-A-N drill. My colleagues have noticed how calm I stay under pressure.',
-        verified: true
-      }
-    ]
-  },
-  {
-    id: 'np-prod-6',
-    level: 'Core',
-    title: '4-Week Specialized Course',
-    subtitle: 'Conscious Mastery & Emotional Equilibrium',
-    category: 'course',
-    categoryLabel: 'Core Course',
-    price: 3499,
-    originalPrice: 6999,
-    discountPercent: 50,
-    priceDisplay: '₹3,499',
-    originalPriceDisplay: '₹6,999',
-    isBestseller: true,
-    isAssured: true,
-    rating: 4.9,
-    ratingCount: 1980,
-    reviewCount: 420,
-    images: [
-      'https://images.unsplash.com/photo-1522202176988-66273c2fd55f?w=800&auto=format&fit=crop&q=80',
-      'https://images.unsplash.com/photo-1531482615713-2afd69097998?w=800&auto=format&fit=crop&q=80',
-      'https://images.unsplash.com/photo-1524178232363-1fb2b075b655?w=800&auto=format&fit=crop&q=80'
-    ],
-    format: '4 Comprehensive Modules + Weekly Live Group Office Hours',
-    duration: '4 Weeks',
-    accessType: 'Full Student Portal + Community Circles',
-    shortDescription: 'In-depth 4-week structured curriculum breaking deep subconscious conditioning and building enduring personal leadership.',
-    longDescription: 'Our flagship 4-week syllabus walks you through neurological rewiring, boundary establishment, emotional sovereignty, and purpose-driven execution. Includes weekly mentor office hours.',
-    highlights: [
-      '24 High-Definition Structured Video Modules',
-      '4 Weekly Live Interactive Mentorship Sessions',
-      'Private Student Circle Discussion Access',
-      'Detailed Course Workbook & Action Blueprints'
-    ],
-    specifications: {
-      'Level': 'Core Curriculum',
-      'Duration': '4 Weeks Structured',
-      'Sessions': '4 Live Office Hours + 24 Modules',
-      'Certificate': 'Professional Mastery Certificate'
-    },
-    reviews: [
-      {
-        id: 'r7',
-        author: 'Pooja Nair',
-        avatar: 'https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=100&auto=format&fit=crop&q=80',
-        rating: 5,
-        date: '2 weeks ago',
-        title: 'Deep, scientific and intensely practical',
-        comment: 'Combines modern neuroscience with deep Eastern contemplative practices. Transformed how I lead my team.',
-        verified: true
-      }
-    ]
-  },
-  {
-    id: 'np-prod-7',
-    level: 'Flagship',
-    title: '6-Week Clear Mind',
-    subtitle: 'Freedom from Overthinking & Cognitive Fatigue',
-    category: 'course',
-    categoryLabel: 'Flagship Program',
-    price: 6999,
-    originalPrice: 12999,
-    discountPercent: 46,
-    priceDisplay: '₹6,999',
-    originalPriceDisplay: '₹12,999',
-    isBestseller: true,
-    isAssured: true,
-    rating: 5.0,
-    ratingCount: 1420,
-    reviewCount: 380,
-    images: [
-      'https://images.unsplash.com/photo-1499209974431-9dddcece7f88?w=800&auto=format&fit=crop&q=80',
-      'https://images.unsplash.com/photo-1506126613408-eca07ce68773?w=800&auto=format&fit=crop&q=80',
-      'https://images.unsplash.com/photo-1518241353330-0f7941c2d9b5?w=800&auto=format&fit=crop&q=80'
-    ],
-    format: '6 Intensive Modules + Weekly Live Masterminds + Dedicated Mentor',
-    duration: '6 Weeks Intensive',
-    accessType: 'Lifetime Curriculum Access + 1 Year Community',
-    shortDescription: 'The gold-standard flagship program for chronic overthinkers, high-performance executives, and overwhelmed professionals.',
-    longDescription: 'Clear Mind is our most celebrated transformation framework. It permanently cures decision paralysis, quietens the relentless inner critic, and builds ironclad mental stamina for demanding careers.',
-    highlights: [
-      '6 Core Pillars of Mental De-escalation',
-      'Weekly Live Mind Mastery Masterminds on Zoom',
-      'Direct Peer-Study Buddy Pairing System',
-      '1-on-1 Milestone Review with Senior Coach'
-    ],
-    specifications: {
-      'Level': 'Flagship Tier',
-      'Duration': '6 Weeks Cohort',
-      'Includes': 'Weekly Masterminds + 1-on-1 Review',
-      'Access': 'VIP Lifetime Portal Vault'
-    },
-    reviews: [
-      {
-        id: 'r8',
-        author: 'Karan Singhania',
-        avatar: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=100&auto=format&fit=crop&q=80',
-        rating: 5,
-        date: '1 month ago',
-        title: 'Worth 10x the investment',
-        comment: 'As a startup founder, overthinking was crippling my sleep and decisions. Clear Mind literally restored my mental sanity.',
-        verified: true
-      }
-    ]
-  },
-  {
-    id: 'np-prod-8',
-    level: 'Advanced',
-    title: '6-Week Specialized Group Programme',
-    subtitle: 'High-Touch Cohort for Leaders & Change Makers',
-    category: 'course',
-    categoryLabel: 'Advanced Cohort',
-    price: 11999,
-    originalPrice: 22999,
-    discountPercent: 48,
-    priceDisplay: '₹11,999',
-    originalPriceDisplay: '₹22,999',
-    isBestseller: false,
-    isAssured: true,
-    rating: 4.9,
-    ratingCount: 680,
-    reviewCount: 190,
-    images: [
-      'https://images.unsplash.com/photo-1531482615713-2afd69097998?w=800&auto=format&fit=crop&q=80',
-      'https://images.unsplash.com/photo-1522202176988-66273c2fd55f?w=800&auto=format&fit=crop&q=80',
-      'https://images.unsplash.com/photo-1515187029135-18ee286d815b?w=800&auto=format&fit=crop&q=80'
-    ],
-    format: 'Small-Group Intimate Zoom Circles (Max 15) + Personal Feedback',
-    duration: '6 Weeks Cohort',
-    accessType: 'Exclusive Inner Circle + Master Audio Vault',
-    shortDescription: 'Intimate mastermind cohort capped at 15 leaders. High-touch accountability, deep behavioral unlearning, and sovereign presence.',
-    longDescription: 'Created strictly for leaders, therapists, doctors, and senior executives who carry substantial responsibility. Experience deep collective wisdom and intensive personal feedback in small confidential cohorts.',
-    highlights: [
-      'Capped at Strictly 15 Members Per Cohort',
-      'Weekly 90-Minute Intimate Group Strategy Sessions',
-      'Dedicated WhatsApp Accountability Hotline',
-      'Comprehensive Personalized Behavioral Audit'
-    ],
-    specifications: {
-      'Level': 'Advanced Inner Circle',
-      'Cohort Size': 'Max 15 Participants',
-      'Duration': '6 Weeks Deep Dive',
-      'Selection': 'Application & Direct Onboarding'
-    },
-    reviews: [
-      {
-        id: 'r9',
-        author: 'Dr. Sunita Patel',
-        avatar: 'https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=100&auto=format&fit=crop&q=80',
-        rating: 5,
-        date: '2 months ago',
-        title: 'Rare depth and profound peer accountability',
-        comment: 'Connecting with fellow executives navigating the same inner pressure made this the most impactful group I have ever been part of.',
-        verified: true
-      }
-    ]
-  },
-  {
-    id: 'np-prod-9',
-    level: 'Private',
-    title: 'One-to-One Clarity Session',
-    subtitle: 'Direct 60-Minute Deep Breakthrough Consultation',
-    category: 'private',
-    categoryLabel: '1-on-1 Session',
-    price: 2499,
-    originalPrice: 4999,
-    discountPercent: 50,
-    priceDisplay: '₹2,499',
-    originalPriceDisplay: '₹4,999',
-    isBestseller: true,
-    isAssured: true,
-    rating: 5.0,
-    ratingCount: 940,
-    reviewCount: 310,
-    images: [
-      'https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=800&auto=format&fit=crop&q=80',
-      'https://images.unsplash.com/photo-1517842645767-c639042777db?w=800&auto=format&fit=crop&q=80',
-      'https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=800&auto=format&fit=crop&q=80'
-    ],
-    format: 'Private 1-on-1 Zoom Session + Session Summary + Custom Action Plan',
-    duration: '60 Minutes Live Consultation',
-    accessType: 'Calendar Booking Link Provided Immediately After Order',
-    shortDescription: 'Private 60-minute diagnostic session with Narayan Presence senior mentors to pinpoint exact mental bottlenecks and create a 30-day plan.',
-    longDescription: 'Get focused, uninterrupted personal attention on your unique life, relationship, or career challenges. Walk away with complete emotional relief and a concrete step-by-step roadmap.',
-    highlights: [
-      '60-Minute Private 1-on-1 Video Consultation',
-      'Full Audio & Video Recording for Private Review',
-      'Customized 30-Day Personal Action Protocol',
-      '7 Days of WhatsApp Post-Session Follow-Up'
-    ],
-    specifications: {
-      'Level': 'Private Advisory',
-      'Duration': '60 Minutes',
-      'Platform': 'Private Encrypted Zoom',
-      'Follow-up': '7-Day Direct Chat Support'
-    },
-    reviews: [
-      {
-        id: 'r10',
-        author: 'Deepak Roy',
-        avatar: 'https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?w=100&auto=format&fit=crop&q=80',
-        rating: 5,
-        date: '1 week ago',
-        title: 'Solved an issue I was stuck on for 6 months in 1 hour',
-        comment: 'Incisive, compassionate, and zero wasted fluff. The 30-day customized protocol was exactly what I needed.',
-        verified: true
-      }
-    ]
-  },
-  {
-    id: 'np-prod-10',
-    level: 'Private',
-    title: 'Three-Session Coaching',
-    subtitle: 'Comprehensive Personal Guidance & Habit Imprinting',
-    category: 'private',
-    categoryLabel: 'Coaching Package',
-    price: 6499,
-    originalPrice: 11999,
-    discountPercent: 46,
-    priceDisplay: '₹6,499',
-    originalPriceDisplay: '₹11,999',
-    isBestseller: false,
-    isAssured: true,
-    rating: 4.9,
-    ratingCount: 520,
-    reviewCount: 160,
-    images: [
-      'https://images.unsplash.com/photo-1517842645767-c639042777db?w=800&auto=format&fit=crop&q=80',
-      'https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=800&auto=format&fit=crop&q=80',
-      'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=800&auto=format&fit=crop&q=80'
-    ],
-    format: '3x 60-Minute Private Sessions Spaced Over 45 Days',
-    duration: '3 Sessions (45-Day Duration)',
-    accessType: 'Priority Calendar Access + Unlimited Messaging Support',
-    shortDescription: 'Three structured private sessions allowing for diagnosis, implementation, real-world testing, and permanent habit locking.',
-    longDescription: 'Single sessions provide breakthrough moments; this 3-session series ensures sustainable behavioral transformation. Experience continuous guidance between sessions with direct coach check-ins.',
-    highlights: [
-      '3 Dedicated 1-on-1 Sessions (60 mins each)',
-      'Continuous Direct WhatsApp Guidance between calls',
-      'Deep Psycho-emotional Diagnostic Assessment',
-      'Personalized Resource Vault Access'
-    ],
-    specifications: {
-      'Level': 'Private Series',
-      'Sessions': '3 Full Sessions',
-      'Validity': '60 Days from Purchase',
-      'Support': 'WhatsApp Hotline between calls'
-    },
-    reviews: [
-      {
-        id: 'r11',
-        author: 'Meera Deshmukh',
-        avatar: 'https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=100&auto=format&fit=crop&q=80',
-        rating: 5,
-        date: '3 weeks ago',
-        title: 'Sustainable change rather than temporary motivation',
-        comment: 'Having sessions spaced out over a month helped me overcome setbacks in real-time. My relationships and stress levels have never been better.',
-        verified: true
-      }
-    ]
-  },
-  {
-    id: 'np-prod-11',
-    level: 'Premium',
-    title: '90-Day Private Programme',
-    subtitle: 'Exclusive Executive Mentorship & Complete Life Recalibration',
-    category: 'premium',
-    categoryLabel: 'VIP Mentorship',
-    price: 42000,
-    originalPrice: 65000,
-    discountPercent: 35,
-    priceDisplay: '₹42,000',
-    originalPriceDisplay: '₹65,000',
-    isBestseller: true,
-    isAssured: true,
-    rating: 5.0,
-    ratingCount: 180,
-    reviewCount: 65,
-    images: [
-      'https://images.unsplash.com/photo-1497366216548-37526070297c?w=800&auto=format&fit=crop&q=80',
-      'https://images.unsplash.com/photo-1497366811353-6870744d04b2?w=800&auto=format&fit=crop&q=80',
-      'https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=800&auto=format&fit=crop&q=80'
-    ],
-    format: '12 Weekly 1-on-1 Sessions + VIP Concierge Hotline + Full Curriculum Suite',
-    duration: '90 Days (Quarterly Immersion)',
-    accessType: 'VIP Direct Access to Master Coach Narayan',
-    shortDescription: 'Our most elite private immersion. Complete access to master coach, private weekly strategy calls, and customized life architecture.',
-    longDescription: 'A premier 3-month personal partnership for visionaries, industry leaders, and high-net-worth creators. Rewire your operating baseline across health, presence, wealth, and spiritual sovereignty.',
-    highlights: [
-      '12 Private Weekly 60-Minute 1-on-1 Deep-Dives',
-      'Unrestricted VIP WhatsApp Voice/Text Concierge Access',
-      'Full Access to Every Course, Workshop & Asset in the Vault',
-      'Comprehensive Quarterly Mind-Body Energy Audit'
-    ],
-    specifications: {
-      'Level': 'VIP Elite',
-      'Duration': '90 Days Complete Immersion',
-      'Access': 'VIP Direct Concierge Hotline',
-      'Availability': 'Strictly Limited to 5 Clients per Quarter'
-    },
-    reviews: [
-      {
-        id: 'r12',
-        author: 'Rajiv Singhal',
-        avatar: 'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=100&auto=format&fit=crop&q=80',
-        rating: 5,
-        date: '1 month ago',
-        title: 'The single highest ROI investment in my wellbeing',
-        comment: 'Guided me through a 50-crore company acquisition without burning out or sacrificing my family life. Truly masters at the highest level.',
-        verified: true
-      }
-    ]
-  },
-  {
-    id: 'np-prod-12',
-    level: 'Membership',
-    title: 'Narayan Presence Circle',
-    subtitle: 'Monthly Satsang, Live Meditations & Continuous Sangha',
-    category: 'membership',
-    categoryLabel: 'Monthly Membership',
-    price: 499,
-    originalPrice: 999,
-    discountPercent: 50,
-    priceDisplay: '₹499/mo',
-    originalPriceDisplay: '₹999/mo',
-    isBestseller: true,
-    isAssured: true,
-    rating: 4.9,
-    ratingCount: 4250,
-    reviewCount: 1100,
-    images: [
-      'https://images.unsplash.com/photo-1518241353330-0f7941c2d9b5?w=800&auto=format&fit=crop&q=80',
-      'https://images.unsplash.com/photo-1506126613408-eca07ce68773?w=800&auto=format&fit=crop&q=80',
-      'https://images.unsplash.com/photo-1522202176988-66273c2fd55f?w=800&auto=format&fit=crop&q=80'
-    ],
-    format: 'Weekly Live Group Satsangs + Complete Recorded Vault + Private Circle Community',
-    duration: 'Ongoing Monthly Membership (Cancel Anytime)',
-    accessType: 'Unlimited Member Vault Access',
-    shortDescription: 'Join thousands of dedicated seekers in our vibrant global presence circle. Weekly live calls, curated teachings, and supportive sangha.',
-    longDescription: 'Spiritual growth requires continuous sangha (community). As a Presence Circle member, attend weekly Sunday morning satsangs, access our 100+ hour recorded wisdom vault, and join private mastermind discussions.',
-    highlights: [
-      '4 Live Online Satsang & Meditation Circles Every Month',
-      'Instant Access to 100+ Hours of Past Masterclasses',
-      'Private Encrypted Member Community & Discourse Space',
-      'Exclusive Member-Only Discounts on 1-on-1 Sessions'
-    ],
-    specifications: {
-      'Level': 'Global Membership',
-      'Billing': '₹499 Billed Monthly (Cancel Anytime)',
-      'Community': 'Exclusive Narayan Presence App & Discord',
-      'Live Schedule': 'Every Sunday 8:00 AM IST'
-    },
-    reviews: [
-      {
-        id: 'r13',
-        author: 'Kavita Chawla',
+        author: 'Geetanshi Bharti',
         avatar: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=100&auto=format&fit=crop&q=80',
         rating: 5,
-        date: '2 weeks ago',
-        title: 'My Sunday morning sanctuary',
-        comment: 'Sunday satsangs have become non-negotiable for my mental peace. The energy of hundreds of conscious souls meditating together is electrifying.',
+        date: '1 week ago',
+        title: 'Deeply profound and grounding',
+        comment: 'Brings immense tranquility to the heart. Reading just a few paragraphs in the morning sets a tone of sacred calm for the entire day.',
         verified: true
       }
     ]
@@ -683,13 +373,22 @@ const cart = ref<CartItem[]>([])
 const wishlist = ref<string[]>([])
 const isCartOpen = ref(false)
 const isWishlistOpen = ref(false)
-const isQuickViewOpen = ref(false)
-const activeQuickViewProduct = ref<ShopProduct | null>(null)
 const isCheckoutModalOpen = ref(false)
 const activeCheckoutItem = ref<ShopProduct | null>(null)
+const isQuickViewOpen = ref(false)
+const activeQuickViewProduct = ref<ShopProduct | null>(null)
 
-const CART_STORAGE_KEY = 'narayan_presence_shop_cart_v1'
-const WISHLIST_STORAGE_KEY = 'narayan_presence_shop_wishlist_v1'
+// Selected edition map (bookId -> edition)
+const selectedEditions = ref<Record<string, string>>({
+  'book-overthinking-cure': 'Both',
+  'book-hold-what-you-heal': 'Both',
+  'book-ek-baat-roz': 'Both',
+  'book-heal-any-relationship': 'Both',
+  'book-when-narayan-awakens-within': 'हिंदी · now'
+})
+
+const CART_STORAGE_KEY = 'narayan_presence_shop_cart_v2'
+const WISHLIST_STORAGE_KEY = 'narayan_presence_shop_wishlist_v2'
 
 export const useShopCart = () => {
   // Initialize state from localStorage
@@ -731,13 +430,27 @@ export const useShopCart = () => {
     }
   }
 
+  const setEdition = (bookId: string, edition: string) => {
+    selectedEditions.value[bookId] = edition
+  }
+
+  const getEdition = (bookId: string) => {
+    return selectedEditions.value[bookId] || 'Both'
+  }
+
   // Cart operations
-  const addToCart = (product: ShopProduct, quantity = 1) => {
-    const existing = cart.value.find(item => item.product.id === product.id)
+  const addToCart = (product: ShopProduct, quantity = 1, edition?: string) => {
+    const chosen = edition || selectedEditions.value[product.id] || 'Both'
+    const cartKey = `${product.id}-${chosen}`
+    const existing = cart.value.find(item => `${item.product.id}-${item.chosenEdition || 'Both'}` === cartKey)
     if (existing) {
       existing.quantity += quantity
     } else {
-      cart.value.push({ product, quantity })
+      cart.value.push({
+        product,
+        quantity,
+        chosenEdition: chosen
+      })
     }
     persistCart()
   }
@@ -752,7 +465,7 @@ export const useShopCart = () => {
       removeFromCart(productId)
       return
     }
-    const item = cart.value.find(item => item.product.id === productId)
+    const item = cart.value.find(i => i.product.id === productId)
     if (item) {
       item.quantity = quantity
       persistCart()
@@ -766,21 +479,17 @@ export const useShopCart = () => {
 
   // Wishlist operations
   const toggleWishlist = (productId: string) => {
-    if (wishlist.value.includes(productId)) {
-      wishlist.value = wishlist.value.filter(id => id !== productId)
+    const index = wishlist.value.indexOf(productId)
+    if (index > -1) {
+      wishlist.value.splice(index, 1)
     } else {
       wishlist.value.push(productId)
     }
     persistWishlist()
   }
 
-  const isInWishlist = (productId: string): boolean => {
+  const isInWishlist = (productId: string) => {
     return wishlist.value.includes(productId)
-  }
-
-  const moveToCartFromWishlist = (product: ShopProduct) => {
-    addToCart(product, 1)
-    toggleWishlist(product.id)
   }
 
   // Quick View Modal
@@ -794,10 +503,18 @@ export const useShopCart = () => {
     activeQuickViewProduct.value = null
   }
 
-  // Direct Buy Now / Express Checkout
-  const startBuyNow = (product: ShopProduct) => {
+  // Direct Checkout
+  const startBuyNow = (product: ShopProduct, edition?: string) => {
     activeCheckoutItem.value = product
     isCheckoutModalOpen.value = true
+    isCartOpen.value = false
+  }
+
+  const openCheckoutWithCart = () => {
+    if (cart.value.length === 0) return
+    activeCheckoutItem.value = cart.value[0].product
+    isCheckoutModalOpen.value = true
+    isCartOpen.value = false
   }
 
   const closeCheckout = () => {
@@ -805,21 +522,21 @@ export const useShopCart = () => {
     activeCheckoutItem.value = null
   }
 
-  // Computed Totals
+  // Computed totals
   const cartTotalCount = computed(() => {
-    return cart.value.reduce((total, item) => total + item.quantity, 0)
-  })
-
-  const cartTotalMRP = computed(() => {
-    return cart.value.reduce((total, item) => total + (item.product.originalPrice * item.quantity), 0)
+    return cart.value.reduce((sum, item) => sum + item.quantity, 0)
   })
 
   const cartTotalPrice = computed(() => {
-    return cart.value.reduce((total, item) => total + (item.product.price * item.quantity), 0)
+    return cart.value.reduce((sum, item) => sum + item.product.price * item.quantity, 0)
   })
 
-  const cartTotalDiscount = computed(() => {
-    return cartTotalMRP.value - cartTotalPrice.value
+  const cartOriginalTotalPrice = computed(() => {
+    return cart.value.reduce((sum, item) => sum + item.product.originalPrice * item.quantity, 0)
+  })
+
+  const cartTotalSavings = computed(() => {
+    return Math.max(0, cartOriginalTotalPrice.value - cartTotalPrice.value)
   })
 
   const wishlistProducts = computed(() => {
@@ -832,25 +549,28 @@ export const useShopCart = () => {
     wishlist,
     isCartOpen,
     isWishlistOpen,
-    isQuickViewOpen,
-    activeQuickViewProduct,
     isCheckoutModalOpen,
     activeCheckoutItem,
+    isQuickViewOpen,
+    activeQuickViewProduct,
+    selectedEditions,
+    cartTotalCount,
+    cartTotalPrice,
+    cartOriginalTotalPrice,
+    cartTotalSavings,
+    wishlistProducts,
+    setEdition,
+    getEdition,
     addToCart,
     removeFromCart,
     updateQuantity,
     clearCart,
     toggleWishlist,
     isInWishlist,
-    moveToCartFromWishlist,
     openQuickView,
     closeQuickView,
     startBuyNow,
-    closeCheckout,
-    cartTotalCount,
-    cartTotalMRP,
-    cartTotalPrice,
-    cartTotalDiscount,
-    wishlistProducts
+    openCheckoutWithCart,
+    closeCheckout
   }
 }

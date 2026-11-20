@@ -24,14 +24,14 @@
       </div>
     </section>
 
-    <UiPageBreadcrumb
-      :items="[
-        { label: 'Offerings', to: '/courses' },
-        { label: 'Courses & Programmes' }
-      ]"
-      :prev="{ label: 'Our Methodology', to: '/methodology' }"
-      :next="{ label: 'Workshops & Events', to: '/workshops' }"
-    />
+      <UiPageBreadcrumb
+        :items="[
+          { label: 'Offerings', to: '/courses' },
+          { label: 'Courses & Programmes' }
+        ]"
+        :prev="{ label: 'Our Methodology', to: '/methodology' }"
+        :next="{ label: 'Workshops & Events', to: '/workshops' }"
+      />
 
     <!-- Filter Buttons & Programme Rows -->
     <section class="sec">
@@ -92,7 +92,6 @@
         </p>
       </div>
     </section>
-
     <!-- CTA -->
     <section class="sec dark grain cta">
       <i class="aurora" aria-hidden="true"><b></b><b></b><b></b></i>
