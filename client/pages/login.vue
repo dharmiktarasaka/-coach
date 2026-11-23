@@ -3,8 +3,8 @@
     <div class="w-full max-w-md space-y-8">
       <!-- Brand Logo & Header -->
       <div class="text-center space-y-3">
-        <NuxtLink to="/" class="inline-flex items-center gap-3 group">
-          <img src="/logo.png" alt="Narayan Presence" class="h-12 w-auto object-contain mx-auto" />
+        <NuxtLink to="/" class="inline-flex items-center group focus:outline-none" title="The Narayan Presence">
+          <img src="/logo-official-light.png" alt="The Narayan Presence" class="h-20 w-auto object-contain mx-auto transition-transform group-hover:scale-105" />
         </NuxtLink>
         <h1 class="font-display font-extrabold text-2xl sm:text-3xl text-[#171844] tracking-tight">
           Student Portal Login

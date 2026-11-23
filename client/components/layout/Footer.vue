@@ -5,11 +5,8 @@
         <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-10 lg:gap-8">
           <!-- Col 1: Brand -->
           <div class="col-span-2 md:col-span-3 lg:col-span-1 space-y-4">
-            <NuxtLink to="/" class="flex items-center gap-3">
-              <div class="h-9 w-9 rounded-lg bg-[#FAFAFA] p-1 flex items-center justify-center shadow-md">
-                <img src="/logo.png" alt="Narayan Presence Logo" class="h-full w-auto object-contain" />
-              </div>
-              <span class="font-display font-extrabold text-base text-white tracking-tight">NARAYAN PRESENCE</span>
+            <NuxtLink to="/" class="inline-flex items-center group focus:outline-none" title="The Narayan Presence">
+              <img src="/logo-official-dark.png" alt="The Narayan Presence Logo" class="h-14 md:h-16 w-auto object-contain transition-transform group-hover:scale-105" />
             </NuxtLink>
             <p class="text-xs text-[#EAE2D4]/70 leading-relaxed max-w-xs">
               Conscious mastery, emotional grounding, and purposeful leadership frameworks for the modern practitioner.

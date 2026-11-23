@@ -4,30 +4,23 @@
       'fixed top-0 left-0 right-0 z-50 transition-all duration-300',
       isScrolled
         ? (isDark
-            ? 'bg-[#0f1233]/95 backdrop-blur-md border-b border-[#D9AA55]/25 shadow-lg shadow-black/30 py-3'
-            : 'bg-[#FAFAFA]/95 backdrop-blur-md border-b border-[#EAE2D4] shadow-sm py-3')
+            ? 'bg-[#0f1233]/95 backdrop-blur-md border-b border-[#D9AA55]/25 shadow-lg shadow-black/30 py-2 sm:py-2.5'
+            : 'bg-[#FAFAFA]/95 backdrop-blur-md border-b border-[#EAE2D4] shadow-sm py-2 sm:py-2.5')
         : (isDark
-            ? 'bg-[#0f1233]/85 backdrop-blur-sm border-b border-[#D9AA55]/20 py-4'
-            : 'bg-[#FAFAFA]/85 backdrop-blur-sm border-b border-[#EAE2D4]/70 py-4')
+            ? 'bg-[#0f1233]/85 backdrop-blur-sm border-b border-[#D9AA55]/20 py-2.5 sm:py-3'
+            : 'bg-[#FAFAFA]/85 backdrop-blur-sm border-b border-[#EAE2D4]/70 py-2.5 sm:py-3')
     ]"
   >
     <UiContainer size="xl">
       <div class="flex items-center justify-between">
         <!-- Brand Logo -->
-        <NuxtLink to="/" class="flex items-center gap-2 sm:gap-3 group focus:outline-none min-w-0">
+        <NuxtLink to="/" class="flex items-center group focus:outline-none shrink-0" title="The Narayan Presence">
           <img
-            src="/logo.png"
-            alt="Narayan Presence"
-            class="h-8 sm:h-11 w-auto object-contain group-hover:scale-105 transition-transform shrink-0"
+            :src="isDark ? '/logo-official-dark.png' : '/logo-official-light.png'"
+            alt="The Narayan Presence"
+            class="w-auto object-contain transition-all duration-300 group-hover:scale-105 drop-shadow-sm"
+            :class="isScrolled ? 'h-12 sm:h-14 md:h-16' : 'h-14 sm:h-16 md:h-20'"
           />
-          <div class="flex flex-col min-w-0">
-            <span
-              class="font-display font-extrabold text-sm xs:text-base sm:text-xl tracking-tight transition-colors truncate"
-              :class="isDark ? 'text-[#F8F5EF] group-hover:text-[#F8D78B]' : 'text-[#171844] group-hover:text-[#242658]'"
-            >
-              NARAYAN PRESENCE
-            </span>
-          </div>
         </NuxtLink>
 
         <!-- Desktop Navigation -->
@@ -456,11 +449,12 @@
             class="flex items-center justify-between px-4 py-3 border-b shrink-0 backdrop-blur-md"
             :class="isDark ? 'border-[#D9AA55]/20 bg-[#0f1233]/95' : 'border-[#EAE2D4] bg-[#FAFAFA]/95'"
           >
-            <NuxtLink to="/" class="flex items-center gap-2.5 min-w-0" @click="isMobileMenuOpen = false">
-              <img src="/logo.png" alt="Narayan Presence" class="h-8 w-auto object-contain shrink-0" />
-              <span class="font-display font-extrabold text-sm tracking-tight truncate" :class="isDark ? 'text-[#F8F5EF]' : 'text-[#171844]'">
-                NARAYAN PRESENCE
-              </span>
+            <NuxtLink to="/" class="flex items-center shrink-0" @click="isMobileMenuOpen = false" title="The Narayan Presence">
+              <img
+                :src="isDark ? '/logo-official-dark.png' : '/logo-official-light.png'"
+                alt="The Narayan Presence"
+                class="h-12 sm:h-14 w-auto object-contain"
+              />
             </NuxtLink>
 
             <div class="flex items-center gap-2 shrink-0">
