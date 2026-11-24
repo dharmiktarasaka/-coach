@@ -729,7 +729,7 @@ const offeringsLinks = [
 ]
 
 const insightLinks = [
-  { to: '/resources', label: 'Blog & Journal', desc: 'Reflections, essays & actionable ideas' },
+  { to: '/blog', label: 'Blog & Journal', desc: 'Reflections, essays & actionable ideas' },
   { to: '/testimonials', label: 'Testimonials', desc: 'Real experiences & impact' },
   { to: '/faqs', label: 'FAQs', desc: 'Frequently asked questions' }
 ]

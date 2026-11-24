@@ -56,17 +56,18 @@
         </div>
 
         <!-- 4-Column Card Grid (1 col mobile, 2 tablet, 3 md, 4 lg) -->
-        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-5 sm:gap-6 mt-4">
-          <article
+        <div v-if="filteredArticles && filteredArticles.length > 0" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-5 sm:gap-6 mt-4">
+          <NuxtLink
             v-for="(art, idx) in filteredArticles"
-            :key="idx"
-            class="resource-card group"
+            :key="art?.slug || idx"
+            :to="art?.url || ('/blog/' + (art?.slug || ''))"
+            class="resource-card group block cursor-pointer no-underline"
           >
             <!-- Card Cover Image with Badges -->
             <div class="card-cover">
               <img
-                :src="art.image"
-                :alt="art.title"
+                :src="art?.image || '/logo.png'"
+                :alt="art?.title || 'Article'"
                 class="card-img"
                 loading="lazy"
                 @error="onImageError"
@@ -74,16 +75,17 @@
               <div class="card-overlay"></div>
               <div class="card-badges">
                 <span
+                  v-if="art?.cat"
                   class="card-cat-badge"
                   :style="{
-                    color: art.color,
-                    backgroundColor: art.bg,
-                    borderColor: art.border
+                    color: art?.color || '#D9AA55',
+                    backgroundColor: art?.bg || 'rgba(217, 170, 85, 0.16)',
+                    borderColor: art?.border || 'rgba(217, 170, 85, 0.4)'
                   }"
                 >
                   {{ art.cat }}
                 </span>
-                <span class="card-time-badge">
+                <span v-if="art?.readTime" class="card-time-badge">
                   <svg class="w-3 h-3 mr-1 inline-block" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
                   </svg>
@@ -95,28 +97,32 @@
             <!-- Card Content Body -->
             <div class="card-body">
               <h3 class="card-title">
-                {{ art.title }}
+                {{ art?.title || 'Article Title' }}
               </h3>
-              <p class="card-desc">
+              <p v-if="art?.desc" class="card-desc">
                 {{ art.desc }}
               </p>
               
               <!-- Card Footer with Author and CTA -->
               <div class="card-footer">
                 <div class="card-author">
-                  <img src="/ranu.webp" alt="Ranu Patel" class="author-avatar" @error="onAvatarError" />
-                  <span>Ranu Patel</span>
+                  <img :src="art?.author?.avatar || '/ranu.webp'" :alt="art?.author?.name || 'Ranu Patel'" class="author-avatar" @error="onAvatarError" />
+                  <span>{{ art?.author?.name || 'Ranu Patel' }}</span>
                 </div>
                 <span class="card-cta">
                   Read Guide <span class="arrow">→</span>
                 </span>
               </div>
             </div>
-          </article>
+          </NuxtLink>
         </div>
 
-        <div v-if="filteredArticles.length === 0" class="empty-state">
-          <p>No guides found in this category.</p>
+        <div v-else class="empty-state py-16 px-6 text-center rounded-3xl border border-[#D9AA55]/25 my-8" :class="isDark ? 'bg-[#141845]/50' : 'bg-white shadow-sm'">
+          <div class="text-4xl mb-4 text-[#D9AA55]">📖</div>
+          <h3 class="text-xl sm:text-2xl font-serif font-bold" style="color:var(--fg)">New Curated Guides Coming Soon</h3>
+          <p class="text-sm sm:text-base max-w-lg mx-auto mt-2" style="color:var(--muted)">
+            We are preparing fresh, transformative blog articles and reflective frameworks. Check back shortly as new topics are published.
+          </p>
         </div>
       </div>
     </section>
@@ -125,155 +131,31 @@
 
 <script setup lang="ts">
 import { ref, computed } from 'vue'
+import { useArticles } from '~/composables/useArticles'
+import { useTheme } from '~/composables/useTheme'
+
+// Redirect /resources to the canonical /blog
+await navigateTo('/blog', { redirectCode: 301 })
+
+const { isDark } = useTheme()
+const { articles } = useArticles()
 
 const activeFilter = ref('all')
 
-const filterTabs = [
-  { id: 'all', label: 'All Guides (12)' },
+const filteredArticles = computed(() => {
+  const list = articles.value || []
+  if (!Array.isArray(list)) return []
+  const valid = list.filter(a => a && typeof a === 'object' && a.title)
+  if (activeFilter.value === 'all') return valid
+  return valid.filter(a => a.tag === activeFilter.value)
+})
+
+const filterTabs = computed(() => [
+  { id: 'all', label: `All Guides (${filteredArticles.value.length})` },
   { id: 'mind', label: 'Mind & Clarity' },
   { id: 'emotions', label: 'Emotions & Habits' },
   { id: 'coaching', label: 'Coaching & Business' }
-]
-
-const articles = [
-  {
-    cat: 'Self-Awareness',
-    tag: 'mind',
-    title: 'How to practise self-awareness without judging yourself',
-    desc: 'Learn to observe your inner dialogue as a curious witness rather than a harsh critic.',
-    readTime: '4 min read',
-    image: 'https://images.unsplash.com/photo-1506126613408-eca07ce68773?auto=format&fit=crop&w=600&q=80',
-    color: '#D9AA55',
-    bg: 'rgba(217, 170, 85, 0.16)',
-    border: 'rgba(217, 170, 85, 0.4)'
-  },
-  {
-    cat: 'Emotions',
-    tag: 'emotions',
-    title: 'Notice emotional triggers before reacting in high-stakes moments',
-    desc: 'Spot somatic tension patterns in the body and cultivate the vital 3-second pause.',
-    readTime: '5 min read',
-    image: 'https://images.unsplash.com/photo-1499209974431-9dddcece7f88?auto=format&fit=crop&w=600&q=80',
-    color: '#E06D53',
-    bg: 'rgba(224, 109, 83, 0.16)',
-    border: 'rgba(224, 109, 83, 0.4)'
-  },
-  {
-    cat: 'Mindfulness',
-    tag: 'emotions',
-    title: 'Five-minute mindfulness practices for busy work days',
-    desc: 'Micro-meditations and breath anchors you can execute between meetings without a cushion.',
-    readTime: '3 min read',
-    image: 'https://images.unsplash.com/photo-1518241353330-0f7941c2d9b5?auto=format&fit=crop&w=600&q=80',
-    color: '#10B981',
-    bg: 'rgba(16, 185, 129, 0.16)',
-    border: 'rgba(16, 185, 129, 0.4)'
-  },
-  {
-    cat: 'Relationships',
-    tag: 'mind',
-    title: 'How to express a boundary clearly and respectfully',
-    desc: 'A non-defensive communication framework to state limits without guilt or resentment.',
-    readTime: '6 min read',
-    image: 'https://images.unsplash.com/photo-1517048676732-d65bc937f952?auto=format&fit=crop&w=600&q=80',
-    color: '#9B72CF',
-    bg: 'rgba(155, 114, 207, 0.16)',
-    border: 'rgba(155, 114, 207, 0.4)'
-  },
-  {
-    cat: 'Parenting',
-    tag: 'emotions',
-    title: 'How parents can pause before responding to big emotions',
-    desc: 'Regulating your own nervous system first before co-regulating with your child.',
-    readTime: '5 min read',
-    image: 'https://images.unsplash.com/photo-1476703993599-0035a21b17a9?auto=format&fit=crop&w=600&q=80',
-    color: '#F59E0B',
-    bg: 'rgba(245, 158, 11, 0.16)',
-    border: 'rgba(245, 158, 11, 0.4)'
-  },
-  {
-    cat: 'Intentional Living',
-    tag: 'mind',
-    title: 'A weekly values-based planning practice for focus',
-    desc: 'Align your calendar with inner priorities instead of reacting to external urgency.',
-    readTime: '4 min read',
-    image: 'https://images.unsplash.com/photo-1484480974693-6ca0a78fb36b?auto=format&fit=crop&w=600&q=80',
-    color: '#EC4899',
-    bg: 'rgba(236, 72, 153, 0.16)',
-    border: 'rgba(236, 72, 153, 0.4)'
-  },
-  {
-    cat: 'Coaching Scope',
-    tag: 'coaching',
-    title: 'Coaching, consulting and therapy: understand the scope',
-    desc: 'Clarify boundaries between healing the past, diagnosis, and creating future agency.',
-    readTime: '5 min read',
-    image: 'https://images.unsplash.com/photo-1552664730-d307ca884978?auto=format&fit=crop&w=600&q=80',
-    color: '#3B82F6',
-    bg: 'rgba(59, 130, 246, 0.16)',
-    border: 'rgba(59, 130, 246, 0.4)'
-  },
-  {
-    cat: 'Niche Strategy',
-    tag: 'coaching',
-    title: 'Choose a coaching niche based on evidence, not assumptions',
-    desc: 'Validate client urgency, purchasing capability, and proven market demand.',
-    readTime: '6 min read',
-    image: 'https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=600&q=80',
-    color: '#059669',
-    bg: 'rgba(5, 150, 105, 0.16)',
-    border: 'rgba(5, 150, 105, 0.4)'
-  },
-  {
-    cat: 'Programme Design',
-    tag: 'coaching',
-    title: 'Structure a coaching programme around client outcomes',
-    desc: 'How to sequence milestones, accountability, and exercises for lasting habit changes.',
-    readTime: '7 min read',
-    image: 'https://images.unsplash.com/photo-1434030216411-0b793f4b4173?auto=format&fit=crop&w=600&q=80',
-    color: '#6366F1',
-    bg: 'rgba(99, 102, 241, 0.16)',
-    border: 'rgba(99, 102, 241, 0.4)'
-  },
-  {
-    cat: 'Course Creation',
-    tag: 'coaching',
-    title: 'Turn your lived expertise into a structured curriculum',
-    desc: 'Break down complex wisdom into digestible modules, checklists, and video lessons.',
-    readTime: '6 min read',
-    image: 'https://images.unsplash.com/photo-1516321318423-f06f85e504b3?auto=format&fit=crop&w=600&q=80',
-    color: '#EA580C',
-    bg: 'rgba(234, 88, 12, 0.16)',
-    border: 'rgba(234, 88, 12, 0.4)'
-  },
-  {
-    cat: '1 A.M. Reset',
-    tag: 'emotions',
-    title: 'Calm night-time mental loops and wake with clarity',
-    desc: 'Break the midnight ruminating loop and transition effortlessly into restorative rest.',
-    readTime: '5 min read',
-    image: 'https://images.unsplash.com/photo-1545205597-3d9d02c29597?auto=format&fit=crop&w=600&q=80',
-    color: '#EAB308',
-    bg: 'rgba(234, 179, 8, 0.16)',
-    border: 'rgba(234, 179, 8, 0.4)'
-  },
-  {
-    cat: 'Energy & Reiki',
-    tag: 'mind',
-    title: 'The grounding frequency: somatic calm for conscious leaders',
-    desc: 'Harness breath alignment and Narayan Reiki principles to stabilize your energy field.',
-    readTime: '4 min read',
-    image: 'https://images.unsplash.com/photo-1507679799987-c73779587ccf?auto=format&fit=crop&w=600&q=80',
-    color: '#0D9488',
-    bg: 'rgba(13, 148, 136, 0.16)',
-    border: 'rgba(13, 148, 136, 0.4)'
-  }
-]
-
-const filteredArticles = computed(() => {
-  if (activeFilter.value === 'all') return articles
-  return articles.filter(a => a.tag === activeFilter.value)
-})
+])
 
 const onImageError = (e: Event) => {
   const target = e.target as HTMLImageElement
@@ -285,14 +167,14 @@ const onImageError = (e: Event) => {
 const onAvatarError = (e: Event) => {
   const target = e.target as HTMLImageElement
   if (target) {
-    target.src = '/logo.png'
+    target.src = '/ranu.webp'
   }
 }
 
 useHead({
   title: 'Journal & Insights Library · The Narayan Presence',
   meta: [
-    { name: 'description', content: 'Explore 12 practical guides on self-awareness, emotional agility, boundaries, mindfulness, and conscious coaching business by Ranu Patel.' },
+    { name: 'description', content: 'Practical guides on self-awareness, emotional agility, boundaries, mindfulness, and conscious coaching business by Ranu Patel.' },
     { property: 'og:title', content: 'Journal & Knowledge Library | The Narayan Presence' },
     { property: 'og:description', content: 'In-depth notes, worksheets, and reflection practices from Ranu Patel\'s coaching room.' },
     { property: 'og:image', content: 'https://narayanpresence.com/ranu.webp' },
@@ -306,7 +188,7 @@ useHead({
         '@context': 'https://schema.org',
         '@type': 'ItemList',
         'name': 'The Narayan Presence Journal & Guides',
-        'itemListElement': articles.map((art, index) => ({
+        'itemListElement': (articles.value || []).map((art, index) => ({
           '@type': 'ListItem',
           'position': index + 1,
           'item': {

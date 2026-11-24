@@ -24,7 +24,7 @@
 
     <UiPageBreadcrumb
       :items="[
-        { label: 'Insights & Resources', to: '/resources' },
+        { label: 'Insights & Resources', to: '/blog' },
         { label: 'FAQs' }
       ]"
       :prev="{ label: 'Testimonials', to: '/testimonials' }"

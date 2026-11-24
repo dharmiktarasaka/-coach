@@ -65,7 +65,10 @@
                 <NuxtLink to="/community" class="text-[#EAE2D4]/80 hover:text-white transition-colors">Community Overview</NuxtLink>
               </li>
               <li>
-                <NuxtLink to="/resources" class="text-[#EAE2D4]/80 hover:text-white transition-colors">Journal & Resources</NuxtLink>
+                <NuxtLink to="/blog" class="text-[#EAE2D4]/80 hover:text-white transition-colors">Blog & Journal</NuxtLink>
+              </li>
+              <li>
+                <NuxtLink to="/testimonials" class="text-[#EAE2D4]/80 hover:text-white transition-colors">Testimonials</NuxtLink>
               </li>
               <li>
                 <NuxtLink to="/faqs" class="text-[#EAE2D4]/80 hover:text-white transition-colors">FAQs</NuxtLink>

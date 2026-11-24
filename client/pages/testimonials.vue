@@ -24,10 +24,10 @@
 
     <UiPageBreadcrumb
       :items="[
-        { label: 'Insights & Stories', to: '/resources' },
+        { label: 'Insights & Stories', to: '/blog' },
         { label: 'Testimonials' }
       ]"
-      :prev="{ label: 'Journal & Resources', to: '/resources' }"
+      :prev="{ label: 'Blog & Journal', to: '/blog' }"
       :next="{ label: 'FAQs', to: '/faqs' }"
     />
 
