@@ -13,6 +13,7 @@ export default defineEventHandler((event) => {
     { path: '/products', priority: '0.85', changefreq: 'weekly' },
     { path: '/blog', priority: '0.9', changefreq: 'daily' },
     { path: '/blog/can-ai-replace-human-coaches-in-2026', priority: '0.85', changefreq: 'weekly' },
+    { path: '/blog/10-skills-you-need-to-succeed-in-an-ai-driven-world', priority: '0.85', changefreq: 'weekly' },
     { path: '/resources', priority: '0.8', changefreq: 'weekly' },
     { path: '/community', priority: '0.8', changefreq: 'weekly' },
     { path: '/membership', priority: '0.8', changefreq: 'weekly' },

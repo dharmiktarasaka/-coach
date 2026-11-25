@@ -37,7 +37,7 @@ export const initialArticles: Article[] = [
     title: 'Can AI Replace Human Coaches in 2026? The Truth About the Future of Coaching',
     desc: 'An in-depth perspective on the real impact of artificial intelligence on coaching, what algorithms cannot replicate, and why deep human presence matters more than ever.',
     readTime: '5 min read',
-    image: 'https://images.unsplash.com/photo-1552664730-d307ca884978?auto=format&fit=crop&w=1200&q=80',
+    image: '/images/blog/can-ai-replace-human-coaches-2026.jpg',
     color: '#D9AA55',
     bg: 'rgba(217, 170, 85, 0.16)',
     border: 'rgba(217, 170, 85, 0.4)',
@@ -69,6 +69,30 @@ export const initialArticles: Article[] = [
         heading: '4. The Truth About the Future: How Modern Coaches Thrive in 2026',
         content: ''
       }
+    ]
+  },
+  {
+    slug: '10-skills-you-need-to-succeed-in-an-ai-driven-world',
+    url: '/blog/10-skills-you-need-to-succeed-in-an-ai-driven-world',
+    cat: 'FUTURE & MASTERY',
+    tag: 'mind',
+    title: '10 Skills You Need to Succeed in an AI-Driven World',
+    desc: 'The skills AI can\'t replace, backed by WEF, PwC and MIT research, with a weekly practice for each. Build future-proof human and cognitive skills for the AI era.',
+    readTime: '8 min read',
+    image: '/images/blog/10-skills-you-need-to-succeed-in-an-ai-driven-world.jpg',
+    color: '#D9AA55',
+    bg: 'rgba(217, 170, 85, 0.16)',
+    border: 'rgba(217, 170, 85, 0.4)',
+    publishedAt: '2026-11-25',
+    author: {
+      name: 'Ranu Patel',
+      role: 'Life Transformation Coach & Healer',
+      avatar: '/ranu.webp'
+    },
+    keyTakeaways: [
+      'The shifting value from answers to question framing in an automated landscape.',
+      'Somatic awareness, emotional resonance, and contextual judgment as irreplaceable human anchors.',
+      'How to build cognitive sovereignty and deep focus amid continuous algorithmic noise.'
     ]
   }
 ]
